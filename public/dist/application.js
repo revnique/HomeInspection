@@ -482,10 +482,14 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-  function ($scope, Authentication) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication','$timeout',
+  function ($scope, Authentication, $timeout) {
     // This provides Authentication context.
-    $scope.authentication = Authentication;
+      $scope.authentication = Authentication;
+      $timeout(function () {
+          sbAdminObj.init();
+          morrisData.init();
+      });
   }
 ]);
 
@@ -516,7 +520,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       }
 
       function getTitle(currentState) {
-        var applicationCoreTitle = 'MEAN.js';
+        var applicationCoreTitle = 'HarrisTeq Home Inspection Mean.js Demo';
         var workingState = currentState;
         if (currentState.data) {
           workingState = (typeof workingState.locals !== 'undefined') ? workingState.locals.globals : workingState;
