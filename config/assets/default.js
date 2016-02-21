@@ -29,9 +29,9 @@ module.exports = {
 
         'public/lib/raphael/raphael-min.js',
         'public/lib/morrisjs/morris.min.js',
-        'public/data/morris-data.js',
+        'public/dist/morris-data.js',
         //'public/lib/flot/jquery.flot.js',
-        //'public/data/flot-data.js',
+        //'public/dist/flot-data.js',
         'public/dist/sb-admin-2.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
