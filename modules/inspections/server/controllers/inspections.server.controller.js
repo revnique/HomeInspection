@@ -38,5 +38,9 @@ exports.delete = function (req, res) {
  * List of 
  */
 exports.list = function (req, res) {
-
+    return "i gotz it 8";
 };
+exports.inspectionsByID = function (req, res) {
+    return "i gotz it";
+};
+

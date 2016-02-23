@@ -1,3 +1,156 @@
 <section data-ng-controller="InspectionsController">
-  This is the Inspections
+
+    <div style="height: 30px;"></div>
+
+    <!--<div class="col-lg-12">
+        <form method="post">
+            <div class="form-group" show-errors>
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" class="form-control" ng-model="category" placeholder="Add Category" required>
+                <div ng-messages="passwordForm.currentPassword.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Your current password is required.</p>
+                </div>
+            </div>
+
+        </form>
+
+    </div>-->
+
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <select id="cboCategoryList" class="form-control" name="account">
+                    <option>Exterior</option>
+                    <option>Roofing</option>
+                </select>
+            </div>
+
+
+
+
+            <style>
+                .speed-entry-button {
+                    font-size: 25px;
+                }
+
+                .speed-entry-input {
+                    width: 75%;
+                }
+                .speed-entry-input-topper {
+                    background-color: #ddd;
+                }
+            </style>
+            <form method="post" name="vm.form.inspectionForm">
+                <div class="panel-body">
+                    <div class="speed-entry-input-topper">
+                        <div class="m-l m-r" style="padding: 10px 0 10px 0;">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <span class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
+                            </span>
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <span class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <span class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs"><i class="fa fa-floppy-o"></i></a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-trash-o"></i></a>
+                            </span>
+                            <span class="clearfix"></span>
+                        </span>
+
+                        <span class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                            <span class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs"><i class="fa fa-floppy-o"></i></a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-trash-o"></i></a>
+                            </span>
+                            <span class="clearfix"></span>
+                        </span>
+                    </div>
+
+                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-comment fa-fw"></i> New Comment
+                        <span class="pull-right text-muted small">
+                            <em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                        <span class="pull-right text-muted small">
+                            <em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                        <span class="pull-right text-muted small">
+                            <em>27 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-tasks fa-fw"></i> New Task
+                        <span class="pull-right text-muted small">
+                            <em>43 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                        <span class="pull-right text-muted small">
+                            <em>11:32 AM</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                        <span class="pull-right text-muted small">
+                            <em>11:13 AM</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                        <span class="pull-right text-muted small">
+                            <em>10:57 AM</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                        <span class="pull-right text-muted small">
+                            <em>9:49 AM</em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-money fa-fw"></i> Payment Received
+                        <span class="pull-right text-muted small">
+                            <em>Yesterday</em>
+                        </span>
+                    </a>
+                </div>
+                <!-- /.list-group -->
+                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+    </div>
 </section>
