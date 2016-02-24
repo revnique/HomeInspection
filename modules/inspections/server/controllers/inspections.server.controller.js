@@ -4,14 +4,34 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+    Inspection = mongoose.model('Inspection'),
+    Category = mongoose.model('Category'),
+    CategoryItem = mongoose.model('CategoryItem'),
+    CategoryItemOption = mongoose.model('CategoryItemOption'),
   _ = require('lodash');
 
 /**
  * Create a 
  */
 exports.create = function (req, res) {
+    console.log("create inspection", req);
+    var inspection = new Inspection(req.body);
+    //inspection.user = req.user;
+
+    inspection.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(inspection);
+        }
+    });
 
 };
+
+
+
 
 /**
  * Show the current 
@@ -43,6 +63,95 @@ exports.list = function (req, res) {
 exports.inspectionsByID = function (req, res) {
     
 };
+
+
+
+
+
+
+
+/**
+ * Categories
+ */
+exports.createCategory = function (req, res) {
+    console.log("create cat", req);
+    var category = new Category(req.body);
+        //inspection.user = req.user;
+
+    category.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(category);
+        }
+    });
+
+    //return res.jsonp({ info: "create cat" });
+};
+
+exports.createCategoryItem = function (req, res) {
+    console.log("create cat", req);
+    var categoryItem = new CategoryItem(req.body);
+    //inspection.user = req.user;
+
+    categoryItem.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(categoryItem);
+        }
+    });
+
+    //return res.jsonp({ info: "create cat" });
+};
+
+exports.createCategoryItemOption = function (req, res) {
+    console.log("create categoryItemOption", req);
+    var categoryItemOption = new CategoryItemOption(req.body);
+    //inspection.user = req.user;
+
+    categoryItemOption.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(categoryItemOption);
+        }
+    });
+
+    //return res.jsonp({ info: "create cat" });
+};
+
+
+
+exports.listCategory = function (req, res) {
+    console.log("list cat", req);
+    return res.jsonp([
+            {
+                info: "create cat"
+            },
+            {
+                info: "create ca2t"
+            },
+            {
+                info: "create cat3"
+            }
+        ]
+    );
+};
+
+
+
+
+
+
+
+
 
 //'use strict';
 

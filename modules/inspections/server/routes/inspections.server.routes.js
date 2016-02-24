@@ -15,6 +15,17 @@ module.exports = function (app) {
       .put(inspections.update)
       .delete(inspections.delete);
 
+
+    app.route('/api/category')
+      .get(inspections.listCategory)
+      .post(inspections.createCategory);
+
+    app.route('/api/categoryitem')
+      .post(inspections.createCategoryItem);
+
+    app.route('/api/categoryitemoption')
+      .post(inspections.createCategoryItemOption);
+
     app.param('inspectionId', inspections.inspectionsByID);
 };
 

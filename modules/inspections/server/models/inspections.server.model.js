@@ -67,7 +67,11 @@ var CategoryItemOptionSchema = new Schema({
         trim: true,
         required: 'CategoryItemOptionName cannot be blank'
     },
-    isSelected: Boolean
+    selected: {
+        type: Boolean,
+        default: false,
+        required: 'Selected cannot be blank'
+    }
 });
 mongoose.model('CategoryItemOption', CategoryItemOptionSchema);
 
@@ -105,7 +109,7 @@ mongoose.model('Category', CategorySchema);
 /**
  * Inspections Schema
  */
-var InspectionsSchema = new Schema({
+var InspectionSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
@@ -124,4 +128,4 @@ var InspectionsSchema = new Schema({
     }
 });
 
-mongoose.model('Inspections', InspectionsSchema);
+mongoose.model('Inspection', InspectionSchema);
