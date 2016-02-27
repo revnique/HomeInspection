@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
     Category = mongoose.model('Category'),
     CategoryItem = mongoose.model('CategoryItem'),
     CategoryItemOption = mongoose.model('CategoryItemOption'),
+  errorHandler = require('../../../core/server/controllers/errors.server.controller'),
   _ = require('lodash');
 
 
@@ -49,6 +50,34 @@ exports.listInpsectionTemplate = function (req, res) {
             }
         });
     //return res.jsonp({ info: "create cat" });
+};
+
+exports.readInspectionTemplate = function (req, res) {
+    var id = req.params.templateId;
+    InspectionTemplate.findById(id).populate('user', 'displayName').exec(function (err, inpsectionTemplate) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            if (!inpsectionTemplate) {
+                return res.status(400).send('Failed to load InpsectionTemplate ' + id);
+            } else {
+                res.jsonp(inpsectionTemplate);
+            }
+        }
+    });
+};
+
+//56d11fba7502e3d81a4aafe7
+
+exports.getInspectionTemplateById = function (req, res, next, id) {
+    InspectionTemplate.findById(id).populate('user', 'displayName').exec(function (err, inpsectionTemplate) {
+        if (err) return next(err);
+        if (!inpsectionTemplate) return next(new Error('Failed to load InpsectionTemplate ' + id));
+        req.inpsectionTemplate = inpsectionTemplate;
+        next();
+    });
 };
 
 

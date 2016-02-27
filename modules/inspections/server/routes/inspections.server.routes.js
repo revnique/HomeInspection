@@ -15,6 +15,11 @@ module.exports = function (app) {
       .put(inspections.update)
       .delete(inspections.delete);
 
+    app.route('/api/inspectiontemplate/:templateId')
+        .get(inspections.readInspectionTemplate);
+      //.put(inspections.updateInspectionTemplate)
+      //.delete(inspections.deleteInspectionTemplate);
+
 
     app.route('/api/inspectiontemplate')
       .get(inspections.listInpsectionTemplate)
