@@ -67,6 +67,10 @@ var CategoryItemOptionSchema = new Schema({
         trim: true,
         required: 'CategoryItemOptionName cannot be blank'
     },
+    _parent: {
+        type: Number,
+        ref: 'CategoryItem'
+    },
     selected: {
         type: Boolean,
         default: false,
@@ -85,6 +89,10 @@ var CategoryItemSchema  = new Schema({
         default: '',
         trim: true,
         required: 'CategoryItemName cannot be blank'
+    },
+    _parent: {
+        type: Number,
+        ref: 'Category'
     },
     categoryItemOptions: [CategoryItemOptionSchema]
 });
@@ -106,6 +114,72 @@ var CategorySchema = new Schema({
 
 mongoose.model('Category', CategorySchema);
 
+
+
+/**
+ * Inspections Schema
+ */
+var InspectionTemplateSchema = new Schema({
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    title: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'Title cannot be blank'
+    },
+    categories: [CategorySchema],
+    propertyAddress1: {
+        type: String,
+        default: '<empty>'
+    },
+    propertyAddress2: {
+        type: String,
+        default: '<empty>'
+    },
+    propertyAddressCity: {
+        type: String,
+        default: '<empty>'
+    },
+    propertyAddressState: {
+        type: String,
+        default: '<empty>'
+    },
+    propertyAddressZip: {
+        type: String,
+        default: '<empty>'
+    },
+    ownerAddress1: {
+        type: String,
+        default: '<empty>'
+    },
+    ownerAddress2: {
+        type: String,
+        default: '<empty>'
+    },
+    ownerAddressCity: {
+        type: String,
+        default: '<empty>'
+    },
+    ownerAddressState: {
+        type: String,
+        default: '<empty>'
+    },
+    ownerAddressZip: {
+        type: String,
+        default: '<empty>'
+    },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
+});
+
+mongoose.model('InspectionTemplate', InspectionTemplateSchema);
+
+
 /**
  * Inspections Schema
  */
@@ -120,8 +194,7 @@ var InspectionSchema = new Schema({
         trim: true,
         required: 'Title cannot be blank'
     },
-    categories: [CategorySchema],
-    addresses: [AddressSchema],
+    template: InspectionTemplateSchema,
     user: {
         type: Schema.ObjectId,
         ref: 'User'

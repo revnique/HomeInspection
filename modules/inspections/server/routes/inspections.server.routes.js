@@ -16,6 +16,10 @@ module.exports = function (app) {
       .delete(inspections.delete);
 
 
+    app.route('/api/inspectiontemplate')
+      .get(inspections.listInpsectionTemplate)
+      .post(inspections.createInpsectionTemplate);
+
     app.route('/api/category')
       .get(inspections.listCategory)
       .post(inspections.createCategory);

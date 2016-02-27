@@ -5,10 +5,53 @@
  */
 var mongoose = require('mongoose'),
     Inspection = mongoose.model('Inspection'),
+    InspectionTemplate = mongoose.model('InspectionTemplate'),
     Category = mongoose.model('Category'),
     CategoryItem = mongoose.model('CategoryItem'),
     CategoryItemOption = mongoose.model('CategoryItemOption'),
   _ = require('lodash');
+
+
+
+
+
+exports.createInpsectionTemplate = function (req, res) {
+    console.log("create template", req);
+   
+    var inpsectionTemplate = new InspectionTemplate(req.body);
+    inpsectionTemplate.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(inpsectionTemplate);
+        }
+    });
+
+    //return res.jsonp({ info: "create cat" });
+};
+
+
+
+exports.listInpsectionTemplate = function (req, res) {
+    console.log("list template", req);
+    //inspection.user = req.user;
+
+
+    InspectionTemplate.find().sort('-created').populate('user', 'displayName').exec(function (err, templates) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(templates);
+            }
+        });
+    //return res.jsonp({ info: "create cat" });
+};
+
+
 
 /**
  * Create a 
@@ -75,8 +118,27 @@ exports.inspectionsByID = function (req, res) {
  */
 exports.createCategory = function (req, res) {
     console.log("create cat", req);
+    //inspection.user = req.user;
+    var temp = {
+        categoryName: req.body.categoryName
+    };
+    var category = new Category(temp);
+    category.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(category);
+        }
+    });
+
+    //return res.jsonp({ info: "create cat" });
+};
+exports.createCategoryObj = function (req, res) {
+    console.log("create cat", req);
     var category = new Category(req.body);
-        //inspection.user = req.user;
+    //inspection.user = req.user;
 
     category.save(function(err) {
         if (err) {
@@ -90,6 +152,17 @@ exports.createCategory = function (req, res) {
 
     //return res.jsonp({ info: "create cat" });
 };
+
+
+//exports.getCategoryById = function (req, res, next, id) {
+//    Category.findById(id).populate('user', 'displayName').exec(function (err, need) {
+//        if (err) return next(err);
+//        if (!need) return next(new Error('Failed to load Need ' + id));
+//        req.need = need;
+//        next();
+//    });
+//};
+
 
 exports.createCategoryItem = function (req, res) {
     console.log("create cat", req);
@@ -260,3 +333,6 @@ exports.listCategory = function (req, res) {
 //    }
 //    next();
 //};
+
+
+
