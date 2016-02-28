@@ -899,9 +899,9 @@ angular.module('inspections').config(['$stateProvider',
       .module('inspections')
       .controller('InspectionsController', InspectionsController);
 
-    InspectionsController.$inject = ['$scope', '$state', 'Authentication', '$timeout'];
+    InspectionsController.$inject = ['$scope', '$state', 'Authentication', '$timeout', 'InspectionService'];
 
-    function InspectionsController($scope, $state, Authentication, $timeout) {
+    function InspectionsController($scope, $state, Authentication, $timeout, InspectionService) {
         var vm = this;
 
         //vm.inspection = inspection;
@@ -911,9 +911,11 @@ angular.module('inspections').config(['$stateProvider',
         vm.remove = remove;
         vm.save = save;
         vm.inspection = {};
+        vm.inspectionTemplate = {};
 
         $timeout(function () {
             sbAdminObj.init();
+            vm.loadTemplates();
             //morrisData.init();
         });
         // Remove existing Article
@@ -923,7 +925,6 @@ angular.module('inspections').config(['$stateProvider',
             }
         }
 
-        // Save Article
         function save(isValid) {
             if (!isValid) {
                 $scope.$broadcast('show-errors-check-validity', 'vm.form.inspectionForm');
@@ -947,6 +948,24 @@ angular.module('inspections').config(['$stateProvider',
                 vm.error = res.data.message;
             }
         }
+
+        vm.loadTemplates = function() {
+            var promise = InspectionService.listInpsectionTemplate();
+            promise.then(function (res) {
+                //ambitApp.utils.convertDateStringsToDates(res);
+                vm.showTemplates(res);
+                vm.hideUi = false;
+            }, function (response) {
+                //failed
+                //screenSvc.showAlert(response, 2, false);
+                vm.hideUi = false;
+            });
+        }
+        vm.showTemplates = function (res) {
+            vm.templates = res;
+            console.log(res);
+        }
+
     }
 })();
 
@@ -982,17 +1001,44 @@ angular.module('inspections').filter('inspections', [
 
 'use strict';
 
-angular.module('inspections').factory('Inspections', [
-  function () {
-    // Inspections service logic
-    // ...
+angular.module('inspections').factory('InspectionService', ['$q', '$http',
+  function ($q, $http) {
+      var svc = {};
 
-    // Public API
-    return {
-      someMethod: function () {
-        return true;
-      }
-    };
+      svc.listInpsectionTemplate = function (data) {
+          var deferred = $q.defer();
+          
+          console.log(" listInpsectionTemplate data", data);
+          $http.get("/api/inspectiontemplate/", data)
+             .success(function (data, status) {
+                 deferred.resolve(data);
+             }).error(function (data, status, headers, config) {
+                 var err = buildErrorResponse(data, status, headers, config);
+                 err.detailedErrorMessage = "Error fetching listInpsectionTemplate.";
+                 console.log(err);
+                 deferred.reject(err);
+             });
+
+          return deferred.promise;
+      };
+
+
+
+      svc.buildErrorResponse = function (data, status, headers, config) {
+          var statusCode = status || "Unknown";
+          var rtn = {
+              data: data || {},
+              status: status || {},
+              headers: headers || {},
+              config: config || {},
+              isAuthenticated: true,
+              simpleErrorMessage: statusCode + " error has occured.",
+              detailedErrorMessage: ""
+          };
+          return rtn;
+      };
+
+      return svc;
   }
 ]);
 
