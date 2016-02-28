@@ -8,9 +8,9 @@
       .module('inspections')
       .controller('InspectionsController', InspectionsController);
 
-    InspectionsController.$inject = ['$scope', '$state', 'Authentication', '$timeout'];
+    InspectionsController.$inject = ['$scope', '$state', 'Authentication', '$timeout', 'InspectionService'];
 
-    function InspectionsController($scope, $state, Authentication, $timeout) {
+    function InspectionsController($scope, $state, Authentication, $timeout, InspectionService) {
         var vm = this;
 
         //vm.inspection = inspection;
@@ -20,9 +20,11 @@
         vm.remove = remove;
         vm.save = save;
         vm.inspection = {};
+        vm.inspectionTemplate = {};
 
         $timeout(function () {
             sbAdminObj.init();
+            vm.loadTemplates();
             //morrisData.init();
         });
         // Remove existing Article
@@ -32,7 +34,6 @@
             }
         }
 
-        // Save Article
         function save(isValid) {
             if (!isValid) {
                 $scope.$broadcast('show-errors-check-validity', 'vm.form.inspectionForm');
@@ -56,5 +57,23 @@
                 vm.error = res.data.message;
             }
         }
+
+        vm.loadTemplates = function() {
+            var promise = InspectionService.listInpsectionTemplate();
+            promise.then(function (res) {
+                //ambitApp.utils.convertDateStringsToDates(res);
+                vm.showTemplates(res);
+                vm.hideUi = false;
+            }, function (response) {
+                //failed
+                //screenSvc.showAlert(response, 2, false);
+                vm.hideUi = false;
+            });
+        }
+        vm.showTemplates = function (res) {
+            vm.templates = res;
+            console.log(res);
+        }
+
     }
 })();
