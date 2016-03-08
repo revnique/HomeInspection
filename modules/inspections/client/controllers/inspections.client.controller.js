@@ -20,7 +20,159 @@
         vm.remove = remove;
         vm.save = save;
         vm.inspection = {};
-        vm.inspectionTemplate = {};
+
+
+        vm.inspectionTemplate = {
+            "title": "HarrisTeq Demo Template TWO",
+            "categories": [
+                {
+                    "categoryName": "Demo Exterior TWO",
+                    "categoryItems": [
+                      {
+                          "categoryItemName": "Siding",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      },
+                      {
+                          "categoryItemName": "Windows",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      },
+                      {
+                          "categoryItemName": "Doors",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      },
+                      {
+                          "categoryItemName": "Steps",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      }
+                    ]
+                }, {
+                    "categoryName": "Heating/Cooling",
+                    "categoryItems": [
+                      {
+                          "categoryItemName": "Heating Equipment",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      },
+                      {
+                          "categoryItemName": "Cooling Equipment",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      },
+                      {
+                          "categoryItemName": "Normal Operating Controls",
+                          "categoryItemOptions": [
+                            {
+                                "categoryItemOptionName": "Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Not Inspected",
+                                "isSelected": false
+                            },
+                            {
+                                "categoryItemOptionName": "Replace\/Repair",
+                                "isSelected": false
+                            }
+                          ]
+                      }
+                    ]
+                }
+            ]
+        };
+
+
+        vm.createItemOption = function (name, isSelected) {
+            var rtn = {}
+            rtn["categoryItemOptionName"] = name;
+            rtn["isSelected"] = isSelected;
+            return rtn;
+        };
+
+
+        vm.createInspectedCategoryItemOptions = function() {
+            var rtn = [];
+            rtn.push (createItemOption("Inspected", false));
+            rtn.push (createItemOption("Not Inspected", false));
+            rtn.push(createItemOption("Replace\/Repair", false));
+            
+            return rtn;
+        };
 
         $timeout(function () {
             sbAdminObj.init();
