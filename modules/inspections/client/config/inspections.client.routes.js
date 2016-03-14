@@ -17,7 +17,20 @@ angular.module('inspections').config(['$stateProvider',
         //    roles: ['user', 'admin'],
         //    pageTitle: 'Manage Inspections'
         //}
-      });
+      }).state('inspections-photo', {
+          url: '/inspections-photo',
+          templateUrl: 'modules/inspections/client/views/inspections-photo.client.view.html',
+          controller: 'InspectionsController',
+          controllerAs: 'vm'
+          //resolve: {
+          //    inspectionResolve: newInspection
+          //},
+          //data: {
+          //    roles: ['user', 'admin'],
+          //    pageTitle: 'Manage Inspections'
+          //}
+      })
+      ;
 
     //newInspection.$inject = ['InspectionsService'];
 
