@@ -196,6 +196,50 @@
                 flip_horiz: true
             });
             Webcam.attach('#my_camera');
+            // preload shutter audio clip
+            var shutter = new Audio();
+            shutter.autoplay = false;
+            shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+
+            vm.preview_snapshot = function() {
+                // play sound effect
+                try { shutter.currentTime = 0; } catch (e) {; } // fails in IE
+                shutter.play();
+
+                // freeze camera so user can preview current frame
+                Webcam.freeze();
+
+                // swap button sets
+                document.getElementById('pre_take_buttons').style.display = 'none';
+                document.getElementById('post_take_buttons').style.display = '';
+            }
+
+            vm.cancel_preview = function () {
+                // cancel preview freeze and return to live camera view
+                Webcam.unfreeze();
+
+                // swap buttons back to first set
+                document.getElementById('pre_take_buttons').style.display = '';
+                document.getElementById('post_take_buttons').style.display = 'none';
+            }
+
+            vm.save_photo = function () {
+                // actually snap photo (from preview freeze) and display it
+                Webcam.snap(function (data_uri) {
+                    // display results in page
+                    document.getElementById('results').innerHTML =
+                        '<h2>Here is your large, cropped image:</h2>' +
+                        '<img src="' + data_uri + '"/><br/></br>' +
+                        '<a href="' + data_uri + '" target="_blank">Open image in new window...</a>';
+
+                    // shut down camera, stop capturing
+                    Webcam.reset();
+
+                    // show results, hide photo booth
+                    document.getElementById('results').style.display = '';
+                    document.getElementById('my_photo_booth').style.display = 'none';
+                });
+            }
         };
 
         $timeout(function () {
