@@ -37,6 +37,7 @@
                 .speed-entry-input {
                     width: 75%;
                 }
+
                 .speed-entry-input-topper {
                     background-color: #ddd;
                 }
@@ -45,31 +46,118 @@
                 <div class="panel-body">
                     <div class="speed-entry-input-topper">
                         <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
                             <span class="pull-right text-muted small">
                                 <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
                             </span>
                             <span class="clearfix"></span>
                         </div>
                     </div>
-                    <div class="list-group">
-                        <span class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <span class="pull-right text-muted small">
-                                <a href="#" class="speed-entry-button m-xs"><i class="fa fa-floppy-o"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-trash-o"></i></a>
-                            </span>
-                            <span class="clearfix"></span>
-                        </span>
 
-                        <span class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <span class="pull-right text-muted small">
-                                <a href="#" class="speed-entry-button m-xs"><i class="fa fa-floppy-o"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-trash-o"></i></a>
-                            </span>
+
+                    <style>
+                        .ddd {
+                            padding-left: 25px;
+                        }
+
+
+
+
+                        .link-badge {
+                            float: right;
+                        }
+
+                            .link-badge i {
+                                font-size: 25px;
+                            }
+
+                            .link-badge div {
+                                margin: 5px 15px 0px 7px;
+                            }
+
+                        div + span.badge {
+                            position: relative;
+                            top: -35px;
+                            left: 7px;
+                            font-size: 10px;
+                        }
+                    </style>
+
+
+
+
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <div class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-square-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success pull-right">99</span>
+                                </a>
+                            </div>
                             <span class="clearfix"></span>
-                        </span>
+                        </div>
+                        <!--<div class="media">
+                    <a class="pull-left" href="#">
+                        <div style="width:64px;height:64px;background-color:black;">
+                            d
+                        </div>
+                        <span class="badge badge-success pull-right">2</span>
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4>
+                        My content
+                    </div>
+                </div>-->
+
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                            <div class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-check-square"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-up"></i>
+                                    </div>
+                                    <span class="badge badge-success pull-right">2</span>
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+
+                            <ul class="list-group ddd">
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <a href="#" class="btn btn-default btn-block">View All Alerts</a>
