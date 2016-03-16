@@ -42,6 +42,7 @@
                     background-color: #ddd;
                 }
             </style>
+
             <form method="post" name="vm.form.inspectionForm">
                 <div class="panel-body">
                     <div class="speed-entry-input-topper">
@@ -109,18 +110,6 @@
                             </div>
                             <span class="clearfix"></span>
                         </div>
-                        <!--<div class="media">
-                    <a class="pull-left" href="#">
-                        <div style="width:64px;height:64px;background-color:black;">
-                            d
-                        </div>
-                        <span class="badge badge-success pull-right">2</span>
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Media heading</h4>
-                        My content
-                    </div>
-                </div>-->
 
                         <div class="list-group-item">
                             <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
@@ -142,6 +131,104 @@
                                 </a>
                             </div>
                             <span class="clearfix"></span>
+
+                            <style>
+                                .action-cell {
+                                    width: 150px;
+                                    padding-right: 10px;
+                                }
+
+                                .first-cell {
+                                    width: 50px;
+                                    padding-left: 10px;
+                                }
+
+                                .selection-list {
+                                    width: 100%;
+                                }
+
+                                .selection-list-container {
+                                    padding-left: 25px;
+                                    width: 100%;
+                                }
+                            </style>
+                            <div class="selection-list-container">
+
+                                <table class="table-responsive selection-list">
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-circle-o"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-square-o"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-check-square"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
                             <ul class="list-group ddd">
                                 <li class="list-group-item">
