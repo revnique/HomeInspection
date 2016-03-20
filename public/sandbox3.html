@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>sandbox3</title>
+    <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link href="slidemenu.css" rel="stylesheet" />
+</head>
+<body>
+    <script>
+    var openMenu = function () {
+        $(".menu-slider").addClass("opened");
+        $(".main-content").addClass("shifted");
+    }
+    var closeMenu = function () {
+        $(".menu-slider").removeClass("opened");
+        $(".main-content").removeClass("shifted");
+    }
+    </script>
+    <style>
+        .menu-slider {
+            background-color: aliceblue;
+            width: 200px;
+        }
+
+            .menu-slider.opened {
+                background-color: lightgreen;
+            }
+
+        .main-content {
+            background-color: lightsteelblue;
+            height: 1100px;
+        }
+
+            .main-content.shifted {
+                background-color: green;
+            }
+    </style>
+    <div>
+        <div class="menu-slider">
+            <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                <li role="presentation" class="active"><a href="#" onclick="closeMenu()">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div>
+
+                <a href="#" class="btn btn-primary" onclick="openMenu()"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

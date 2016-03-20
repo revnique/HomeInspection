@@ -24,9 +24,74 @@
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
 </head>
 <body data-ng-app="app" data-ng-controller="tempController">
+
+<style>
+    .p-header {
+        background-color: lavender;
+        text-align: center;
+    }
+
+    .p-header-text {
+        font-size: 27px;
+        display: inline-block;
+    }
+
+    .move {
+        padding-right: 200px;
+    }
+
+    .p-header-badge-container {
+    }
+
+    .p-header-badge {
+        padding-top: 5px;
+    }
+
+    /*div.p-header-text + span.badge {
+            font-size: 10px;
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }*/
+    span.badge {
+        font-size: 10px;
+        margin: -21px 0px 0px -3px;
+    }
+
+    .p-container {
+        margin: 10px;
+    }
+</style>
+
+
+
+
+<div>
+        <div class="p-container">
+            <div class="p-header text-center">
+                <div class="pull-left">
+                    <a href="#" class="btn btn-primary" ng-click="doit();"><i class="fa fa-bars"></i></a>
+                </div>
+                <div class="pull-right">
+                    <a href="#" class="speed-entry-button"><i class="fa fa-pencil-square-o"></i></a>
+                </div>
+
+                <div class="p-header-badge">
+                    <div class="p-header-text">
+                        Categories
+                    </div>
+                    <span class="badge badge-success">99</span>
+                </div>
+
+
+                <span class="clearfix"></span>
+            </div>
+
+        </div>
+
+    </div>
+
     <style>
-
-
     </style>
     <form method="post" name="vm.form.inspectionForm">
         <div class="panel-body">
@@ -34,11 +99,20 @@
                 <div class="m-l m-r" style="padding: 10px 0 10px 0;">
                     <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
                     <span class="pull-right text-muted small">
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
+
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
+
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
                         <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
+
+
                     </span>
                     <span class="clearfix"></span>
                 </div>
             </div>
+
 
 
             <style>
@@ -58,15 +132,16 @@
                         margin: 5px 15px 0px 7px;
                     }
 
-                div + span.badge {
+                /*div + span.badge {
                     font-size: 10px;
                     left: 7px;
                     position: relative;
                     top: -35px;
-                }
+                }*/
 
                 .speed-entry-button {
                     font-size: 30px;
+                    margin-bottom: -10px;
                 }
 
                 .speed-entry-input {
@@ -261,7 +336,9 @@
 
         function tempController($scope, $timeout) {
             $scope.dtown = "hello world";
-
+            $scope.doit = function() {
+                //$(".p-container").toggleClass("move");
+            };
 
             $scope.inspectionTemplate = {
                 "title": "HarrisTeq Demo Template TWO",
