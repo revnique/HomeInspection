@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
 </head>
-<body data-ng-app="app" data-ng-controller="tempController">
+<body data-ng-app="app" data-ng-controller="tempController" data-ng-class="{'shifted': isShifted}">
 
 <style>
     .p-header {
@@ -67,6 +67,7 @@
 
 
 <div>
+    <div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
         <div class="p-container">
             <div class="p-header text-center">
                 <div class="pull-left">
@@ -92,7 +93,7 @@
     </div>
 
     <style>
-    </style>
+        </style>
     <form method="post" name="vm.form.inspectionForm">
         <div class="panel-body">
             <div class="speed-entry-input-topper">
@@ -124,13 +125,13 @@
                     float: right;
                 }
 
-                    .link-badge i {
-                        font-size: 30px;
-                    }
+                .link-badge i {
+                    font-size: 30px;
+                }
 
-                    .link-badge div {
-                        margin: 5px 15px 0px 7px;
-                    }
+                .link-badge div {
+                    margin: 5px 15px 0px 7px;
+                }
 
                 /*div + span.badge {
                     font-size: 10px;
@@ -325,7 +326,128 @@
         </div>
     </form>
 
-    <script>
+    
+
+
+    </div>
+    <div class="menu-slider" data-ng-class="{'shifted': isShifted}">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active">
+                <a href="#" data-ng-click="doit()">Home</a>
+            </li>
+            <li role="presentation">
+                <a href="#">Profile</a>
+            </li>
+            <li role="presentation">
+                <a href="#">Messages</a>
+            </li>
+        </ul>
+    </div>
+    <div class="p-mask" data-ng-class="{'shifted': isShifted}"></div>
+
+<style>
+    
+    body.shifted { overflow: hidden; }
+
+    .menu-slider {
+        -ms-transform: translateX(-100%);
+        
+        -webkit-transform: translateX(-100%);
+        -webkit-transition: -webkit-transform 0.3s;
+        background-color: aliceblue;
+        background-color: #67b5d1;
+        height: 100%;
+        left: 0;
+        overflow-y: scroll;
+        position: fixed;
+
+        top: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+        width: 100%;
+        z-index: 200;
+    }
+
+    @media all and (min-width: 320px) {
+        .menu-slider {
+            -ms-transform: translateX(-300px);
+            -webkit-transform: translateX(-300px);
+            transform: translateX(-300px);
+            width: 300px;
+        }
+    }
+
+
+    .menu-slider.shifted {
+        -ms-transform: translateX(0);
+         
+        -webkit-transform: translateX(0);
+        background-color: lightgreen;
+        transform: translateX(0);
+    }
+
+    .main-content {
+        background-color: lightsteelblue;
+        height: 1100px;
+    }
+
+    .main-content.shifted { background-color: green; }
+
+    .p-wrapper {
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+    }
+
+    .p-wrapper.shifted {
+        -ms-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    
+    @media all and (min-width: 320px) {
+      .p-wrapper.shifted {
+        -webkit-transform: translateX(300px);
+            -ms-transform: translateX(300px);
+                transform: translateX(300px);
+      }
+    }
+
+    @media all and (min-width: 320px) {
+        .p-wrapper.has-push-left {
+            -ms-transform: translateX(300px);
+            -webkit-transform: translateX(300px);
+            transform: translateX(300px);
+        }
+    }
+
+    .p-mask {
+        -webkit-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+        background-color: #000;
+        height: 0;
+        left: 0;
+        opacity: 0;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+        width: 0;
+        z-index: 100;
+    }
+        
+  
+
+    .p-mask.shifted {
+        -webkit-transition: opacity 0.3s;
+        height: 100%;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+        width: 100%;
+    }
+
+</style>
+
+<script>
         var app = angular.module('app', []);
 
         angular
@@ -336,8 +458,9 @@
 
         function tempController($scope, $timeout) {
             $scope.dtown = "hello world";
+            $scope.isShifted = false;
             $scope.doit = function() {
-                //$(".p-container").toggleClass("move");
+                $scope.isShifted = !$scope.isShifted;
             };
 
             $scope.inspectionTemplate = {
