@@ -3,7 +3,8 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width">-->
     <title>ht hi jsbin</title>
 
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
@@ -32,20 +33,15 @@
     }
 
     .p-header-text {
-        font-size: 27px;
         display: inline-block;
+        font-size: 27px;
     }
 
-    .move {
-        padding-right: 200px;
-    }
+    .move { padding-right: 200px; }
 
-    .p-header-badge-container {
-    }
+    .p-header-badge-container { }
 
-    .p-header-badge {
-        padding-top: 5px;
-    }
+    .p-header-badge { padding-top: 5px; }
 
     /*div.p-header-text + span.badge {
             font-size: 10px;
@@ -53,53 +49,50 @@
             left: 0px;
             top: 0px;
         }*/
+
     span.badge {
         font-size: 10px;
         margin: -21px 0px 0px -3px;
     }
 
-    .p-container {
-        margin: 10px;
-    }
+    .p-container { margin: 10px; }
 </style>
 
 
-
-
-<div>
-    <div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
-        <div class="p-container">
-            <div class="p-header text-center">
-                <div class="pull-left">
-                    <a href="#" class="btn btn-primary" ng-click="doit();"><i class="fa fa-bars"></i></a>
-                </div>
-                <div class="pull-right">
-                    <a href="#" class="speed-entry-button"><i class="fa fa-pencil-square-o"></i></a>
-                </div>
-
-                <div class="p-header-badge">
-                    <div class="p-header-text">
-                        Categories
-                    </div>
-                    <span class="badge badge-success">99</span>
-                </div>
-
-
-                <span class="clearfix"></span>
-            </div>
-
+<div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
+<div class="p-container">
+    <div class="p-header text-center">
+        <div class="pull-left">
+            <a href="#" class="btn btn-primary" ng-click="doit();">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="pull-right">
+            <a href="#" class="speed-entry-button">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
         </div>
 
+        <div class="p-header-badge">
+            <div class="p-header-text">
+                Categories
+            </div>
+            <span class="badge badge-success">99</span>
+        </div>
+
+
+        <span class="clearfix"></span>
     </div>
 
-    <style>
-        </style>
-    <form method="post" name="vm.form.inspectionForm">
-        <div class="panel-body">
-            <div class="speed-entry-input-topper">
-                <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                    <span class="pull-right text-muted small">
+</div>
+
+
+<form method="post" name="vm.form.inspectionForm">
+<div class="panel-body">
+<div class="speed-entry-input-topper">
+    <div class="m-l m-r" style="padding: 10px 0 10px 0;">
+        <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+        <span class="pull-right text-muted small">
                         <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
 
                         <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
@@ -110,240 +103,225 @@
 
 
                     </span>
-                    <span class="clearfix"></span>
-                </div>
-            </div>
+        <span class="clearfix"></span>
+    </div>
+</div>
 
 
+<style>
+    .ddd { padding-left: 25px; }
 
-            <style>
-                .ddd {
-                    padding-left: 25px;
-                }
+    .link-badge { float: right; }
 
-                .link-badge {
-                    float: right;
-                }
+    .link-badge i { font-size: 30px; }
 
-                .link-badge i {
-                    font-size: 30px;
-                }
+    .link-badge div { margin: 5px 15px 0px 7px; }
 
-                .link-badge div {
-                    margin: 5px 15px 0px 7px;
-                }
-
-                /*div + span.badge {
+    /*div + span.badge {
                     font-size: 10px;
                     left: 7px;
                     position: relative;
                     top: -35px;
                 }*/
 
-                .speed-entry-button {
-                    font-size: 30px;
-                    margin-bottom: -10px;
-                }
+    .speed-entry-button {
+        font-size: 30px;
+        margin-bottom: -10px;
+    }
 
-                .speed-entry-input {
-                    width: 90%;
-                    font-size: 12px;
-                }
+    .speed-entry-input {
+        font-size: 12px;
+        width: 90%;
+    }
 
-                .speed-entry-button-group {
-                    width: 100%;
-                    margin-top: 10px;
-                }
+    .speed-entry-button-group {
+        margin-top: 10px;
+        width: 100%;
+    }
 
-                .speed-entry-input-topper {
-                    background-color: #ddd;
-                }
-            </style>
+    .speed-entry-input-topper { background-color: #ddd; }
+</style>
 
 
-            <div class="list-group">
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                    <a href="#" class="speed-entry-button m-xs">
-                        <i class="fa fa-square-o"></i>
-                    </a>
-                    <div class="pull-right speed-entry-button-group">
+<div class="list-group">
+    <div class="list-group-item">
+        <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+        <a href="#" class="speed-entry-button m-xs">
+            <i class="fa fa-square-o"></i>
+        </a>
+        <div class="pull-right speed-entry-button-group">
 
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
+            <a href="#" class="speed-entry-button m-xs">
+                <i class="fa fa-floppy-o"></i>
+            </a>
+            <a href="#" class="speed-entry-button m-xs m-r-none">
+                <i class="fa fa-trash-o"></i>
+            </a>
 
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-down"></i>
-                            </div>
-                            <span class="badge badge-success pull-right">99</span>
-                        </a>
-                    </div>
-                    <span class="clearfix"></span>
+            <a class="link-badge" href="#">
+                <div>
+                    <i class="fa fa-arrow-down"></i>
                 </div>
+                <span class="badge badge-success pull-right">99</span>
+            </a>
+        </div>
+        <span class="clearfix"></span>
+    </div>
 
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                    <div class="pull-right speed-entry-button-group">
+    <div class="list-group-item">
+        <input type="text" class="form-control speed-entry-input pull-left" value="Windows"/>
+        <div class="pull-right speed-entry-button-group">
+            <a href="#" class="speed-entry-button m-xs">
+                <i class="fa fa-check-square"></i>
+            </a>
+            <a href="#" class="speed-entry-button m-xs">
+                <i class="fa fa-floppy-o"></i>
+            </a>
+            <a href="#" class="speed-entry-button m-xs m-r-none">
+                <i class="fa fa-trash-o"></i>
+            </a>
+            <a class="link-badge" href="#">
+                <div>
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <span class="badge badge-success pull-right">2</span>
+            </a>
+        </div>
+        <span class="clearfix"></span>
+
+        <style>
+            .action-cell {
+                padding-right: 10px;
+                width: 150px;
+            }
+
+            .first-cell {
+                padding-left: 10px;
+                width: 50px;
+            }
+
+            .selection-list { width: 100%; }
+
+            .selection-list-container {
+                padding-left: 25px;
+                width: 100%;
+            }
+        </style>
+        <div class="selection-list-container">
+
+            <table class="table-responsive selection-list">
+                <tr>
+                    <td class="first-cell">
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-circle-o"></i>
+                        </a>
+                    </td>
+                    <td class="content-cell">Inspected</td>
+                    <td class="action-cell">
+                        <div class="pull-right text-muted small">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first-cell">
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-circle"></i>
+                        </a>
+                    </td>
+                    <td class="content-cell">Inspected</td>
+                    <td class="action-cell">
+                        <div class="pull-right text-muted small">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first-cell">
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-square-o"></i>
+                        </a>
+                    </td>
+                    <td class="content-cell">Inspected</td>
+                    <td class="action-cell">
+                        <div class="pull-right text-muted small">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first-cell">
                         <a href="#" class="speed-entry-button m-xs">
                             <i class="fa fa-check-square"></i>
                         </a>
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-up"></i>
-                            </div>
-                            <span class="badge badge-success pull-right">2</span>
-                        </a>
-                    </div>
-                    <span class="clearfix"></span>
-
-                    <style>
-                        .action-cell {
-                            padding-right: 10px;
-                            width: 150px;
-                        }
-
-                        .first-cell {
-                            padding-left: 10px;
-                            width: 50px;
-                        }
-
-                        .selection-list {
-                            width: 100%;
-                        }
-
-                        .selection-list-container {
-                            padding-left: 25px;
-                            width: 100%;
-                        }
-                    </style>
-                    <div class="selection-list-container">
-
-                        <table class="table-responsive selection-list">
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-circle-o"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-circle"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-square-o"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-check-square"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <ul class="list-group ddd">
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                    </td>
+                    <td class="content-cell">Inspected</td>
+                    <td class="action-cell">
+                        <div class="pull-right text-muted small">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </form>
 
-    
-
-
-    </div>
-    <div class="menu-slider" data-ng-class="{'shifted': isShifted}">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active">
-                <a href="#" data-ng-click="doit()">Home</a>
+        <ul class="list-group ddd">
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
             </li>
-            <li role="presentation">
-                <a href="#">Profile</a>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
             </li>
-            <li role="presentation">
-                <a href="#">Messages</a>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
             </li>
         </ul>
     </div>
-    <div class="p-mask" data-ng-class="{'shifted': isShifted}"></div>
+</div>
+
+<a href="#" class="btn btn-default btn-block">View All Alerts</a>
+</div>
+</form>
+
+
+</div>
+<div class="menu-slider" data-ng-class="{'shifted': isShifted}">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active">
+            <a href="#" data-ng-click="doit()">Home</a>
+        </li>
+        <li role="presentation">
+            <a href="#">Profile</a>
+        </li>
+        <li role="presentation">
+            <a href="#">Messages</a>
+        </li>
+    </ul>
+</div>
+<div class="p-mask" data-ng-class="{'shifted': isShifted}" data-ng-click="isShifted = false"></div>
 
 <style>
     
@@ -370,10 +348,11 @@
 
     @media all and (min-width: 320px) {
         .menu-slider {
-            -ms-transform: translateX(-300px);
-            -webkit-transform: translateX(-300px);
-            transform: translateX(-300px);
-            width: 300px;
+            -ms-transform: translateX(-250px);
+            -webkit-transform: translateX(-250px);
+            transform: translateX(-250px);
+            width: 250px;
+        height: 100%;
         }
     }
 
@@ -384,6 +363,7 @@
         -webkit-transform: translateX(0);
         background-color: lightgreen;
         transform: translateX(0);
+        height: 100%;
     }
 
     .main-content {
@@ -406,20 +386,13 @@
 
     
     @media all and (min-width: 320px) {
-      .p-wrapper.shifted {
-        -webkit-transform: translateX(300px);
-            -ms-transform: translateX(300px);
-                transform: translateX(300px);
-      }
-    }
-
-    @media all and (min-width: 320px) {
-        .p-wrapper.has-push-left {
-            -ms-transform: translateX(300px);
-            -webkit-transform: translateX(300px);
-            transform: translateX(300px);
+        .p-wrapper.shifted {
+            -ms-transform: translateX(250px);
+            -webkit-transform: translateX(250px);
+            transform: translateX(250px);
         }
     }
+
 
     .p-mask {
         -webkit-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
@@ -448,175 +421,175 @@
 </style>
 
 <script>
-        var app = angular.module('app', []);
+    var app = angular.module('app', []);
 
-        angular
-            .module('app')
-            .controller('tempController', tempController);
+    angular
+        .module('app')
+        .controller('tempController', tempController);
 
-        tempController.$inject = ['$scope', '$timeout'];
+    tempController.$inject = ['$scope', '$timeout'];
 
-        function tempController($scope, $timeout) {
-            $scope.dtown = "hello world";
-            $scope.isShifted = false;
-            $scope.doit = function() {
-                $scope.isShifted = !$scope.isShifted;
-            };
+    function tempController($scope, $timeout) {
+        $scope.dtown = "hello world";
+        $scope.isShifted = false;
+        $scope.doit = function() {
+            $scope.isShifted = !$scope.isShifted;
+        };
 
-            $scope.inspectionTemplate = {
-                "title": "HarrisTeq Demo Template TWO",
-                "categories": [
-                    {
-                        "categoryName": "Demo Exterior TWO",
-                        "categoryItems": [
-                            {
-                                "categoryItemName": "Siding",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            },
-                            {
-                                "categoryItemName": "Windows",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            },
-                            {
-                                "categoryItemName": "Doors",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            },
-                            {
-                                "categoryItemName": "Steps",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            }
-                        ]
-                    }, {
-                        "categoryName": "Heating/Cooling",
-                        "categoryItems": [
-                            {
-                                "categoryItemName": "Heating Equipment",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            },
-                            {
-                                "categoryItemName": "Cooling Equipment",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            },
-                            {
-                                "categoryItemName": "Normal Operating Controls",
-                                "categoryItemOptions": [
-                                    {
-                                        "categoryItemOptionName": "Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Not Inspected",
-                                        "isSelected": false
-                                    },
-                                    {
-                                        "categoryItemOptionName": "Replace\/Repair",
-                                        "isSelected": false
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            };
-
-
-            $scope.createItemOption = function (name, isSelected) {
-                var rtn = {};
-                rtn["categoryItemOptionName"] = name;
-                rtn["isSelected"] = isSelected;
-                return rtn;
-            };
+        $scope.inspectionTemplate = {
+            "title": "HarrisTeq Demo Template TWO",
+            "categories": [
+                {
+                    "categoryName": "Demo Exterior TWO",
+                    "categoryItems": [
+                        {
+                            "categoryItemName": "Siding",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        },
+                        {
+                            "categoryItemName": "Windows",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        },
+                        {
+                            "categoryItemName": "Doors",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        },
+                        {
+                            "categoryItemName": "Steps",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        }
+                    ]
+                }, {
+                    "categoryName": "Heating/Cooling",
+                    "categoryItems": [
+                        {
+                            "categoryItemName": "Heating Equipment",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        },
+                        {
+                            "categoryItemName": "Cooling Equipment",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        },
+                        {
+                            "categoryItemName": "Normal Operating Controls",
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionName": "Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Not Inspected",
+                                    "isSelected": false
+                                },
+                                {
+                                    "categoryItemOptionName": "Replace\/Repair",
+                                    "isSelected": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
 
 
-            $scope.createInspectedCategoryItemOptions = function () {
-                var rtn = [];
-                rtn.push(createItemOption("Inspected", false));
-                rtn.push(createItemOption("Not Inspected", false));
-                rtn.push(createItemOption("Replace\/Repair", false));
-
-                return rtn;
-            };
+        $scope.createItemOption = function(name, isSelected) {
+            var rtn = {};
+            rtn["categoryItemOptionName"] = name;
+            rtn["isSelected"] = isSelected;
+            return rtn;
+        };
 
 
-        }
-    </script>
+        $scope.createInspectedCategoryItemOptions = function() {
+            var rtn = [];
+            rtn.push(createItemOption("Inspected", false));
+            rtn.push(createItemOption("Not Inspected", false));
+            rtn.push(createItemOption("Replace\/Repair", false));
+
+            return rtn;
+        };
+
+
+    }
+</script>
 </body>
 </html>
