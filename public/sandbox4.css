@@ -1,6 +1,5 @@
 ﻿
     .p-header {
-        background-color: lavender;
         text-align: center;
     }
 
@@ -65,8 +64,6 @@
         -ms-transform: translateX(-100%);
         -webkit-transform: translateX(-100%);
         -webkit-transition: -webkit-transform 0.3s;
-        background-color: aliceblue;
-        background-color: #67b5d1;
         height: 100%;
         left: 0;
         overflow-y: scroll;
@@ -92,9 +89,9 @@
     .menu-slider.shifted {
         -ms-transform: translateX(0);
         -webkit-transform: translateX(0);
-        background-color: lightgreen;
         height: 100%;
         transform: translateX(0);
+        background-color: #efefef;
     }
 
 
