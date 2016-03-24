@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width">-->
+    <title>ht hi jsbin</title>
+</head>
+<body data-ng-app="app" data-ng-controller="tempController" data-ng-class="{'shifted': isShifted}">
+
+    <div id="container">
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            #container {
+                display: flex;
+                min-height: 100%;
+            }
+
+            input[type=checkbox] {
+                position: absolute;
+                opacity: 0;
+            }
+
+            label {
+                position: absolute;
+                top: 10px;
+                left: 40px;
+                z-index: 1;
+                display: block;
+                font-size: 3em;
+                color: #444;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+                transform: translate3d(0, 0, 0);
+                transition: transform .4s;
+            }
+
+            input[type=checkbox]:checked ~ label {
+                transform: translate3d(250px, 0, 0) rotate(90deg);
+            }
+
+            .content {
+                width: 100%;
+                padding: 40px;
+                background: #f2f2f2;
+                transform: translate3d(0, 0, 0);
+                transition: transform .4s;
+            }
+
+            input[type=checkbox]:checked ~ .content {
+                transform: translate3d(250px, 0, 0);
+            }
+
+            input[type=checkbox]:checked ~ .slide-menu {
+                transform: translate3d(0, 0, 0);
+            }
+
+                input[type=checkbox]:checked ~ .slide-menu .menu li {
+                    width: 100%;
+                }
+
+            .slide-menu {
+                transform: translate3d(-250px, 0, 0);
+                position: absolute;
+                width: 250px;
+                background: #4f6b81;
+                color: #ddd;
+                left: 0;
+                height: 100%;
+                transition: all .4s;
+            }
+
+                .slide-menu h1 {
+                    margin: 10px;
+                    text-shadow: 1px 1px 1px #000;
+                }
+
+            .menu {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+                .menu a {
+                    display: block;
+                    text-decoration: none;
+                    color: #fff;
+                    font-size: 1.1em;
+                    padding: 15px;
+                    background: linear-gradient(#628297, #4f6b81);
+                    border-bottom: 1px solid #1e222b;
+                    box-shadow: inset 0px 1px 1px #8b9db3;
+                }
+
+                    .menu a:hover {
+                        background: linear-gradient(#3b3f48, #3c434d);
+                        box-shadow: inset 0px 1px 1px #475059;
+                    }
+        </style>
+        <input id="toggle" type="checkbox"><label for="toggle"></label>
+
+        <div class="content">
+            <h1>CSS Slide In Menu Example</h1>
+            <p>If you need the menu on the right hand side, very easy to achieve, just check out our blog at CSSPortal - <a href="http://www.cssportal.com/blog/css-slide-in-menu/">CSS Slide in Menu</a>.</p>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
+            <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
+            <p>Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
+        </div>
+
+        <div class="slide-menu">
+            <h1>Menu</h1>
+            <nav class="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Sign In</a></li>
+            </nav>
+        </div>
+
+    </div>
+</body>
+</html>
