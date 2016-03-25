@@ -21,10 +21,6 @@
 <style>
     .p-header { text-align: center; }
 
-    .p-header-text {
-        display: inline-block;
-        font-size: 27px;
-    }
 
     .move { padding-right: 200px; }
 
@@ -83,8 +79,6 @@
 
     
     body {
-        background: #556270;
-        color: #353d46;
         margin: 0;
     }
 
@@ -99,42 +93,47 @@
         height: 100%;
         left: -100px;
         max-width: 284px;
-        overflow-y: scroll;
+        overflow-y: auto;
         position: fixed;
         top: 0;
         transition: all 300ms;
         width: 100%;
     }
 
-    .menu-slider > ul { opacity: 0.5; }
+    .menu-slider > ul { 
+    }
 
-    .menu-slider.shifted { left: 0px; }
+    .menu-slider.shifted { 
+        left: 0px; 
+    }
 
     .p-wrapper {
-        -moz-box-shadow: -3px 0 6px #4a5562;
+        -moz-box-shadow: -1px 0 2px #efefef;
+        -webkit-box-shadow: -1px 0 2px #efefef;
+        box-shadow: -1px 0 2px #efefef;
         -moz-box-sizing: border-box;
-        -moz-transition: all 300ms;
-        -webkit-box-shadow: -3px 0 6px #4a5562;
         -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+
+        -moz-transition: all 300ms;
         -webkit-transition: all 300ms;
+        transition: all 300ms;
+
         background: #fcfeff;
         border-radius: 0;
-        box-shadow: -3px 0 6px #4a5562;
-        box-sizing: border-box;
         height: 100%;
         left: 0;
         position: fixed;
         top: 0;
-        transition: all 300ms;
         width: 100%;
-  overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     
 
-    .p-wrapper.shifted { left: 284px; }
-
-
-
+    .p-wrapper.shifted { 
+        left: 284px; 
+    }
 
     .link-badge i { font-size: 30px; }
 
@@ -144,9 +143,6 @@
     }
 
     .link-badge div { display: inline-block; }
-
-
-
 
     .p-header {
         border-bottom: 1px solid #efefef;
@@ -167,46 +163,90 @@
 
     .shifted .logo-main,
     .shifted .logo-text { visibility: hidden; }
+
+    .logo {
+        display: inline-block;
+        opacity: .5;
+        padding: 3px;
+        width: 27px;
+    }
+
+    .menu-slider h5 {
+        display: inline-block;
+        margin-left: 5px;
+        color: #000;
+        opacity: .3;
+    }
+    
+    .menu-slider .header {
+        text-align: center;
+        text-transform: capitalize;
+        font-size: 18px;
+        color: #ffffff;
+        padding: 12px;
+    }
+    .menu-slider .header-container {
+        background: #556270;
+        color: #353d46;
+    }
+     .menu-slider {
+         background-color: #ffffff;
+    }
+    
+     .p-container {
+         background-color: steelblue;
+         margin: 0;
+         color: #fff;
+         padding-top: 5px;
+     }
+
+     .p-container a {
+         color: #fff;
+     }
+     
+     .p-container .menu-button {
+         margin: 3px 10px 0px 15px;
+         display: inline-block;
+         font-size: 20px;
+     }
+     .p-container .edit-button {
+         margin: 0px 15px 0px 15px;
+         display: inline-block;
+         font-size: 25px;
+     }
+     
+    .p-header-text {
+        display: inline-block;
+        font-size: 20px;
+    }
 </style>
 
 <nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
-    <style>
-        .logo {
-            display: inline-block;
-            opacity: .5;
-            padding: 3px;
-            width: 27px;
-        }
-
-        .menu-slider h5 {
-            display: inline-block;
-            margin-left: 5px;
-        }
-    </style>
-    <img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo"/><h5>HarrisTeq</h5>
-    <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active">
-            <a href="#" data-ng-click="doit()">Home</a>
-        </li>
-        <li role="presentation">
-            <a href="#">Profile</a>
-        </li>
-        <li role="presentation">
-            <a href="#">Messages</a>
-        </li>
-    </ul>
+    <div class="header-container" data-ng-click="doit();">
+        <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo" />
+        <h5>HarrisTeq</h5>-->
+        <div class="header">
+            Menu
+        </div>
+    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item active">Home</a>
+        <a href="#" class="list-group-item">Inspections</a>
+        <a href="#" class="list-group-item">Templates</a>
+    </div>
 </nav>
-<div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
-    <img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/><h5 class="logo-text">HarrisTeq</h5>
+<div class="p-wrapper" data-ng-class="{'shifted': isShifted}" >
+    <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
+    <h5 class="logo-text">HarrisTeq</h5>-->
     <div class="p-container">
         <div class="p-header text-center">
             <div class="pull-left">
-                <a href="#" class="btn btn-primary" ng-click="doit();">
+                <a href="#" class="menu-button" ng-click="doit();">
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
             <div class="pull-right">
-                <a href="#" class="speed-entry-button">
+                <a href="#" class="edit-button">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
             </div>
