@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>katPoo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+
+    <meta name="apple-mobile-web-app-title" content="HarrisTeq">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/metisMenu/dist/metisMenu.min.css">
+    <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/timeline.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/sb-admin-2.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/morrisjs/morris.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
+    <link rel="stylesheet" href="logon.style.css">
+    <link rel="stylesheet" href="logon.animate.css">
+    <style>
+        body {
+            color: #fff;
+        }
+
+        .inner-addon {
+            margin: 15px 0px 10px 0px;
+            position: relative;
+        }
+
+            .inner-addon .glyphicon, .inner-addon .fa {
+                font-size: 25px;
+                color: #2f4050;
+            }
+
+            .inner-addon .glyphicon, .inner-addon .fa, .slider input[type='checkbox'] {
+                padding: 10px;
+                position: absolute;
+                color: #2f4050;
+            }
+
+        .slider input[type='checkbox'] {
+            bottom: 0px;
+            left: 0px;
+            position: absolute;
+            right: 0px;
+            top: 7px;
+            z-index: 1;
+        }
+
+        .left-addon .glyphicon, .left-addon.fa {
+            left: 0px;
+            color: #2f4050;
+        }
+
+        .right-addon .glyphicon, .right-addon.fa {
+            cursor: pointer;
+            right: 0px;
+            z-index: 44;
+            color: #2f4050;
+        }
+
+        .left-addon input {
+            padding-left: 30px;
+            color: #2f4050;
+        }
+
+        .right-addon input {
+            padding-right: 30px;
+            color: #2f4050;
+        }
+
+        .slider i {
+            color: #efefef;
+            font-size: 35px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sliderold i {
+            color: #0B67A6;
+            font-size: 35px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slider-row {
+            margin-top: 15px;
+            position: relative;
+            text-align: left;
+        }
+
+            .slider-row .slider {
+                float: left;
+            }
+
+            .slider-row label {
+                float: left;
+                font-size: 20px;
+                font-weight: normal;
+                margin: 5px 0px 10px 10px;
+            }
+
+            .slider-row:after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+
+        .button-100 {
+            font-size: 25px;
+            margin: 10px 0px 0px 0px;
+            width: 100%;
+        }
+
+        .form-control.large {
+            font-size: 25px;
+            padding: 20px 20px 20px 45px;
+        }
+
+        .help-row {
+            font-size: 15px;
+            margin: 15px 0px 10px 0px;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            border-color: #fff;
+            color: #2f4050;
+        }
+
+            .btn-primary:hover {
+                background-color: #2f4050;
+                border-color: #efefef;
+                color: #efefef;
+            }
+
+
+        .avatar {
+        }
+
+            .avatar img {
+                border-radius: 500px;
+            }
+
+        form {
+            position: relative;
+        }
+        .logo-name {
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body data-ng-app="app" data-ng-controller="tempController">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">KP<i class="fa fa-check-circle-o" style="font-size: 45px;"></i></h1>
+            </div>
+            <h3>Welcome to HomeInspection</h3>
+            <p>
+                Revnique's (get a MEAN.js job) Demo
+            </p>
+            <p>Login in. To see it in action.</p>
+
+            <form method="POST">
+                <div class="inner-addon left-addon" style="margin-top: 25px;">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <i class="fa fa-times-circle right-addon" ng-show="username != ''" ng-click="clearUserName()"></i>
+                    <input type="text" class="form-control large" ng-model="username" />
+                </div>
+                <div class="inner-addon left-addon">
+                    <i class="fa fa-lock left-addon"></i>
+                    <i class="fa fa-times-circle right-addon" ng-show="password != ''" ng-click="clearPassword()"></i>
+                    <input type="password" class="form-control large" ng-model="password" />
+                </div>
+                <div class="slider-row">
+                    <div class="slider">
+                        <i class="fa" ng-class="{'fa-toggle-on': rememberMe === true, 'fa-toggle-off': rememberMe === false}" ng-click="rememberMe=!rememberMe"></i>
+                        <!--<i class="fa fa-toggle-off"></i>-->
+                        <!--<input type="checkbox" />-->
+                    </div>
+                    <label>
+                        Remember Me
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-primary button-100" ng-click="login();">Sign In</button>
+                </div>
+
+            </form>
+            <p class="m-t"> <small>Let's get this dude a job &copy; 2016</small> </p>
+        </div>
+    </div>
+    <script>
+    var app = angular.module('app', []);
+
+    angular
+        .module('app')
+        .controller('tempController', tempController);
+
+    tempController.$inject = ['$scope', '$timeout'];
+
+    function tempController($scope, $timeout) {
+        $scope.username = "";
+        $scope.password = "";
+
+        $scope.rememberMe = true;
+        $scope.clearUserName = function () {
+            $scope.username = "";
+        };
+        $scope.clearPassword = function () {
+            $scope.password = "";
+        };
+
+        $scope.login = function () {
+            //screenSvc.hideAlert();
+            //$scope.authorizing = true;
+            //var username = $scope.username, password = $scope.password, LOGIN_FAILED = "Username and/or Password invalid.";
+            //if (username !== "" && password !== "") {
+            //    var promise = loginSvc.login(username, password);
+            //    promise.then(function (response) {
+            //        //setting cookie expiration for a week. the token it contains will always be validated on the server.
+            //        var expireCookieDate = new Date().addDays(7);
+            //        var d = "";
+            //        if (location.href.indexOf("/localhost") < 0) {
+            //            d = "qrPays";
+            //        }
+            //        ptApp.utils.createCookie("authToken", response.Token, d, expireCookieDate);
+
+            //        loginSvc.redirectToHomepage();
+            //        $scope.authorizing = false;
+            //    }, function (response) {
+            //        screenSvc.showAlert(response.simpleErrorMessage, 2, false);
+            //        $scope.authorizing = false;
+            //    });
+
+            //} else {
+            //    $scope.authorizing = false;
+            //    screenSvc.showAlert(LOGIN_FAILED, 2, false);
+            //}
+            location.href = "homepage.html";
+        };
+    }
+    </script>
+
+</body>
+</html>
