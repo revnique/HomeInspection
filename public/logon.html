@@ -2,6 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <title>katPoo</title>
 
     <meta charset="utf-8">
@@ -31,8 +32,8 @@
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/sb-admin-2.css">
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/morrisjs/morris.css">
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
-    <link rel="stylesheet" href="logon.style.css">
-    <link rel="stylesheet" href="logon.animate.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/logon.style.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/logon.animate.css">
     <style>
         body {
             color: #fff;
@@ -161,8 +162,13 @@
         form {
             position: relative;
         }
-        .logo-name {
+        .logo-name, .middle-box h1 {
             font-size: 100px;
+        }
+        .logo-name i {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 45px;
         }
     </style>
 </head>
@@ -170,11 +176,11 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">KP<i class="fa fa-check-circle-o" style="font-size: 45px;"></i></h1>
+                <h1 class="logo-name">HI<i class="fa fa-check-circle-o" ></i></h1>
             </div>
             <h3>Welcome to HomeInspection</h3>
             <p>
-                Revnique's (get a MEAN.js job) Demo
+                Revnique's (showcasing his MEAN.js skillz) Demo
             </p>
             <p>Login in. To see it in action.</p>
 
@@ -204,7 +210,7 @@
                 </div>
 
             </form>
-            <p class="m-t"> <small>Let's get this dude a job &copy; 2016</small> </p>
+            <p class="m-t"> <small>Would you pay this dude??? &copy; 2016</small> </p>
         </div>
     </div>
     <script>
