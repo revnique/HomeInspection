@@ -2,6 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <title>katPoo</title>
 
     <meta charset="utf-8">
@@ -161,23 +162,42 @@
         form {
             position: relative;
         }
+        .main-links img {
+            width: 110px;
+            margin: 0px;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .main-links h3 {
+            color: #adadad;
+            margin-top: 20px;
+        }
+        .loginscreen.middle-box {
+            padding-top: 0px;
+        }
+        .main-links a img:hover {
+            border: 1px solid #efefef;
+            padding: 9px;
+        }
     </style>
 </head>
 <body data-ng-app="app" data-ng-controller="tempController">
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
-            <h3>Home</h3>
-            <div class="col-lg-6">
-                <a href="page-inspections.html?p=i">
-                    <i class="fa fa-pencil-square-o"></i>
-                    Inspections
-                </a>
-            </div>
-            <div class="col-lg-6">
-                <a href="page-inspections.html?p=t">
-                    <i class="fa fa-pencil-square-o"></i>
-                    Templates
-                </a>
+            <h2>Home</h2>
+            <div class="main-links">
+                <div class="col-xs-6 text-center">
+                    <a href="page-inspections.html?p=i">
+                        <h3>Inspections</h3>
+                        <img src="inspections-white.png" />
+                    </a>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <a href="page-inspections.html?p=t">
+                        <h3>Templates</h3>
+                        <img src="template-white.png" />
+                    </a>
+                </div>
             </div>
 
         </div>
