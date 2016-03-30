@@ -246,180 +246,253 @@
 
             <div class="p-header-badge">
                 <div class="p-header-text">
-                    Categories
+                    {{selectedFormName}}
                 </div>
-                <span class="badge badge-success">99</span>
+                <span class="badge badge-success">{{selectedFormItemCount}}</span>
             </div>
             <span class="clearfix"></span>
         </div>
     </div>
-    <div class="p-scroll">
+<div class="p-scroll">
+    <form id="formTempates" class="slide-right" data-ng-class="{'show': selectedFormName=='Templates'}" >
+        <h1>
+            Templates
+        </h1>
 
-        <form method="post" name="vm.form.inspectionForm">
-            <div class="panel-body">
-                <div class="speed-entry-input-topper">
-                    <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                        <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                        <span class="pull-right text-muted small">
-                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="goto('Categories')">
+            Categories
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </form>
+    <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide-right" data-ng-class="{'show': selectedFormName=='Categories'}">
+        <div class="panel-body">
+            <div class="speed-entry-input-topper">
+                <div class="m-l m-r" style="padding: 10px 0 10px 0;">
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" data-ng-click="goto('Templates')" />
+                    <span class="pull-right text-muted small">
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
 
-                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
 
-                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
-                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
-                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
 
 
-                        </span>
-                        <span class="clearfix"></span>
-                    </div>
+                    </span>
+                    <span class="clearfix"></span>
                 </div>
-
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-square-o"></i>
-                        </a>
-                        <div class="pull-right speed-entry-button-group">
-
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-floppy-o"></i>
-                            </a>
-                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
-
-                            <a class="link-badge" href="#">
-                                <div>
-                                    <i class="fa fa-arrow-down"></i>
-                                </div>
-                                <span class="badge badge-success">99</span>
-                            </a>
-                        </div>
-                        <span class="clearfix"></span>
-                    </div>
-
-                    <div class="list-group-item">
-                        <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                        <div class="pull-right speed-entry-button-group">
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-check-square"></i>
-                            </a>
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-floppy-o"></i>
-                            </a>
-                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
-                            <a class="link-badge" href="#">
-                                <div>
-                                    <i class="fa fa-arrow-down"></i>
-                                </div>
-                                <span class="badge badge-success">3</span>
-                            </a>
-                        </div>
-                        <span class="clearfix"></span>
-
-                        <div class="selection-list-container">
-
-                            <table class="table-responsive selection-list">
-                                <tr>
-                                    <td class="first-cell">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-circle-o"></i>
-                                        </a>
-                                    </td>
-                                    <td class="content-cell">Inspected</td>
-                                    <td class="action-cell">
-                                        <div class="pull-right text-muted small">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-floppy-o"></i>
-                                            </a>
-                                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="first-cell">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-circle"></i>
-                                        </a>
-                                    </td>
-                                    <td class="content-cell">Inspected</td>
-                                    <td class="action-cell">
-                                        <div class="pull-right text-muted small">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-floppy-o"></i>
-                                            </a>
-                                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="first-cell">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-square-o"></i>
-                                        </a>
-                                    </td>
-                                    <td class="content-cell">Inspected</td>
-                                    <td class="action-cell">
-                                        <div class="pull-right text-muted small">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-floppy-o"></i>
-                                            </a>
-                                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="first-cell">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-check-square"></i>
-                                        </a>
-                                    </td>
-                                    <td class="content-cell">Inspected</td>
-                                    <td class="action-cell">
-                                        <div class="pull-right text-muted small">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-floppy-o"></i>
-                                            </a>
-                                            <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <ul class="list-group ddd">
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                Cras justo odio
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                Cras justo odio
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                Cras justo odio
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
             </div>
-        </form>
-    </div>
+
+            <div class="list-group">
+                <div class="list-group-item">
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                    <a href="#" class="speed-entry-button m-xs">
+                        <i class="fa fa-square-o"></i>
+                    </a>
+                    <div class="pull-right speed-entry-button-group">
+
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-floppy-o"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+
+                        <a class="link-badge" href="#">
+                            <div>
+                                <i class="fa fa-arrow-down"></i>
+                            </div>
+                            <span class="badge badge-success">99</span>
+                        </a>
+                    </div>
+                    <span class="clearfix"></span>
+                </div>
+
+                <div class="list-group-item">
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                    <div class="pull-right speed-entry-button-group">
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-check-square"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-floppy-o"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a class="link-badge" href="#">
+                            <div>
+                                <i class="fa fa-arrow-down"></i>
+                            </div>
+                            <span class="badge badge-success">3</span>
+                        </a>
+                    </div>
+                    <span class="clearfix"></span>
+
+                    <div class="selection-list-container">
+
+                        <table class="table-responsive selection-list">
+                            <tr>
+                                <td class="first-cell">
+                                    <a href="#" class="speed-entry-button m-xs">
+                                        <i class="fa fa-circle-o"></i>
+                                    </a>
+                                </td>
+                                <td class="content-cell">Inspected</td>
+                                <td class="action-cell">
+                                    <div class="pull-right text-muted small">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-floppy-o"></i>
+                                        </a>
+                                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="first-cell">
+                                    <a href="#" class="speed-entry-button m-xs">
+                                        <i class="fa fa-circle"></i>
+                                    </a>
+                                </td>
+                                <td class="content-cell">Inspected</td>
+                                <td class="action-cell">
+                                    <div class="pull-right text-muted small">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-floppy-o"></i>
+                                        </a>
+                                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="first-cell">
+                                    <a href="#" class="speed-entry-button m-xs">
+                                        <i class="fa fa-square-o"></i>
+                                    </a>
+                                </td>
+                                <td class="content-cell">Inspected</td>
+                                <td class="action-cell">
+                                    <div class="pull-right text-muted small">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-floppy-o"></i>
+                                        </a>
+                                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="first-cell">
+                                    <a href="#" class="speed-entry-button m-xs">
+                                        <i class="fa fa-check-square"></i>
+                                    </a>
+                                </td>
+                                <td class="content-cell">Inspected</td>
+                                <td class="action-cell">
+                                    <div class="pull-right text-muted small">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-floppy-o"></i>
+                                        </a>
+                                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <ul class="list-group ddd">
+                        <li class="list-group-item">
+                            <span class="badge">14</span>
+                            Cras justo odio
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">14</span>
+                            Cras justo odio
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">14</span>
+                            Cras justo odio
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+        </div>
+    </form>
+    <form id="formItems" class="ng-hide">
+        <h1>
+            Items
+        </h1>
+        <div class="panel-body">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                    <a href="#" class="speed-entry-button m-xs">
+                        <i class="fa fa-square-o"></i>
+                    </a>
+                    <div class="pull-right speed-entry-button-group">
+
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-floppy-o"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+
+                        <a class="link-badge" href="#">
+                            <div>
+                                <i class="fa fa-arrow-down"></i>
+                            </div>
+                            <span class="badge badge-success">99</span>
+                        </a>
+                    </div>
+                    <span class="clearfix"></span>
+                </div>
+
+                <div class="list-group-item">
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                    <div class="pull-right speed-entry-button-group">
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-check-square"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-floppy-o"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a class="link-badge" href="#">
+                            <div>
+                                <i class="fa fa-arrow-down"></i>
+                            </div>
+                            <span class="badge badge-success">3</span>
+                        </a>
+                    </div>
+                    <span class="clearfix"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="formItemOptions" class="ng-hide">
+        <h1>
+            Item options
+        </h1>
+    </form>
+    <form id="formInspections" class="ng-hide">
+        <h1>
+            Inspections
+        </h1>
+    </form>
+</div>
 <style>
     .p-footer {
         position: absolute;
@@ -472,6 +545,32 @@
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+    .slide-right {
+        -moz-transition: all 1000ms;
+        -webkit-transition: all 1000ms;
+        transition: all 1000ms;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 5000px;
+        background-color: yellow;
+    }
+
+    
+    .slide-right.show {
+        -moz-transition: all 1000ms;
+        -webkit-transition: all 1000ms;
+        transition: all 1000ms;
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: inherit;
+    }
 </style>
     <div class="p-footer">
         <input type="text" class="speed-entry-text"/>
@@ -497,7 +596,12 @@
         $scope.doit = function() {
             $scope.isShifted = !$scope.isShifted;
         };
-
+        $scope.selectedFormName = "Templates";
+        $scope.selectedFormItemCount = "77";
+        $scope.goto = function(formName) {
+            $scope.selectedFormName = formName;
+            $scope.selectedFormItemCount = "88";
+        };
         $scope.inspectionTemplate = {
             "title": "HarrisTeq Demo Template TWO",
             "categories": [
