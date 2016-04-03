@@ -231,44 +231,51 @@
 <div class="p-wrapper" data-ng-class="{'shifted': isShifted}" >
     <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
     <h5 class="logo-text">HarrisTeq</h5>-->
-    <div class="p-container">
-        <div class="p-header text-center">
-            <div class="pull-left">
-                <a href="#" class="menu-button" ng-click="doit();">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-            <div class="pull-right">
-                <a href="#" class="edit-button">
-                    <i class="fa fa-pencil-square-o"></i>
-                </a>
-            </div>
-
-            <div class="p-header-badge">
-                <div class="p-header-text">
-                    {{selectedFormName}}
-                </div>
-                <span class="badge badge-success">{{selectedFormItemCount}}</span>
-            </div>
-            <span class="clearfix"></span>
+<div class="p-container">
+    <div class="p-header text-center">
+        <div class="pull-left">
+            <a href="#" class="menu-button" ng-click="doit();">
+                <i class="fa fa-bars"></i>
+            </a>
         </div>
+        <div class="pull-right">
+            <a href="#" class="edit-button">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
+        </div>
+
+        <div class="p-header-badge">
+            <div class="p-header-text">
+                {{selectedForm.title}}
+            </div>
+            <span class="badge badge-success">{{selectedForm.itemCount}}</span>
+        </div>
+        <span class="clearfix"></span>
     </div>
+</div>
 <div class="p-scroll">
-    <form id="formTempates" class="slide-right" data-ng-class="{'show': selectedFormName=='Templates'}" >
+    <form id="formTempates" class="slide" data-ng-class="getStyle(forms[0])">
         <h1>
             Templates
         </h1>
 
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="goto('Categories')">
-            Categories
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
             <i class="fa fa-chevron-right"></i>
         </a>
     </form>
-    <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide-right" data-ng-class="{'show': selectedFormName=='Categories'}">
+    <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
         <div class="panel-body">
             <div class="speed-entry-input-topper">
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+
                 <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" data-ng-click="goto('Templates')" />
+                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
                     <span class="pull-right text-muted small">
                         <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
 
@@ -428,10 +435,18 @@
             <a href="#" class="btn btn-default btn-block">View All Alerts</a>
         </div>
     </form>
-    <form id="formItems" class="ng-hide">
+    <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
         <h1>
             Items
         </h1>
+
+
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+            <i class="fa fa-chevron-right"></i>
+        </a>
         <div class="panel-body">
             <div class="list-group">
                 <div class="list-group-item">
@@ -482,26 +497,72 @@
             </div>
         </div>
     </form>
-    <form id="formItemOptions" class="ng-hide">
+    <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
         <h1>
             Item options
         </h1>
+
+
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+            <i class="fa fa-chevron-right"></i>
+        </a>
     </form>
-    <form id="formInspections" class="ng-hide">
+    <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
         <h1>
             Inspections
         </h1>
+
+
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+            <i class="fa fa-chevron-right"></i>
+        </a>
     </form>
 </div>
 <style>
-    .p-footer {
+    .slide {
         position: absolute;
-        background-color: #556270;
-        bottom: 0px;
-        height: 50px;
-        left: 0px;
-        right: 0px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
+    .slide.right {
+        -moz-transition: all 1000ms;
+        -webkit-transition: all 1000ms;
+        transition: all 1000ms;
+        transform: translate3d(5000px, 0, 0);
+        visibility:hidden;
+    }
+    .slide.left { 
+        -moz-transition: all 1000ms;
+        -webkit-transition: all 1000ms;
+        transition: all 1000ms;
+        transform: translate3d(-5000px, 0, 0);
+        visibility:hidden;
+    }
+    .slide.middle {
+        -moz-transition: all 1000ms;
+        -webkit-transition: all 1000ms;
+        transition: all 1000ms;    
+        transform: translate3d(0px, 0, 0);
+        visibility:visible;
+    }
+
+
+     .p-footer {
+         position: absolute;
+         background-color: #556270;
+         bottom: 0px;
+         height: 50px;
+         left: 0px;
+         right: 0px;
+     }
     .p-scroll {
         overflow-y: auto;
         position: absolute;
@@ -529,47 +590,20 @@
         right: 50px;
         bottom: 0px;
         width: 84%;
-    height: 30px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-
-    .slide-right {
-        -moz-transition: all 1000ms;
-        -webkit-transition: all 1000ms;
-        transition: all 1000ms;
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 5000px;
-        background-color: yellow;
-    }
-
-    
-    .slide-right.show {
-        -moz-transition: all 1000ms;
-        -webkit-transition: all 1000ms;
-        transition: all 1000ms;
-        opacity: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: inherit;
+        height: 30px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     }
 </style>
     <div class="p-footer">
@@ -602,6 +636,96 @@
             $scope.selectedFormName = formName;
             $scope.selectedFormItemCount = "88";
         };
+
+
+
+        //formTempates
+        //formCategories
+        //formItems
+        //formItemOptions
+        //formInspections
+
+        $scope.forms = [
+            {
+                "id": 1,
+                "title": "Templates",
+                "formName": "Templates",
+                "cssClass": "middle",
+                "itemCount": 27,
+                "nextForm": 2,
+                "prevForm": -1
+            },
+            {
+                "id": 2,
+                "title": "Categories",
+                "formName": "Categories",
+                "cssClass": "right",
+                "itemCount": 11,
+                "nextForm": 3,
+                "prevForm": 1
+            },
+            {
+                "id": 3,
+                "title": "Items",
+                "formName": "Items",
+                "cssClass": "right",
+                "itemCount": 22,
+                "nextForm": 4,
+                "prevForm": 2
+            },
+            {
+                "id": 4,
+                "title": "Item Options",
+                "formName": "ItemOptions",
+                "cssClass": "right",
+                "itemCount": 33,
+                "nextForm": -1,
+                "prevForm": 3
+            },
+            {
+                "id": 5,
+                "title": "Inspections",
+                "formName": "Inspections",
+                "cssClass": "right",
+                "itemCount": 44,
+                "nextForm": -1,
+                "prevForm": -1
+            }
+        ];
+
+        $scope.selectedForm = $scope.forms[0];
+
+        $scope.next = function (frm) {
+            if (frm.nextForm !== -1) {
+                var nextForm = $scope.forms[frm.nextForm - 1];
+                if (nextForm.cssClass === "right") {
+                    frm.cssClass = "left";
+                } else if (nextForm.cssClass === "left") {
+                    frm.cssClass = "right";
+                }
+                console.log(frm);
+                nextForm.cssClass = "middle";
+                $scope.selectedForm = nextForm;
+            }
+        }
+
+        $scope.prev = function (frm) {
+            if (frm.prevForm !== -1) {
+                var prevForm = $scope.forms[frm.prevForm - 1];
+                if (prevForm.cssClass === "right") {
+                    frm.cssClass = "left";
+                } else if (prevForm.cssClass === "left") {
+                    frm.cssClass = "right";
+                }
+                console.log(frm);
+                prevForm.cssClass = "middle";
+                $scope.selectedForm = prevForm;
+            }
+        }
+        $scope.getStyle = function(frm) {
+            return frm.cssClass;
+        }
+
         $scope.inspectionTemplate = {
             "title": "HarrisTeq Demo Template TWO",
             "categories": [
