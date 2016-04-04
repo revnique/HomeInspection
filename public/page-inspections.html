@@ -606,13 +606,28 @@
         -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     }
+
+    .p-mask {
+        z-index: -100;
+    } 
+    .shifted .p-mask {
+        z-index: 10;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: #333;
+        opacity: .7;
+    }
 </style>
-    <div class="p-footer">
-        <input type="text" class="speed-entry-text"/>
-        <a href="#" class="bottom-btn">
-            <i class="fa fa-plus-square-o"></i>
-        </a>
-    </div>
+<div class="p-footer">
+    <input type="text" class="speed-entry-text"/>
+    <a href="#" class="bottom-btn">
+        <i class="fa fa-plus-square-o"></i>
+    </a>
+</div>
+    <div class="p-mask"></div>
 </div>
 
 
