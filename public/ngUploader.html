@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-ng-app="app" data-ng-controller="tempController">
+<head>
+    <title>ng 1 pager</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+</head>
+<body>
+<h1>{{dtown}}</h1>
+<input type="file" file-model="myFile"/>
+<button ng-click="doit()">doit</button>
+
+
+<script>
+    var app = angular.module('app', []);
+
+
+    app.service('fileUpload', ['$http', function ($http) {
+        this.uploadFileToUrl = function (file, uploadUrl) {
+            var fd = new FormData();
+            fd.append('file', file);
+
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+
+            .success(function () {
+            })
+
+            .error(function () {
+            });
+        }
+    }]);
+
+    angular
+        .module('app')
+        .controller('tempController', tempController);
+
+    tempController.$inject = ['$scope', '$timeout', 'fileUpload'];
+
+    app.directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+            
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);
+
+    function tempController($scope, $timeout, fileUpload) {
+        $scope.dtown = "hello world";
+        $scope.doit = function () {
+            var file = $scope.myFile;
+            var uploadUrl = 'http://localhost:61050/api/values/';
+            fileUpload.uploadFileToUrl(file, uploadUrl);
+        };
+    }
+    </script>
+</body>
+</html>
