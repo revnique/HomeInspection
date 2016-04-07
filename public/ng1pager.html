@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html data-ng-app="app" data-ng-controller="tempController">
+<head>
+    <title>ng 1 pager</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+</head>
+<body>
+<h1>{{dtown}}</h1>
+
+    <script>
+    var app = angular.module('app', []);
+
+    angular
+        .module('app')
+        .controller('tempController', tempController);
+
+    tempController.$inject = ['$scope', '$timeout'];
+
+    function tempController($scope, $timeout) {
+        $scope.dtown = "hello world";
+    }
+    </script>
+</body>
+</html>
