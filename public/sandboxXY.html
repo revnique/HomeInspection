@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/0a8bccd6-2943-4274-8a17-b1bedc82d3f5.css" />
+    <link href="/Content/css" rel="stylesheet"/>
+    <script src="../Scripts/library/angular/angular.js"></script>
+    <script src="../Scripts/library/angular/angular-http-batch.min.js"></script>
+    <style>
+        .isDisabled {
+            cursor:not-allowed;
+            opacity: .3;
+        }
+    </style>
+    <script>
+        var app = angular.module("app", ['jcs.angular-http-batch'], function () {
+        });
+
+        app.config(['httpBatchConfigProvider',
+            function (httpBatchConfigProvider) {
+                httpBatchConfigProvider.setAllowedBatchEndpoint(
+                        // root endpoint url
+                        'http://localhost:5050/',
+
+                        // endpoint batch address
+                        'http://localhost:5050/api/batch',
+
+                        // optional configuration parameters
+                        {
+                            minimumBatchSize: 2,
+                            maxBatchedRequestPerCall: 100
+                        });
+            }
+        ]);
+        app.directive('htCheckbox', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    checkboxId: '@',
+                    label: '@',
+                    enterToggles: '@'
+                },
+                template: '<a id="{{ checkboxId }}" href="javascript:void(0)" ng-click="checkUncheckMe()" ng-class="setMyClass()"><label for="{{ checkboxId }}">{{ label }}</label><i class="fa fa-fw" ng-class="setMyIconClass()"></i></a>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else
+                            return true;
+                    });
+
+                    scope.checkUncheckMe = function () {
+                        if (attrs.disabled) {
+                            return;
+                        }
+                        scope.ngModel = !scope.ngModel;
+                    };
+
+                    scope.setMyIconClass = function () {
+                        var rtn = scope.ngModel === true ? "fa-check-square" : "fa-square";
+                        return rtn;
+                    }
+
+                    scope.setMyClass = function () {
+                        var rtn = "htcheckbox";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
+                    }
+                }
+            };
+        }
+    ]);
+
+        app.directive('htRadioButton', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    ngValue: '=',
+                    radioButtonId: '@',
+                    label: '@',
+                    enterToggles: '@',
+                    onClick: '&',
+                    preventAction: '@'
+                },
+                template: '<a id="{{ radioButtonId }}" href="javascript:void(0)" ng-class="setMyClass()" ng-click="checkUncheckMe(ngValue)"><i class="fa fa-fw" ng-class="setMyIconClass()"></i><label for="{{ radioButtonId }}">{{ label }}</label></a>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else
+                            return true;
+                    });
+
+
+                    scope.checkUncheckMe = function () {
+                        if (attrs.disabled) {
+                            return;
+                        }
+                        scope.ngModel = scope.ngValue;
+                        scope.onClick(scope.ngValue, scope.preventAction);
+                    };
+
+                    scope.setMyIconClass = function () {
+                        //{\'fa-dot-circle-o\': ngModel == ngValue, \'fa-circle-o\': ngModel != ngValue }
+                        var rtn = scope.ngModel == scope.ngValue ? "fa-dot-circle-o" : "fa-circle-o";
+                        return rtn;
+                    }
+
+                    scope.setMyClass = function () {
+                        var rtn = "htradiobutton";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
+                    }
+                }
+            };
+        }
+        ]);
+
+        app.factory('htSvc', ['$http', '$window', '$q', '$timeout',
+          function ($http, $window, $q, $timeout) {
+              var svc = {};
+
+              svc.getWebApi = function (batchInfoId) {
+                  var deferred = $q.defer();
+                  $http.get("http://localhost:5050/api/demo/" + batchInfoId)
+                      .success(function (data, status, headers, config) {
+                          deferred.resolve(data);
+                      }).error(function (data, status, headers, config) {
+                          var msg = 'Error fetching tasks.';
+                          deferred.reject(msg);
+                      });
+
+                  return deferred.promise;
+              };
+
+              svc.getWebApiCollection = function () {
+                  var deferred = $q.defer();
+                  $http.get("http://localhost:5050/api/demo/")
+                      .success(function (data, status, headers, config) {
+                          deferred.resolve(data);
+                      }).error(function (data, status, headers, config) {
+                          var msg = 'Error fetching tasks.';
+                          deferred.reject(msg);
+                      });
+
+                  return deferred.promise;
+              };
+
+
+              svc.getWebMvc = function (batchInfoId) {
+                  var deferred = $q.defer();
+                  $http.get("http://localhost:5050/dashboard/GetDemoInfo/" + batchInfoId)
+                      .success(function (data, status, headers, config) {
+                          deferred.resolve(data);
+                      }).error(function (data, status, headers, config) {
+                          var msg = 'Error fetching tasks.';
+                          deferred.reject(msg);
+                      });
+
+                  return deferred.promise;
+              };
+
+
+              return svc;
+          }
+        ]);
+
+
+        app.controller("dtown", ["$scope", "$q", "htSvc", function ($scope, $q, htSvc) {
+            $scope.init = function () {
+
+                $scope.svcCalls = [];
+                for (var i = 0; i < 55; i++) {
+                    $scope.svcCalls.push("call (" + i + ") = " + new Date().getTime());
+                }
+
+                //console.log($scope.svcCalls);
+            };
+            $scope.useDarkTheme = true;
+            $scope.init();
+
+            $scope.doTheBatch = function () {
+                var promise;
+                for (var i = 0; i < 55; i++) {
+                    promise = htSvc.getWebApi(i);
+                    promise.then(function (data) {
+                        console.log(data);
+                    });
+                }
+            };
+
+            $scope.doTheBatchMvc = function () {
+                var promise;
+                for (var i = 0; i < 55; i++) {
+                    promise = htSvc.getWebMvc(i);
+                    promise.then(function (data) {
+                        console.log(data);
+                    });
+                }
+            };
+
+            $scope.question = {
+                Name: "Dtown",
+                QuestionID: 1,
+                QuestionIsChecked: true,
+                IsDisabled: true,
+                AssessmentQuestionOptions: [
+                    {
+                        OptionsID: 5,
+                        Options: "a Dtown"
+                    },
+                    {
+                        OptionsID: 6,
+                        Options: "b Dtown"
+                    },
+                    {
+                        OptionsID: 7,
+                        Options: "c Dtown"
+                    }
+                ]
+            };
+            $scope.responses = {
+                1: 1
+            };
+            $scope.option = {
+                Name: "Dtown",
+                OptionsID: 1
+            };
+
+        }]);
+    </script>
+
+
+
+
+
+</head>
+
+<body ng-app="app" ng-controller="dtown" ng-class="{ 'dark' : useDarkTheme, 'light' : !useDarkTheme }">
+
+    hello world
+
+    <div>
+        <form>
+            <div>
+                <div class="form-inline" ng-init="controlTitle = question.Name;">
+                    <ht-checkbox data-ng-disabled="question.IsDisabled" data-ng-model="question.QuestionIsChecked" data-checkbox-id="{{ ::(question.QuestionID +'_' + option.OptionsID)  }}" data-label="{{ ::controlTitle }}"/>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="form-inline" ng-repeat="option in question.AssessmentQuestionOptions">
+                    <ht-radio-button data-ng-disabled="question.IsDisabled" data-ng-model="responses[question.QuestionID]" data-radio-button-id="{{ ::(question.QuestionID +'_' + option.OptionsID)  }}" data-label="{{ ::option.Options }}" data-ng-value="option.OptionsID" />
+                </div>
+
+            </div>
+            <h1>QuestionIsChecked: {{question.QuestionIsChecked}}</h1>
+            <input type="checkbox" data-ng-model="question.IsDisabled" /> is disabled
+            <h1>is disabled: {{question.IsDisabled}}</h1>
+
+
+            <br />
+            <button ng-click="doTheBatch()" type="button">do the API stuff</button>
+            <button ng-click="doTheBatchSingle()" type="button">do the single API stuff</button>
+            <button ng-click="doTheBatchMvc()" type="button">do the MVC stuff</button>
+            <br />
+            <h1>is disabled: {{question.IsDisabled}}</h1>
+
+            <h5>from service call 0</h5>
+            <div>{{svcCalls[0]}}</div>
+            <br />
+            <br />
+
+            <h5>from service call 1</h5>
+            <div>{{svcCalls[1]}}</div>
+        </form>
+
+
+
+    </div>
+</body>
+</html>
