@@ -31,7 +31,7 @@
                                 <div class="section__content">
                                     <div class="fieldset" data-address-fields="">
 
-                                        <ht-floating-field floating-field="ff" enter-submits="true" css-class="field--half field field--optional"></ht-floating-field>
+                                        <ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
 
 
 
@@ -168,7 +168,7 @@
         }]);
 
 
-        app.directive('htFloatingField', [
+        app.directive('htFloatingTextField', [
         function () {
             return {
                 restrict: 'E',
@@ -176,34 +176,30 @@
                 scope: {
                     floatingField: '=',
                     cssClass: '@',
-                    enterSubmits: '@'
+                    enterSubmits: '@',
+                    autocomplete: '@'
                 },
                 template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()">' +
                     '<div class="field__input-wrapper">' +
                     '<label class="field__label" for="floatingField{{floatingField.floatingFieldId}}">{{ floatingField.label }}</label>' +
-                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{floatingField.autocomplete}}" class="field__input" ' +
+                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{autocomplete}}" class="field__input" ' +
                     'size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" ' +
                     'ng-model="floatingField.value" id="floatingField{{floatingField.floatingFieldId}}">' +
                     '</div>' +
                     '</div>',
                 link: function (scope, el, attrs) {
-                    //scope["labelIsFloating"] = false;
                     el.bind('keydown', function ($event) {
                         if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
                             $event.preventDefault();
                             $event.currentTarget.click();
                             return false;
                         } else {
-                            //scope.setMyClass();
-                            //debugger;
-                            //scope.$apply();
                             return true;
                         }
                     });
 
                     scope.setMyClass = function () {
                         scope.labelIsFloating = scope.floatingField.value.length > 0;
-                        //var cssClass = "field--half field field--optional field--show-floating-label";
                         var rtn = scope.cssClass;
                         if (attrs.disabled) {
                             rtn += " disabled";

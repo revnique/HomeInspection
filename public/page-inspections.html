@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <meta charset="utf-8">
@@ -18,254 +18,498 @@
 <body data-ng-app="app" data-ng-controller="tempController" data-ng-class="{'shifted': isShifted}">
 
 
-<style>
-    .p-header {
-        text-align: center;
-    }
-    .move { padding-right: 200px; }
-    .p-header-badge-container { }
-    .p-header-badge { padding-top: 5px; }
-    .p-header-badge .badge {
-        font-size: 10px;
-        margin: -21px 0px 0px -3px;
-    }
-    .p-container { margin: 10px; }
-    .speed-entry-button {
-        font-size: 30px;
-        margin-bottom: -10px;
-    }
-    .speed-entry-input {
-        font-size: 12px;
-        width: 90%;
-    }
-    .speed-entry-button-group {
-        margin-top: 10px;
-        width: 100%;
-    }
-    .speed-entry-input-topper { background-color: #ddd; }
-    .action-cell {
-        padding-right: 10px;
-        width: 150px;
-    }
-    .first-cell {
-        padding-left: 10px;
-        width: 50px;
-    }
-    .selection-list { width: 100%; }
-    .selection-list-container {
-        padding-left: 25px;
-        width: 100%;
-    }
-    body {
-        margin: 0;
-    }
-    body.shifted { overflow: hidden; }
-    .menu-slider {
-        -moz-transition: all 300ms;
-        -webkit-transition: all 300ms;
-        bottom: 0;
-        display: block;
-        float: left;
-        height: 100%;
-        left: -100px;
-        max-width: 284px;
-        overflow-y: auto;
-        position: fixed;
-        top: 0;
-        transition: all 300ms;
-        width: 100%;
-    }
-    .menu-slider > ul { 
-    }
-    .menu-slider.shifted { 
-        left: 0px; 
-    }
-    .p-wrapper {
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        -moz-transition: all 300ms;
-        -webkit-transition: all 300ms;
-        transition: all 300ms;
-        background: #fff;
-        border-radius: 0;
-        height: 100%;
-        left: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    .p-wrapper.shifted { 
-        left: 273px; 
-    }
-    .link-badge i { font-size: 30px; }
-    .link-badge .badge {
-        display: inline-block;
-        margin: -35px 0px 0px -7px;
-    }
-    .link-badge div { display: inline-block; }
-    .p-header {
-        border-bottom: 1px solid #efefef;
-        padding-bottom: 10px;
-    }
-    .logo-main {
-        display: inline-block;
-        opacity: .5;
-        padding: 3px;
-        width: 27px;
-    }
-    .logo-text {
-        display: inline-block;
-        margin-left: 5px;
-    }
-    .shifted .logo-main,
-    .shifted .logo-text { visibility: hidden; }
-    .logo {
-        display: inline-block;
-        opacity: .5;
-        padding: 3px;
-        width: 27px;
-    }
-    .menu-slider h5 {
-        display: inline-block;
-        margin-left: 5px;
-        color: #000;
-        opacity: .3;
-    }
-    .menu-slider .header {
-        text-align: center;
-        text-transform: capitalize;
-        font-size: 18px;
-        color: #ffffff;
-        padding: 13px;
-    }
-    .menu-slider .header-container {
-        background: #2f4050;
-        color: #353d46;
-    }
-    .menu-slider {
-        background-color: #2f4050;
-        color: #efefef;
-    }
-    .p-container {
-        background-color: #556270;
-        margin: 0;
-        color: #fff;
-        padding-top: 5px;
-    }
-    .p-container a {color: #fff;}
-    .p-container .menu-button {
-        margin: 3px 10px 0px 15px;
-        display: inline-block;
-        font-size: 20px;
-    }
-    .p-container .edit-button {
-        margin: 0px 15px 0px 15px;
-        display: inline-block;
-        font-size: 25px;
-    }
-    .p-header-text {
-        display: inline-block;
-        font-size: 20px;
-    }
-    
-    .menu-slider.shifted .list-group-item,
-    .menu-slider .list-group-item {
-        background-color: #2f4050;
-        color: #efefef;
-        border: 1px solid #5a5a5a;
-        border-left: none;
-    }
-    
-    .menu-slider.shifted .list-group-item.active,
-    .menu-slider .list-group-item.active {
-        background-color: #fff;
-        background-image: none;
-        color: #000;
-        text-shadow: none;
-    }
+    <style>
+        .p-header {
+            text-align: center;
+        }
 
-    .menu-slider.shifted .list-group-item i,
-    .menu-slider .list-group-item i {
-        background-color: #5a5a5a;
-        color: #efefef;
-        display: inline-block;
-        font-size: 17px;
-        border-radius: 15px;
-        margin-right: 5px;
-        padding: 7px;
-    }
-    .menu-slider .list-group-item:first-child {
-        border-radius: 0px;
-    }
-    .list-group-item:last-child {
-        border-radius: 0px;
-    }
-</style>
+        .move {
+            padding-right: 200px;
+        }
 
-<nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
-    <div class="header-container" data-ng-click="doit();">
-        <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo" />
-        <h5>HarrisTeq</h5>-->
-        <div class="header">
-            Menu
-        </div>
-    </div>
-    <div class="list-group">
-        <a href="homepage.html" class="list-group-item" data-ng-class="{'active': menuActive=='h'}">
-            <i class="fa fa-home"></i>
-            Homepage
-        </a>
-        <a href="page-inspections.html?p=i" class="list-group-item" data-ng-class="{'active': menuActive=='i'}">
-            <i class="fa fa-search"></i>
-            Inspections
-        </a>
-        <a href="page-inspections.html?p=t" class="list-group-item" data-ng-class="{'active': menuActive=='t'}">
-            <i class="fa fa-list-alt"></i>
-            Templates
-        </a>
-    </div>
-</nav>
-<div class="p-wrapper" data-ng-class="{'shifted': isShifted}" >
-    <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
-    <h5 class="logo-text">HarrisTeq</h5>-->
-<div class="p-container">
-    <div class="p-header text-center">
-        <div class="pull-left">
-            <a href="#" class="menu-button" ng-click="doit();">
-                <i class="fa fa-bars"></i>
-            </a>
-        </div>
-        <div class="pull-right">
-            <a href="#" class="edit-button">
-                <i class="fa fa-pencil-square-o"></i>
-            </a>
-        </div>
+        .p-header-badge-container {
+        }
 
-        <div class="p-header-badge">
-            <div class="p-header-text">
-                {{selectedForm.title}}
+        .p-header-badge {
+            padding-top: 5px;
+        }
+
+            .p-header-badge .badge {
+                font-size: 10px;
+                margin: -21px 0px 0px -3px;
+            }
+
+        .p-container {
+            margin: 10px;
+        }
+
+        .speed-entry-button {
+            font-size: 30px;
+            margin-bottom: -10px;
+        }
+
+        .speed-entry-input {
+            font-size: 12px;
+            width: 90%;
+        }
+
+        .speed-entry-button-group {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .speed-entry-input-topper {
+            background-color: #ddd;
+        }
+
+        .action-cell {
+            padding-right: 10px;
+            width: 150px;
+        }
+
+        .first-cell {
+            padding-left: 10px;
+            width: 50px;
+        }
+
+        .selection-list {
+            width: 100%;
+        }
+
+        .selection-list-container {
+            padding-left: 25px;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+            body.shifted {
+                overflow: hidden;
+            }
+
+        .menu-slider {
+            -moz-transition: all 300ms;
+            -webkit-transition: all 300ms;
+            bottom: 0;
+            display: block;
+            float: left;
+            height: 100%;
+            left: -100px;
+            max-width: 284px;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            transition: all 300ms;
+            width: 100%;
+        }
+
+            .menu-slider > ul {
+            }
+
+            .menu-slider.shifted {
+                left: 0px;
+            }
+
+        .p-wrapper {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -moz-transition: all 300ms;
+            -webkit-transition: all 300ms;
+            transition: all 300ms;
+            background: #fff;
+            border-radius: 0;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+            .p-wrapper.shifted {
+                left: 273px;
+            }
+
+        .link-badge i {
+            font-size: 30px;
+        }
+
+        .link-badge .badge {
+            display: inline-block;
+            margin: -35px 0px 0px -7px;
+        }
+
+        .link-badge div {
+            display: inline-block;
+        }
+
+        .p-header {
+            border-bottom: 1px solid #efefef;
+            padding-bottom: 10px;
+        }
+
+        .logo-main {
+            display: inline-block;
+            opacity: .5;
+            padding: 3px;
+            width: 27px;
+        }
+
+        .logo-text {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .shifted .logo-main,
+        .shifted .logo-text {
+            visibility: hidden;
+        }
+
+        .logo {
+            display: inline-block;
+            opacity: .5;
+            padding: 3px;
+            width: 27px;
+        }
+
+        .menu-slider h5 {
+            display: inline-block;
+            margin-left: 5px;
+            color: #000;
+            opacity: .3;
+        }
+
+        .menu-slider .header {
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 18px;
+            color: #ffffff;
+            padding: 13px;
+        }
+
+        .menu-slider .header-container {
+            background: #2f4050;
+            color: #353d46;
+        }
+
+        .menu-slider {
+            background-color: #2f4050;
+            color: #efefef;
+        }
+
+        .p-container {
+            background-color: #556270;
+            margin: 0;
+            color: #fff;
+            padding-top: 5px;
+        }
+
+            .p-container a {
+                color: #fff;
+            }
+
+            .p-container .menu-button {
+                margin: 3px 10px 0px 15px;
+                display: inline-block;
+                font-size: 20px;
+            }
+
+            .p-container .edit-button {
+                margin: 0px 15px 0px 15px;
+                display: inline-block;
+                font-size: 25px;
+            }
+
+        .p-header-text {
+            display: inline-block;
+            font-size: 20px;
+        }
+
+        .menu-slider.shifted .list-group-item,
+        .menu-slider .list-group-item {
+            background-color: #2f4050;
+            color: #efefef;
+            border: 1px solid #5a5a5a;
+            border-left: none;
+        }
+
+            .menu-slider.shifted .list-group-item.active,
+            .menu-slider .list-group-item.active {
+                background-color: #fff;
+                background-image: none;
+                color: #000;
+                text-shadow: none;
+            }
+
+            .menu-slider.shifted .list-group-item i,
+            .menu-slider .list-group-item i {
+                background-color: #5a5a5a;
+                color: #efefef;
+                display: inline-block;
+                font-size: 17px;
+                border-radius: 15px;
+                margin-right: 5px;
+                padding: 7px;
+            }
+
+            .menu-slider .list-group-item:first-child {
+                border-radius: 0px;
+            }
+
+        .list-group-item:last-child {
+            border-radius: 0px;
+        }
+    </style>
+
+    <nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
+        <div class="header-container" data-ng-click="doit();">
+            <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo" />
+            <h5>HarrisTeq</h5>-->
+            <div class="header">
+                Menu
             </div>
-            <span class="badge badge-success">{{selectedForm.itemCount}}</span>
         </div>
-        <span class="clearfix"></span>
-    </div>
-</div>
-<div class="p-scroll">
-    <form id="formTempates" class="slide" data-ng-class="getStyle(forms[0])">
-        <h1>
-            Templates
-        </h1>
+        <div class="list-group">
+            <a href="homepage.html" class="list-group-item" data-ng-class="{'active': menuActive=='h'}">
+                <i class="fa fa-home"></i>
+                Homepage
+            </a>
+            <a href="page-inspections.html?p=i" class="list-group-item" data-ng-class="{'active': menuActive=='i'}">
+                <i class="fa fa-search"></i>
+                Inspections
+            </a>
+            <a href="page-inspections.html?p=t" class="list-group-item" data-ng-class="{'active': menuActive=='t'}">
+                <i class="fa fa-list-alt"></i>
+                Templates
+            </a>
+        </div>
+    </nav>
+    <div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
+        <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
+        <h5 class="logo-text">HarrisTeq</h5>-->
+        <div class="p-container">
+            <div class="p-header text-center">
+                <div class="pull-left">
+                    <a href="#" class="menu-button" ng-click="doit();">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <div class="pull-right">
+                    <a href="#" class="edit-button">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                </div>
 
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-            <i class="fa fa-chevron-right"></i>
-        </a>
-    </form>
-    <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
-        <div class="panel-body">
-            <div class="speed-entry-input-topper">
+                <div class="p-header-badge">
+                    <div class="p-header-text">
+                        {{selectedForm.title}}
+                    </div>
+                    <span class="badge badge-success">{{selectedForm.itemCount}}</span>
+                </div>
+                <span class="clearfix"></span>
+            </div>
+        </div>
+        <div class="p-scroll">
+            <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
+                <h1>
+                    Templates
+                </h1>
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+
+                <br />
+
+                <ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
+
+
+
+
+
+
+            </form>
+            <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
+                <div class="panel-body">
+                    <div class="speed-entry-input-topper">
+
+                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                        <div class="m-l m-r" style="padding: 10px 0 10px 0;">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <span class="pull-right text-muted small">
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
+
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
+
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
+
+
+                            </span>
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
+
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-square-o"></i>
+                            </a>
+                            <div class="pull-right speed-entry-button-group">
+
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">99</span>
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                        </div>
+
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                            <div class="pull-right speed-entry-button-group">
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-check-square"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">3</span>
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+
+                            <div class="selection-list-container">
+
+                                <table class="table-responsive selection-list">
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-circle-o"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-square-o"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-cell">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-check-square"></i>
+                                            </a>
+                                        </td>
+                                        <td class="content-cell">Inspected</td>
+                                        <td class="action-cell">
+                                            <div class="pull-right text-muted small">
+                                                <a href="#" class="speed-entry-button m-xs">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </a>
+                                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <ul class="list-group ddd">
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                </div>
+            </form>
+            <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
+                <h1>
+                    Items
+                </h1>
+
 
                 <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
                     <i class="fa fa-chevron-left"></i>
@@ -273,640 +517,1125 @@
                 <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
                     <i class="fa fa-chevron-right"></i>
                 </a>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-square-o"></i>
+                            </a>
+                            <div class="pull-right speed-entry-button-group">
 
-                <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
-                    <span class="pull-right text-muted small">
-                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
 
-                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
-
-                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
-
-
-                    </span>
-                    <span class="clearfix"></span>
-                </div>
-            </div>
-
-            <div class="list-group">
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                    <a href="#" class="speed-entry-button m-xs">
-                        <i class="fa fa-square-o"></i>
-                    </a>
-                    <div class="pull-right speed-entry-button-group">
-
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-down"></i>
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">99</span>
+                                </a>
                             </div>
-                            <span class="badge badge-success">99</span>
-                        </a>
-                    </div>
-                    <span class="clearfix"></span>
-                </div>
+                            <span class="clearfix"></span>
+                        </div>
 
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                    <div class="pull-right speed-entry-button-group">
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-check-square"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-down"></i>
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                            <div class="pull-right speed-entry-button-group">
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-check-square"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">3</span>
+                                </a>
                             </div>
-                            <span class="badge badge-success">3</span>
-                        </a>
+                            <span class="clearfix"></span>
+                        </div>
                     </div>
-                    <span class="clearfix"></span>
-
-                    <div class="selection-list-container">
-
-                        <table class="table-responsive selection-list">
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-circle-o"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-circle"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-square-o"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="first-cell">
-                                    <a href="#" class="speed-entry-button m-xs">
-                                        <i class="fa fa-check-square"></i>
-                                    </a>
-                                </td>
-                                <td class="content-cell">Inspected</td>
-                                <td class="action-cell">
-                                    <div class="pull-right text-muted small">
-                                        <a href="#" class="speed-entry-button m-xs">
-                                            <i class="fa fa-floppy-o"></i>
-                                        </a>
-                                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <ul class="list-group ddd">
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">14</span>
-                            Cras justo odio
-                        </li>
-                    </ul>
                 </div>
-            </div>
+            </form>
+            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
+                <h1>
+                    Item options
+                </h1>
 
-            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </form>
+            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
+                <h1>
+                    Inspections
+                </h1>
+
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </form>
         </div>
-    </form>
-    <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
-        <h1>
-            Items
-        </h1>
+        <style>
+            .slide {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+                .slide.right {
+                    -moz-transition: all 1000ms;
+                    -webkit-transition: all 1000ms;
+                    transition: all 1000ms;
+                    transform: translate3d(5000px, 0, 0);
+                    visibility: hidden;
+                }
+
+                .slide.left {
+                    -moz-transition: all 1000ms;
+                    -webkit-transition: all 1000ms;
+                    transition: all 1000ms;
+                    transform: translate3d(-5000px, 0, 0);
+                    visibility: hidden;
+                }
+
+                .slide.middle {
+                    -moz-transition: all 1000ms;
+                    -webkit-transition: all 1000ms;
+                    transition: all 1000ms;
+                    transform: translate3d(0px, 0, 0);
+                    visibility: visible;
+                }
 
 
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-            <i class="fa fa-chevron-left"></i>
-        </a>
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-            <i class="fa fa-chevron-right"></i>
-        </a>
-        <div class="panel-body">
-            <div class="list-group">
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                    <a href="#" class="speed-entry-button m-xs">
-                        <i class="fa fa-square-o"></i>
-                    </a>
-                    <div class="pull-right speed-entry-button-group">
+            .p-footer {
+                position: absolute;
+                background-color: #556270;
+                bottom: 0px;
+                height: 50px;
+                left: 0px;
+                right: 0px;
+            }
 
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
+            .p-scroll {
+                overflow-y: auto;
+                overflow-x: hidden;
+                position: absolute;
+                top: 50px;
+                bottom: 50px;
+                left: 0px;
+                right: 0px;
+            }
 
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-down"></i>
-                            </div>
-                            <span class="badge badge-success">99</span>
-                        </a>
-                    </div>
-                    <span class="clearfix"></span>
-                </div>
+            .bottom-btn {
+                color: #fff;
+                display: inline-block;
+                font-size: 33px;
+                position: absolute;
+                right: 10px;
+                bottom: 1px;
+            }
 
-                <div class="list-group-item">
-                    <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                    <div class="pull-right speed-entry-button-group">
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-check-square"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                        <a class="link-badge" href="#">
-                            <div>
-                                <i class="fa fa-arrow-down"></i>
-                            </div>
-                            <span class="badge badge-success">3</span>
-                        </a>
-                    </div>
-                    <span class="clearfix"></span>
-                </div>
-            </div>
+
+            .p-footer .speed-entry-text {
+                display: inline-block;
+                font-size: 12px;
+                margin-bottom: 10px;
+                position: absolute;
+                left: 10px;
+                right: 50px;
+                bottom: 0px;
+                width: 84%;
+                height: 30px;
+                padding: 6px 12px;
+                font-size: 14px;
+                line-height: 1.42857143;
+                color: #555;
+                background-color: #fff;
+                background-image: none;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            }
+
+            .p-mask {
+                z-index: -100;
+            }
+
+            .shifted .p-mask {
+                z-index: 10;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+                background-color: #333;
+                opacity: .7;
+            }
+        </style>
+        <div class="p-footer">
+            <input type="text" class="speed-entry-text" />
+            <a href="#" class="bottom-btn">
+                <i class="fa fa-plus-square-o"></i>
+            </a>
         </div>
-    </form>
-    <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
-        <h1>
-            Item options
-        </h1>
+        <div class="p-mask"></div>
+    </div>
 
 
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-            <i class="fa fa-chevron-left"></i>
-        </a>
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-            <i class="fa fa-chevron-right"></i>
-        </a>
-    </form>
-    <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
-        <h1>
-            Inspections
-        </h1>
+    <script>
+        var app = angular.module('app', []);
 
+        angular
+            .module('app')
+            .controller('tempController', tempController);
 
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-            <i class="fa fa-chevron-left"></i>
-        </a>
-        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-            <i class="fa fa-chevron-right"></i>
-        </a>
-    </form>
-</div>
-<style>
-    .slide {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-    .slide.right {
-        -moz-transition: all 1000ms;
-        -webkit-transition: all 1000ms;
-        transition: all 1000ms;
-        transform: translate3d(5000px, 0, 0);
-        visibility:hidden;
-    }
-    .slide.left { 
-        -moz-transition: all 1000ms;
-        -webkit-transition: all 1000ms;
-        transition: all 1000ms;
-        transform: translate3d(-5000px, 0, 0);
-        visibility:hidden;
-    }
-    .slide.middle {
-        -moz-transition: all 1000ms;
-        -webkit-transition: all 1000ms;
-        transition: all 1000ms;    
-        transform: translate3d(0px, 0, 0);
-        visibility:visible;
-    }
+        tempController.$inject = ['$scope', '$timeout'];
 
+        app.directive('htFloatingTextField', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    floatingField: '=',
+                    cssClass: '@',
+                    enterSubmits: '@',
+                    autocomplete: '@'
+                },
+                template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()">' +
+                    '<div class="field__input-wrapper">' +
+                    '<label class="field__label" for="floatingField{{floatingField.floatingFieldId}}">{{ floatingField.label }}</label>' +
+                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{autocomplete}}" class="field__input" ' +
+                    'size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" ' +
+                    'ng-model="floatingField.value" id="floatingField{{floatingField.floatingFieldId}}">' +
+                    '</div>' +
+                    '</div>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
 
-     .p-footer {
-         position: absolute;
-         background-color: #556270;
-         bottom: 0px;
-         height: 50px;
-         left: 0px;
-         right: 0px;
-     }
-    .p-scroll {
-        overflow-y: auto;
-        overflow-x: hidden;
-        position: absolute;
-        top: 50px;
-        bottom: 50px;
-        left: 0px;
-        right: 0px;
-    }
-    .bottom-btn {
-        color: #fff;
-        display: inline-block;
-        font-size: 33px;
-        position: absolute;
-        right: 10px;
-        bottom: 1px;
-    }
-  
+                    scope.setMyClass = function () {
+                        scope.labelIsFloating = scope.floatingField.value.length > 0;
+                        var rtn = scope.cssClass;
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        if (scope.labelIsFloating) {
+                            rtn += " field--show-floating-label";
+                        }
+                        return rtn;
+                    }
 
-    .p-footer .speed-entry-text {
-        display: inline-block;
-        font-size: 12px;
-        margin-bottom: 10px;
-        position: absolute;
-        left: 10px;
-        right: 50px;
-        bottom: 0px;
-        width: 84%;
-        height: 30px;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        color: #555;
-        background-color: #fff;
-        background-image: none;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    }
-
-    .p-mask {
-        z-index: -100;
-    } 
-    .shifted .p-mask {
-        z-index: 10;
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        top: 0px;
-        bottom: 0px;
-        background-color: #333;
-        opacity: .7;
-    }
-</style>
-<div class="p-footer">
-    <input type="text" class="speed-entry-text"/>
-    <a href="#" class="bottom-btn">
-        <i class="fa fa-plus-square-o"></i>
-    </a>
-</div>
-    <div class="p-mask"></div>
-</div>
-
-
-<script>
-    var app = angular.module('app', []);
-
-    angular
-        .module('app')
-        .controller('tempController', tempController);
-
-    tempController.$inject = ['$scope', '$timeout'];
-
-    function tempController($scope, $timeout) {
-        $scope.dtown = "hello world";
-        $scope.isShifted = false;
-        $scope.doit = function() {
-            $scope.isShifted = !$scope.isShifted;
-        };
-        $scope.selectedFormName = "Templates";
-        $scope.selectedFormItemCount = "77";
-        $scope.goto = function(formName) {
-            $scope.selectedFormName = formName;
-            $scope.selectedFormItemCount = "88";
-        };
-
-
-
-        //formTempates
-        //formCategories
-        //formItems
-        //formItemOptions
-        //formInspections
-
-        $scope.forms = [
-            {
-                "id": 1,
-                "title": "Templates",
-                "formName": "Templates",
-                "cssClass": "middle",
-                "itemCount": 27,
-                "nextForm": 2,
-                "prevForm": -1
-            },
-            {
-                "id": 2,
-                "title": "Categories",
-                "formName": "Categories",
-                "cssClass": "right",
-                "itemCount": 11,
-                "nextForm": 3,
-                "prevForm": 1
-            },
-            {
-                "id": 3,
-                "title": "Items",
-                "formName": "Items",
-                "cssClass": "right",
-                "itemCount": 22,
-                "nextForm": 4,
-                "prevForm": 2
-            },
-            {
-                "id": 4,
-                "title": "Item Options",
-                "formName": "ItemOptions",
-                "cssClass": "right",
-                "itemCount": 33,
-                "nextForm": -1,
-                "prevForm": 3
-            },
-            {
-                "id": 5,
-                "title": "Inspections",
-                "formName": "Inspections",
-                "cssClass": "right",
-                "itemCount": 44,
-                "nextForm": -1,
-                "prevForm": -1
-            }
-        ];
-
-        $scope.selectedForm = $scope.forms[0];
-
-        $scope.next = function (frm) {
-            if (frm.nextForm !== -1) {
-                var nextForm = $scope.forms[frm.nextForm - 1];
-                if (nextForm.cssClass === "right") {
-                    frm.cssClass = "left";
-                } else if (nextForm.cssClass === "left") {
-                    frm.cssClass = "right";
                 }
-                console.log(frm);
-                nextForm.cssClass = "middle";
-                $scope.selectedForm = nextForm;
-            }
-        }
+            };
+        }]);
 
-        $scope.prev = function (frm) {
-            if (frm.prevForm !== -1) {
-                var prevForm = $scope.forms[frm.prevForm - 1];
-                if (prevForm.cssClass === "right") {
-                    frm.cssClass = "left";
-                } else if (prevForm.cssClass === "left") {
-                    frm.cssClass = "right";
-                }
-                console.log(frm);
-                prevForm.cssClass = "middle";
-                $scope.selectedForm = prevForm;
-            }
-        }
-        $scope.getStyle = function(frm) {
-            return frm.cssClass;
-        }
 
-        $scope.inspectionTemplate = {
-            "title": "HarrisTeq Demo Template TWO",
-            "categories": [
+        function tempController($scope, $timeout) {
+            $scope.dtown = "hello world";
+            $scope.isShifted = false;
+            $scope.doit = function () {
+                $scope.isShifted = !$scope.isShifted;
+            };
+            $scope.selectedFormName = "Templates";
+            $scope.selectedFormItemCount = "77";
+            $scope.goto = function (formName) {
+                $scope.selectedFormName = formName;
+                $scope.selectedFormItemCount = "88";
+            };
+
+            $scope.ff = {
+                "isDisabled": false,
+                "value": "",
+                "floatingFieldId": "firstName",
+                "label": "First Name",
+                "size": 30
+            };
+
+            //formTempates
+            //formCategories
+            //formItems
+            //formItemOptions
+            //formInspections
+
+            $scope.forms = [
                 {
-                    "categoryName": "Demo Exterior TWO",
-                    "categoryItems": [
-                        {
-                            "categoryItemName": "Siding",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Windows",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Doors",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Steps",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        }
-                    ]
-                }, {
-                    "categoryName": "Heating/Cooling",
-                    "categoryItems": [
-                        {
-                            "categoryItemName": "Heating Equipment",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Cooling Equipment",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Normal Operating Controls",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        }
-                    ]
+                    "id": 1,
+                    "title": "Templates",
+                    "formName": "Templates",
+                    "cssClass": "middle",
+                    "itemCount": 27,
+                    "nextForm": 2,
+                    "prevForm": -1
+                },
+                {
+                    "id": 2,
+                    "title": "Categories",
+                    "formName": "Categories",
+                    "cssClass": "right",
+                    "itemCount": 11,
+                    "nextForm": 3,
+                    "prevForm": 1
+                },
+                {
+                    "id": 3,
+                    "title": "Items",
+                    "formName": "Items",
+                    "cssClass": "right",
+                    "itemCount": 22,
+                    "nextForm": 4,
+                    "prevForm": 2
+                },
+                {
+                    "id": 4,
+                    "title": "Item Options",
+                    "formName": "ItemOptions",
+                    "cssClass": "right",
+                    "itemCount": 33,
+                    "nextForm": -1,
+                    "prevForm": 3
+                },
+                {
+                    "id": 5,
+                    "title": "Inspections",
+                    "formName": "Inspections",
+                    "cssClass": "right",
+                    "itemCount": 44,
+                    "nextForm": -1,
+                    "prevForm": -1
                 }
-            ]
-        };
+            ];
+
+            $scope.selectedForm = $scope.forms[0];
+
+            $scope.next = function (frm) {
+                if (frm.nextForm !== -1) {
+                    var nextForm = $scope.forms[frm.nextForm - 1];
+                    if (nextForm.cssClass === "right") {
+                        frm.cssClass = "left";
+                    } else if (nextForm.cssClass === "left") {
+                        frm.cssClass = "right";
+                    }
+                    console.log(frm);
+                    nextForm.cssClass = "middle";
+                    $scope.selectedForm = nextForm;
+                }
+            }
+
+            $scope.prev = function (frm) {
+                if (frm.prevForm !== -1) {
+                    var prevForm = $scope.forms[frm.prevForm - 1];
+                    if (prevForm.cssClass === "right") {
+                        frm.cssClass = "left";
+                    } else if (prevForm.cssClass === "left") {
+                        frm.cssClass = "right";
+                    }
+                    console.log(frm);
+                    prevForm.cssClass = "middle";
+                    $scope.selectedForm = prevForm;
+                }
+            }
+            $scope.getStyle = function (frm) {
+                return frm.cssClass;
+            }
+
+            $scope.inspectionTemplate = {
+                "title": "HarrisTeq Demo Template TWO",
+                "categories": [
+                    {
+                        "categoryName": "Demo Exterior TWO",
+                        "categoryItems": [
+                            {
+                                "categoryItemName": "Siding",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            },
+                            {
+                                "categoryItemName": "Windows",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            },
+                            {
+                                "categoryItemName": "Doors",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            },
+                            {
+                                "categoryItemName": "Steps",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            }
+                        ]
+                    }, {
+                        "categoryName": "Heating/Cooling",
+                        "categoryItems": [
+                            {
+                                "categoryItemName": "Heating Equipment",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            },
+                            {
+                                "categoryItemName": "Cooling Equipment",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            },
+                            {
+                                "categoryItemName": "Normal Operating Controls",
+                                "categoryItemOptions": [
+                                    {
+                                        "categoryItemOptionName": "Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Not Inspected",
+                                        "isSelected": false
+                                    },
+                                    {
+                                        "categoryItemOptionName": "Replace\/Repair",
+                                        "isSelected": false
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            };
 
 
-        $scope.createItemOption = function(name, isSelected) {
-            var rtn = {};
-            rtn["categoryItemOptionName"] = name;
-            rtn["isSelected"] = isSelected;
-            return rtn;
-        };
+            $scope.createItemOption = function (name, isSelected) {
+                var rtn = {};
+                rtn["categoryItemOptionName"] = name;
+                rtn["isSelected"] = isSelected;
+                return rtn;
+            };
 
 
-        $scope.createInspectedCategoryItemOptions = function() {
-            var rtn = [];
-            rtn.push(createItemOption("Inspected", false));
-            rtn.push(createItemOption("Not Inspected", false));
-            rtn.push(createItemOption("Replace\/Repair", false));
+            $scope.createInspectedCategoryItemOptions = function () {
+                var rtn = [];
+                rtn.push(createItemOption("Inspected", false));
+                rtn.push(createItemOption("Not Inspected", false));
+                rtn.push(createItemOption("Replace\/Repair", false));
 
-            return rtn;
-        };
-        $scope.menuActive = 'i';
-        var init = function () {
-            var page = location.href;
-            if (page.indexOf("p=i") > -1) {
-                $scope.menuActive = 'i';
-            } else if (page.indexOf("p=t") > -1) {
-                $scope.menuActive = 't';
-            } else {
-                $scope.menuActive = 'h';
+                return rtn;
+            };
+            $scope.menuActive = 'i';
+            var init = function () {
+                var page = location.href;
+                if (page.indexOf("p=i") > -1) {
+                    $scope.menuActive = 'i';
+                } else if (page.indexOf("p=t") > -1) {
+                    $scope.menuActive = 't';
+                } else {
+                    $scope.menuActive = 'h';
+                }
+            }
+            init();
+
+        }
+    </script>
+
+
+    <style>
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            color: inherit;
+            font: inherit;
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none;
+            -webkit-font-smoothing: inherit;
+            border: none;
+            background: transparent;
+            line-height: normal;
+        }
+
+
+
+        -dropdown--is-flipped {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        body {
+            color: #737373;
+            background: white;
+        }
+
+        .wrap {
+            margin: 0 auto;
+            max-width: 40em;
+            zoom: 1;
+        }
+
+            .wrap:after,
+            .wrap:before {
+                content: "";
+                display: table;
+            }
+
+            .wrap:after {
+                clear: both;
+            }
+
+        @media (max-width: 999px) {
+            .wrap {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 1em;
             }
         }
-        init();
 
-    }
-</script>
+        @media (min-width: 1000px) {
+            .wrap {
+                padding: 0 5%;
+                width: 90%;
+                max-width: 78.57143em;
+            }
+        }
+
+
+
+        .section__header {
+            position: relative;
+            margin-bottom: 1em;
+        }
+
+        @media (min-width: 750px) {
+            .section__header {
+                margin-bottom: 1.5em;
+            }
+        }
+
+
+
+        .fieldset {
+            margin: -0.45em;
+            zoom: 1;
+        }
+
+            .fieldset:after,
+            .fieldset:before {
+                content: "";
+                display: table;
+            }
+
+            .fieldset:after {
+                clear: both;
+            }
+
+
+
+        .field {
+            width: 100%;
+            float: left;
+            padding: 0.45em;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 750px) {
+            .floating-labels.boxsizing .field--two-thirds {
+                width: 66.66667%;
+            }
+
+            .floating-labels.boxsizing .field--half {
+                width: 50%;
+            }
+
+            .floating-labels.boxsizing .field--three-eights {
+                width: 37.5%;
+            }
+
+            .floating-labels.boxsizing .field--third {
+                width: 33.33333%;
+            }
+
+            .floating-labels.boxsizing .field--quarter {
+                width: 25%;
+            }
+        }
+
+        .field__message {
+            font-size: 0.85714em;
+        }
+
+        .field__message--error {
+            display: none;
+            line-height: 1.3em;
+            margin: 0.75em 0 0.25em;
+            color: #ff6d6d;
+        }
+
+        .field--error .field__message--error {
+            display: block;
+        }
+
+        .field__message--warning {
+            margin: 1em 0 0.5em;
+        }
+
+        .field__message__icon {
+            margin-right: 0.25em;
+            vertical-align: -2px;
+        }
+
+        .field__label {
+            font-weight: 500;
+            margin: 0.5em 0;
+            display: block;
+        }
+
+        .main .field__label {
+            color: #4d4d4d;
+        }
+
+        .floating-labels .main .field__label {
+            color: #999999;
+        }
+
+        .sidebar .field__label {
+            color: #4d4d4d;
+        }
+
+        .floating-labels .sidebar .field__label {
+            color: #999999;
+        }
+
+        .content-box .field__label {
+            color: #4d4d4d;
+        }
+
+        .floating-labels .content-box .field__label {
+            color: #999999;
+        }
+
+        .leaflet-popup-content .field__label {
+            color: #4d4d4d;
+        }
+
+        .floating-labels .leaflet-popup-content .field__label {
+            color: #999999;
+        }
+
+        .main .field--active .field__label {
+            color: #737373;
+        }
+
+        .sidebar .field--active .field__label {
+            color: #737373;
+        }
+
+        .content-box .field--active .field__label {
+            color: #737373;
+        }
+
+        .leaflet-popup-content .field--active .field__label {
+            color: #737373;
+        }
+
+        .floating-labels .field__label {
+            font-size: 0.85714em;
+            font-weight: normal;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            margin-top: 0.3em;
+            padding: 0 0.93333em;
+            z-index: 1;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-transform: translateY(3px);
+            transform: translateY(3px);
+            pointer-events: none;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+            opacity: 0;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
+            filter: alpha(opacity=0);
+        }
+
+        .floating-labels .field--show-floating-label .field__label {
+            -webkit-transform: none;
+            transform: none;
+            opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 100 ")";
+            filter: alpha(opacity=100);
+        }
+
+        .animate-floating-labels .field__label {
+            -webkit-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .field__input-wrapper {
+            position: relative;
+        }
+
+        .field__input {
+            border-radius: 4px;
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.94em 0.8em;
+        }
+
+        .main .field__input {
+            background-color: white;
+            color: #333333;
+        }
+
+        .no-js .main .field__input,
+        .no-boxshadow .main .field__input {
+            border: 1px solid #d9d9d9;
+        }
+
+        .boxshadow .main .field__input {
+            box-shadow: 0 0 0 1px #d9d9d9;
+        }
+
+        .main .field__input::-webkit-input-placeholder {
+            color: #999999;
+        }
+
+        .main .field__input:-moz-placeholder {
+            color: #999999;
+        }
+
+        .main .field__input::-moz-placeholder {
+            color: #999999;
+        }
+
+        .main .field__input:-ms-input-placeholder {
+            color: #999999;
+        }
+
+        .sidebar .field__input {
+            background-color: white;
+            color: #333333;
+        }
+
+        .no-js .sidebar .field__input,
+        .no-boxshadow .sidebar .field__input {
+            border: 1px solid #d5d5d5;
+        }
+
+        .boxshadow .sidebar .field__input {
+            box-shadow: 0 0 0 1px #d5d5d5;
+        }
+
+        .sidebar .field__input::-webkit-input-placeholder {
+            color: #999999;
+        }
+
+        .sidebar .field__input:-moz-placeholder {
+            color: #999999;
+        }
+
+        .sidebar .field__input::-moz-placeholder {
+            color: #999999;
+        }
+
+        .sidebar .field__input:-ms-input-placeholder {
+            color: #999999;
+        }
+
+        .content-box .field__input {
+            background-color: white;
+            color: #333333;
+        }
+
+        .no-js .content-box .field__input,
+        .no-boxshadow .content-box .field__input {
+            border: 1px solid #d9d9d9;
+        }
+
+        .boxshadow .content-box .field__input {
+            box-shadow: 0 0 0 1px #d9d9d9;
+        }
+
+        .content-box .field__input::-webkit-input-placeholder {
+            color: #999999;
+        }
+
+        .content-box .field__input:-moz-placeholder {
+            color: #999999;
+        }
+
+        .content-box .field__input::-moz-placeholder {
+            color: #999999;
+        }
+
+        .content-box .field__input:-ms-input-placeholder {
+            color: #999999;
+        }
+
+        .leaflet-popup-content .field__input {
+            background-color: white;
+            color: #333333;
+        }
+
+        .no-js .leaflet-popup-content .field__input,
+        .no-boxshadow .leaflet-popup-content .field__input {
+            border: 1px solid #d9d9d9;
+        }
+
+        .boxshadow .leaflet-popup-content .field__input {
+            box-shadow: 0 0 0 1px #d9d9d9;
+        }
+
+        .leaflet-popup-content .field__input::-webkit-input-placeholder {
+            color: #999999;
+        }
+
+        .leaflet-popup-content .field__input:-moz-placeholder {
+            color: #999999;
+        }
+
+        .leaflet-popup-content .field__input::-moz-placeholder {
+            color: #999999;
+        }
+
+        .leaflet-popup-content .field__input:-ms-input-placeholder {
+            color: #999999;
+        }
+
+        .animate-floating-labels .field__input {
+            -webkit-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .floating-labels .field--show-floating-label .field__input {
+            padding-top: 1.5em;
+            padding-bottom: 0.38em;
+        }
+
+            .floating-labels .field--show-floating-label .field__input::-webkit-input-placeholder {
+                color: transparent;
+            }
+
+            .floating-labels .field--show-floating-label .field__input:-moz-placeholder {
+                color: transparent;
+            }
+
+            .floating-labels .field--show-floating-label .field__input::-moz-placeholder {
+                color: transparent;
+            }
+
+            .floating-labels .field--show-floating-label .field__input:-ms-input-placeholder {
+                color: transparent;
+            }
+
+        .field__input:focus {
+            outline: none;
+        }
+
+        .no-js .field__input:focus,
+        .no-boxshadow .field__input:focus {
+            border: 2px solid #c7ac7f;
+        }
+
+        .boxshadow .field__input:focus {
+            box-shadow: 0 0 0 2px #c7ac7f;
+        }
+
+        .no-js .field--error .field__input,
+        .no-boxshadow .field--error .field__input {
+            border: 2px solid #ff6d6d;
+        }
+
+        .boxshadow .field--error .field__input {
+            box-shadow: 0 0 0 2px #ff6d6d;
+        }
+
+        .field__input--zip {
+            text-transform: uppercase;
+        }
+
+            .field__input--zip::-webkit-input-placeholder {
+                text-transform: none;
+            }
+
+            .field__input--zip:-moz-placeholder {
+                text-transform: none;
+            }
+
+            .field__input--zip::-moz-placeholder {
+                text-transform: none;
+            }
+
+            .field__input--zip:-ms-input-placeholder {
+                text-transform: none;
+            }
+
+        .field__input--select::-ms-expand {
+            display: none;
+        }
+
+        .no-js .field__input--select,
+        .no-pointerevents .field__input--select {
+            background-position: 95% center;
+            background-position: right 1em center;
+            background-repeat: no-repeat;
+        }
+
+        .no-js .main .field__input--select,
+        .no-pointerevents .main .field__input--select {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .no-js .sidebar .field__input--select,
+        .no-pointerevents .sidebar .field__input--select {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .no-js .content-box .field__input--select,
+        .no-pointerevents .content-box .field__input--select {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .no-js .leaflet-popup-content .field__input--select,
+        .no-pointerevents .leaflet-popup-content .field__input--select {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .pointerevents .field__input-wrapper--select:before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .pointerevents .main .field__input-wrapper--select:before {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .pointerevents .sidebar .field__input-wrapper--select:before {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .pointerevents .content-box .field__input-wrapper--select:before {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+        .pointerevents .leaflet-popup-content .field__input-wrapper--select:before {
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
+            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
+        }
+
+
+        /*!= begin(no-rtl) */
+
+        .field__icon {
+            position: absolute;
+            top: 50%;
+            right: 0.2em;
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+        }
+
+            .field__icon:focus {
+                outline: none;
+            }
+
+
+        /*!= end(no-rtl) */
+
+        .flexbox .field__input-btn-wrapper {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+            .flexbox .field__input-btn-wrapper .field__input-wrapper {
+                -webkit-box-flex: 1;
+                -webkit-flex-grow: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+            }
+
+        .flexbox .field__input-btn {
+            width: auto;
+            margin-left: 0.9em;
+            white-space: nowrap;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .no-js .field__input-btn,
+        .no-flexbox .field__input-btn {
+            margin-top: 0.9em;
+            padding: 1em 1.5em;
+        }
+
+
+
+        .hidden {
+            display: none !important;
+        }
+
+        .visually-hidden {
+            border: 0;
+            clip: rect(0, 0, 0, 0);
+            clip: rect(0 0 0 0);
+            width: 2px;
+            height: 2px;
+            margin: -2px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+        }
+
+        @media (max-width: 749px) {
+            .visually-hidden-on-mobile {
+                border: 0;
+                clip: rect(0, 0, 0, 0);
+                clip: rect(0 0 0 0);
+                width: 2px;
+                height: 2px;
+                margin: -2px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .visually-hidden-on-desktop {
+                border: 0;
+                clip: rect(0, 0, 0, 0);
+                clip: rect(0 0 0 0);
+                width: 2px;
+                height: 2px;
+                margin: -2px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+            }
+        }
+    </style>
 </body>
 </html>
