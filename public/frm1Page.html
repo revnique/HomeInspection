@@ -31,7 +31,7 @@
                                 <div class="section__content">
                                     <div class="fieldset" data-address-fields="">
 
-                                        <ht-floating-field></ht-floating-field>
+                                        <ht-floating-field floating-field="ff" css-class="field--half field field--optional"></ht-floating-field>
 
 
 
@@ -104,7 +104,7 @@
                         </div>
 
 
-
+                        <h1>{{ff}}</h1>
 
                     </form>
                 </div>
@@ -112,7 +112,6 @@
             </div>
 
         </div>
-    </div>
     </div>
     <script>
         var app = angular.module('app', []);
@@ -174,20 +173,41 @@
             return {
                 restrict: 'E',
                 replace: true,
-                template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()" class="{{floatingField.cssClass}}">' +
+                scope: {
+                    floatingField: '=',
+                    cssClass: '@',
+                    enterSubmits: true,
+                    labelIsFloating: false
+                },
+                template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()">' +
                     '<div class="field__input-wrapper">' +
                     '<label class="field__label" for="floatingField{{floatingField.floatingFieldId}}">{{ floatingField.label }}</label>' +
-                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{floatingField.autocomplete}}" class="field__input" size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" value="{{floatingField.value}}" id="floatingField{{floatingField.floatingFieldId}}">' +
+                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{floatingField.autocomplete}}" class="field__input" ' +
+                    'size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" ' +
+                    'ng-model="floatingField.value" id="floatingField{{floatingField.floatingFieldId}}" ng-keyup="onKeyUp($event)">' +
                     '</div>' +
                     '</div>',
                 link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+
                     scope.setMyClass = function () {
-                        var cssClass = "field--half field field--optional field--show-floating-label";
-                        var rtn = "htradiobutton";
+                        //var cssClass = "field--half field field--optional field--show-floating-label";
+                        var rtn = scope.cssClass;
                         if (attrs.disabled) {
                             rtn += " disabled";
                         }
                         return rtn;
+                    }
+                    scope.onKeyUp = function (e) {
+                        scope.labelIsFloating = scope.floatingField.value.length > 0;
                     }
                 }
             };
@@ -196,10 +216,9 @@
 
         function tempController($scope, $timeout, fileUpload) {
             $scope.dtown = "hello world";
-            $scope.floatingField = {
+            $scope.ff = {
                 "isDisabled": false,
                 "value": "",
-                "cssClass": "field--half field field--optional field--show-floating-label",
                 "floatingFieldId": "firstName",
                 "label": "First Name",
                 "size" : 30
