@@ -1,238 +1,216 @@
-﻿<html class="boxshadow opacity pointerevents cssanimations csstransitions boxsizing display-table floating-labels">
+﻿<html class="boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels" data-ng-app="app" data-ng-controller="tempController">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
     <title>Moots - Checkout</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
 </head>
 <body>
-
-
     <div class="content" data-content="">
-        <div class="wrap">
-            <div class="main" role="main">
-                <div class="main__content">
-                    <div class="step" data-step="contact_information">
-                        <form novalidate="novalidate" class="edit_checkout animate-floating-labels" action="https://checkout.shopify.com/491612/checkouts/01551f34e83db50402916c4cbb276387" accept-charset="UTF-8" method="post">
-                            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="3g6SFwT7jO617hkU7sC8HaN81POb0a9n7WEbf4158a+1mQU1gBLPKG3R/2AiTw9vlZPhIo1avPLtrDRxZXfaLg==">
+        <div class="main" role="main">
+            <div class="main__content">
+                <div class="step" data-step="contact_information">
+                    <form novalidate="novalidate" class="edit_checkout animate-floating-labels" action="https://checkout.shopify.com/491612/checkouts/01551f34e83db50402916c4cbb276387" accept-charset="UTF-8" method="post">
+                        <input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="3g6SFwT7jO617hkU7sC8HaN81POb0a9n7WEbf4158a+1mQU1gBLPKG3R/2AiTw9vlZPhIo1avPLtrDRxZXfaLg==">
 
-                            <input type="hidden" name="previous_step" id="previous_step" value="contact_information">
-                            <input type="hidden" name="step" value="shipping_method">
+                        <input type="hidden" name="previous_step" id="previous_step" value="contact_information">
+                        <input type="hidden" name="step" value="shipping_method">
 
-                            <div class="step__sections">
-
-                                
+                        <div class="step__sections">
 
 
-                                <div class="section section--shipping-address" data-shipping-address="" data-update-order-summary="">
-
-                                    <div class="section__header">
-                                        <h2 class="section__title">
-                                            Shipping address
-                                        </h2>
-                                    </div>
-
-                                    <div class="section__content">
-                                        <div class="fieldset" data-address-fields="">
 
 
-                                            <div class="field--half field field--optional field--show-floating-label">
+                            <div class="section section--shipping-address" data-shipping-address="" data-update-order-summary="">
 
-                                                <div class="field__input-wrapper">
-                                                    <label class="field__label" for="checkout_shipping_address_first_name">First name</label>
-                                                    <input placeholder="First name" autocomplete="shipping given-name" data-backup="first_name" class="field__input" aria-labelledby="error-for-first_name" size="30" type="text" name="checkout[shipping_address][first_name]" id="checkout_shipping_address_first_name">
-                                                </div>
+                                <div class="section__header">
+                                    <h2 style="display:none;" class="section__title">
+                                        Shipping address
+                                    </h2>
+                                </div>
+
+                                <div class="section__content">
+                                    <div class="fieldset" data-address-fields="">
+
+                                        <ht-floating-field></ht-floating-field>
+
+
+
+                                        <div class="field--half field field--optional ">
+
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label" for="checkout_shipping_address_first_name">First name</label>
+                                                <input placeholder="First name" autocomplete="shipping given-name" data-backup="first_name" class="field__input" aria-labelledby="error-for-first_name" size="30" type="text" name="checkout[shipping_address][first_name]" id="checkout_shipping_address_first_name">
                                             </div>
-                                            <div class="field--half field field--required">
+                                        </div>
+                                        <div class="field--half field field--required">
 
-                                                <div class="field__input-wrapper">
-                                                    <label class="field__label" for="checkout_shipping_address_last_name">Last name</label>
-                                                    <input placeholder="Last name" autocomplete="shipping family-name" data-backup="last_name" class="field__input" aria-labelledby="error-for-last_name" size="30" type="text" name="checkout[shipping_address][last_name]" id="checkout_shipping_address_last_name">
-                                                </div>
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label" for="checkout_shipping_address_last_name">Last name</label>
+                                                <input placeholder="Last name" autocomplete="shipping family-name" data-backup="last_name" class="field__input" aria-labelledby="error-for-last_name" size="30" type="text" name="checkout[shipping_address][last_name]" id="checkout_shipping_address_last_name">
                                             </div>
-                                            
-                                            <div class="field field--required field--show-floating-label">
+                                        </div>
 
-                                                <div class="field__input-wrapper">
-                                                    <label class="field__label" for="checkout_shipping_address_city">City</label>
-                                                    <input placeholder="City" autocomplete="shipping address-level2" data-backup="city" class="field__input" aria-labelledby="error-for-city" size="30" type="text" name="checkout[shipping_address][city]" id="checkout_shipping_address_city">
-                                                </div>
+                                        <div class="field field--required ">
+
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label" for="checkout_shipping_address_city">City</label>
+                                                <input placeholder="City" autocomplete="shipping address-level2" data-backup="city" class="field__input" aria-labelledby="error-for-city" size="30" type="text" name="checkout[shipping_address][city]" id="checkout_shipping_address_city">
                                             </div>
-                                            <div data-country-section="1" class="field field--required field--three-eights field--show-floating-label">
+                                        </div>
+                                        <div data-country-section="1" class="field field--required field--three-eights ">
 
-                                                <div class="field__input-wrapper field__input-wrapper--select">
-                                                    <label class="field__label" for="checkout_shipping_address_country">Country</label>
-                                                    <select size="1" autocomplete="shipping country" data-backup="country" class="field__input field__input--select" aria-labelledby="error-for-country" name="checkout[shipping_address][country]" id="checkout_shipping_address_country">
-                                                        <option data-code="US" selected="selected" value="United States">United States</option>
-                                                        <option data-code="AU" value="Australia">Australia</option>
-                                                        <option data-code="ID" value="Indonesia">Indonesia</option>
-                                                        <option data-code="GB" value="United Kingdom">United Kingdom</option>
-                                                        <option disabled="disabled" value="---">---</option>
-                                                        <option data-code="AF" value="Afghanistan">Afghanistan</option>
-                                                    </select>
-                                                </div>
+                                            <div class="field__input-wrapper field__input-wrapper--select">
+                                                <label class="field__label" for="checkout_shipping_address_country">Country</label>
+                                                <select size="1" autocomplete="shipping country" data-backup="country" class="field__input field__input--select" aria-labelledby="error-for-country" name="checkout[shipping_address][country]" id="checkout_shipping_address_country">
+                                                    <option data-code="" selected="selected" value="" disabled>Country</option>
+                                                    <option data-code="US" value="United States">United States</option>
+                                                    <option data-code="AU" value="Australia">Australia</option>
+                                                    <option data-code="ID" value="Indonesia">Indonesia</option>
+                                                    <option data-code="GB" value="United Kingdom">United Kingdom</option>
+                                                    <option disabled="disabled" value="---">---</option>
+                                                    <option data-code="AF" value="Afghanistan">Afghanistan</option>
+                                                </select>
                                             </div>
-                                            <input class="visually-hidden" autocomplete="shipping address-level1" tabindex="-1" data-autocomplete-field="province" aria-labelledby="error-for-province" size="30" type="text" name="checkout[shipping_address][province]">
+                                        </div>
+                                        <input class="visually-hidden" autocomplete="shipping address-level1" tabindex="-1" data-autocomplete-field="province" aria-labelledby="error-for-province" size="30" type="text" name="checkout[shipping_address][province]">
 
-                                            <div data-province-section="1" class="field field--required field--three-eights field--show-floating-label">
+                                        <div data-province-section="1" class="field field--required field--three-eights ">
 
-                                                <div class="field__input-wrapper field__input-wrapper--select">
-                                                    <label class="field__label" for="checkout_shipping_address_province">State</label>
-                                                    <input type="hidden" name="checkout[shipping_address][province]">
-                                                    <select placeholder="Texas" data-backup="province" class="field__input field__input--select" aria-labelledby="error-for-province" name="checkout[shipping_address][province]" id="checkout_shipping_address_province">
-                                                        <option value="" disabled="">State</option>
-                                                        <option data-code="AL" value="Alabama">Alabama</option>
-                                                        <option data-code="AK" value="Alaska">Alaska</option>
-                                                        <option data-code="TX" value="Texas">Texas</option>
-                                                    </select>
-                                                </div>
+                                            <div class="field__input-wrapper field__input-wrapper--select">
+                                                <label class="field__label" for="checkout_shipping_address_province">State</label>
+                                                <input type="hidden" name="checkout[shipping_address][province]">
+                                                <select placeholder="Texas" data-backup="province" class="field__input field__input--select" aria-labelledby="error-for-province" name="checkout[shipping_address][province]" id="checkout_shipping_address_province">
+                                                    <option value="" disabled="" selected>State</option>
+                                                    <option data-code="AL" value="Alabama">Alabama</option>
+                                                    <option data-code="AK" value="Alaska">Alaska</option>
+                                                    <option data-code="TX" value="Texas">Texas</option>
+                                                </select>
                                             </div>
-                                            <div data-zip-section="1" class="field field--required field--quarter field--show-floating-label">
+                                        </div>
+                                        <div data-zip-section="1" class="field field--required field--quarter ">
 
-                                                <div class="field__input-wrapper">
-                                                    <label class="field__label" for="checkout_shipping_address_zip">Zip code</label>
-                                                    <input placeholder="Zip code" autocomplete="shipping postal-code" data-backup="zip" class="field__input field__input--zip" aria-labelledby="error-for-zip" size="30" type="text" name="checkout[shipping_address][zip]" id="checkout_shipping_address_zip">
-                                                </div>
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label" for="checkout_shipping_address_zip">Zip code</label>
+                                                <input placeholder="Zip code" autocomplete="shipping postal-code" data-backup="zip" class="field__input field__input--zip" aria-labelledby="error-for-zip" size="30" type="text" name="checkout[shipping_address][zip]" id="checkout_shipping_address_zip">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                
-
                             </div>
 
 
 
-                            
-                        </form>
-                    </div>
 
+                        </div>
+
+
+
+
+                    </form>
                 </div>
-               
+
             </div>
+
         </div>
     </div>
+    </div>
     <script>
-    var app = angular.module('app', []);
+        var app = angular.module('app', []);
 
 
-    app.service('fileUpload', ['$http', function ($http) {
-        this.uploadFileToUrl = function (file, uploadUrl) {
-            var fd = new FormData();
-            fd.append('file', file);
+        app.service('fileUpload', ['$http', function ($http) {
+            this.uploadFileToUrl = function (file, uploadUrl) {
+                var fd = new FormData();
+                fd.append('file', file);
 
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
+                $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                })
 
-            .success(function () {
-            })
+                .success(function () {
+                })
 
-            .error(function () {
-            });
-        }
-    }]);
+                .error(function () {
+                });
+            }
+        }]);
 
-    angular
-        .module('app')
-        .controller('tempController', tempController);
+        angular
+            .module('app')
+            .controller('tempController', tempController);
 
-    tempController.$inject = ['$scope', '$timeout', 'fileUpload'];
+        tempController.$inject = ['$scope', '$timeout', 'fileUpload'];
 
-    app.directive('fileModel', ['$parse', function ($parse) {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
-
-
-                //<div class="field--half field field--optional field--show-floating-label">
-                //    <div class="field__input-wrapper">
-                //        <label class="field__label" for="checkout_shipping_address_first_name">First name</label>
-                //        <input placeholder="First name" autocomplete="shipping given-name" data-backup="first_name" class="field__input" aria-labelledby="error-for-first_name" size="30" type="text" name="checkout[shipping_address][first_name]" id="checkout_shipping_address_first_name">
-                //    </div>
-                //</div>
+        app.directive('fileModel', ['$parse', function ($parse) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    var model = $parse(attrs.fileModel);
+                    var modelSetter = model.assign;
 
 
+                    //<div class="field--half field field--optional field--show-floating-label">
+                    //    <div class="field__input-wrapper">
+                    //        <label class="field__label" for="checkout_shipping_address_first_name">First name</label>
+                    //        <input placeholder="First name" autocomplete="shipping given-name" data-backup="first_name" class="field__input" aria-labelledby="error-for-first_name" size="30" type="text" name="checkout[shipping_address][first_name]" id="checkout_shipping_address_first_name">
+                    //    </div>
+                    //</div>
 
-                element.bind('change', function () {
-                    scope.$apply(function () {
-                        modelSetter(scope, element[0].files[0]);
+
+
+                    element.bind('change', function () {
+                        scope.$apply(function () {
+                            modelSetter(scope, element[0].files[0]);
+                        });
                     });
-                });
-            }
-        };
-    }]);
-
-
-    app.directive('htRadioButton', [
-    function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                ngModel: '=',
-                ngValue: '=',
-                radioButtonId: '@',
-                label: '@',
-                enterToggles: '@',
-                onClick: '&',
-                preventAction: '@'
-            },
-            template: '<a id="{{ radioButtonId }}" href="javascript:void(0)" ng-class="setMyClass()" ng-click="checkUncheckMe(ngValue)"><i class="fa fa-fw" ng-class="setMyIconClass()"></i><label for="{{ radioButtonId }}">{{ label }}</label></a>',
-            link: function (scope, el, attrs) {
-                el.bind('keydown', function ($event) {
-                    if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
-                        $event.preventDefault();
-                        $event.currentTarget.click();
-                        return false;
-                    } else
-                        return true;
-                });
-
-
-                scope.checkUncheckMe = function () {
-                    if (attrs.disabled) {
-                        return;
-                    }
-                    scope.ngModel = scope.ngValue;
-                    scope.onClick(scope.ngValue, scope.preventAction);
-                };
-
-                scope.setMyIconClass = function () {
-                    //{\'fa-dot-circle-o\': ngModel == ngValue, \'fa-circle-o\': ngModel != ngValue }
-                    var rtn = scope.ngModel == scope.ngValue ? "fa-dot-circle-o" : "fa-circle-o";
-                    return rtn;
                 }
+            };
+        }]);
 
-                scope.setMyClass = function () {
-                    var rtn = "htradiobutton";
-                    if (attrs.disabled) {
-                        rtn += " disabled";
+
+        app.directive('htFloatingField', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()" class="{{floatingField.cssClass}}">' +
+                    '<div class="field__input-wrapper">' +
+                    '<label class="field__label" for="floatingField{{floatingField.floatingFieldId}}">{{ floatingField.label }}</label>' +
+                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{floatingField.autocomplete}}" class="field__input" size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" value="{{floatingField.value}}" id="floatingField{{floatingField.floatingFieldId}}">' +
+                    '</div>' +
+                    '</div>',
+                link: function (scope, el, attrs) {
+                    scope.setMyClass = function () {
+                        var cssClass = "field--half field field--optional field--show-floating-label";
+                        var rtn = "htradiobutton";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
                     }
-                    return rtn;
                 }
-            }
-        };
-    }
-    ]);
-    function tempController($scope, $timeout, fileUpload) {
-        $scope.dtown = "hello world";
-        $scope.doit = function () {
-            var file = $scope.myFile;
-            var uploadUrl = 'http://localhost:61050/api/values/';
-            fileUpload.uploadFileToUrl(file, uploadUrl);
-        };
-    }
+            };
+        }
+        ]);
+
+        function tempController($scope, $timeout, fileUpload) {
+            $scope.dtown = "hello world";
+            $scope.floatingField = {
+                "isDisabled": false,
+                "value": "",
+                "cssClass": "field--half field field--optional field--show-floating-label",
+                "floatingFieldId": "firstName",
+                "label": "First Name",
+                "size" : 30
+            };
+            $scope.doit = function () {
+                var file = $scope.myFile;
+                var uploadUrl = 'http://localhost:61050/api/values/';
+                fileUpload.uploadFileToUrl(file, uploadUrl);
+            };
+        }
     </script>
-
-<script>
-    
-
-</script>
 
 
 <style>
