@@ -737,7 +737,9 @@
                     '</div>',
                 link: function (scope, el, attrs) {
                     el.bind('keydown', function ($event) {
-                        if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
+                        //spacebar or enter for other controls
+                        //if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
+                        if (scope.enterSubmits && $event.keyCode === 13) {
                             $event.preventDefault();
                             $event.currentTarget.click();
                             return false;
@@ -1441,11 +1443,11 @@
 
         .no-js .field__input:focus,
         .no-boxshadow .field__input:focus {
-            border: 2px solid #c7ac7f;
+            border: 2px solid #556270;
         }
 
         .boxshadow .field__input:focus {
-            box-shadow: 0 0 0 2px #c7ac7f;
+            box-shadow: 0 0 0 2px #556270;
         }
 
         .no-js .field--error .field__input,
