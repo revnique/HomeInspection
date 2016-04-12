@@ -325,12 +325,11 @@
 
                 <br />
 
-                <ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
+                <!--<ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>-->
+                <ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field field--optional"></ht-floating-text-field>
 
-
-
-
-
+                <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights"></ht-floating-select-field>
+                
 
             </form>
             <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
@@ -716,6 +715,7 @@
 
         tempController.$inject = ['$scope', '$timeout'];
 
+        //<ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
         app.directive('htFloatingTextField', [
         function () {
             return {
@@ -723,16 +723,19 @@
                 replace: true,
                 scope: {
                     floatingField: '=',
+                    floatingFieldId: '@',
                     cssClass: '@',
                     enterSubmits: '@',
-                    autocomplete: '@'
+                    autocomplete: '@',
+                    size: '@',
+                    label: '@'
                 },
-                template: '<div id="floatingFieldParent{{ floatingField.floatingFieldId }}" ng-class="setMyClass()">' +
+                template: '<div id="floatingFieldParent{{ floatingFieldId }}" ng-class="setMyClass()">' +
                     '<div class="field__input-wrapper">' +
-                    '<label class="field__label" for="floatingField{{floatingField.floatingFieldId}}">{{ floatingField.label }}</label>' +
-                    '<input placeholder="{{ floatingField.label }}" autocomplete="{{autocomplete}}" class="field__input" ' +
-                    'size="{{floatingField.size}}" type="text" name="floatingField{{floatingField.floatingFieldId}}" ' +
-                    'ng-model="floatingField.value" id="floatingField{{floatingField.floatingFieldId}}">' +
+                    '<label class="field__label" for="floatingField{{floatingFieldId}}">{{ label }}</label>' +
+                    '<input placeholder="{{ label }}" autocomplete="{{autocomplete}}" class="field__input" ' +
+                    'size="{{size}}" type="text" name="floatingField{{floatingFieldId}}" ' +
+                    'ng-model="floatingField.value" id="floatingField{{floatingFieldId}}">' +
                     '</div>' +
                     '</div>',
                 link: function (scope, el, attrs) {
@@ -747,7 +750,7 @@
                             return true;
                         }
                     });
-
+        
                     scope.setMyClass = function () {
                         scope.labelIsFloating = scope.floatingField.value.length > 0;
                         var rtn = scope.cssClass;
@@ -756,6 +759,50 @@
                         }
                         if (scope.labelIsFloating) {
                             rtn += " field--show-floating-label";
+                        }
+                        return rtn;
+                    }
+
+                }
+            };
+        }]);
+
+
+        //<ht-floating-select-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" css-class="field field--required field--three-eights"></ht-floating-select-field>
+        app.directive('htFloatingSelectField', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    floatingField: '=',
+                    floatingFieldId: '@',
+                    cssClass: '@',
+                    label: '@'
+                },
+                template: '<div ng-class="setMyClass()">' +
+                        '<div class="field__input-wrapper field__input-wrapper--select">' +
+                            '<label class="field__label" for="floatingField{{floatingFieldId}}">{{ label }}</label>' +
+                            '<input type="hidden" name="floatingField{{floatingFieldId}}">' +
+                            '<select placeholder="{{ label }}" class="field__input field__input--select" name="floatingField{{floatingFieldId}}" id="floatingField{{floatingFieldId}}" ng-model="floatingField.selectedItem"' +
+                                ' ng-options="option.name for option in floatingField.options">' +
+                                '<option value="" selected>-- {{ label }} --</option>' +
+                            '</select>' +
+                        '</div>' +
+                    '</div>',
+                link: function (scope, el, attrs) {
+                    scope.setMyClass = function () {
+                        console.log("ff", scope.floatingField);
+                        scope.labelIsFloating = (scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.length > 0)
+                            || scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.value != null && scope.floatingField.selectedItem.value.length > 0;
+                        var rtn = scope.cssClass;
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        if (scope.labelIsFloating) {
+                            rtn += " field--show-floating-label";
+                        } else {
+                            rtn += " nothing-selected";
                         }
                         return rtn;
                     }
@@ -783,9 +830,30 @@
                 "value": "",
                 "floatingFieldId": "firstName",
                 "label": "First Name",
-                "size": 30
+                "size": 35
             };
 
+            $scope.ffCbo = {
+                "isDisabled": false,
+                "selectedItem": "",
+                "floatingFieldId": "firstName",
+                "label": "State",
+                "size": 35,
+                "options": [
+                    {
+                        "name": "Alabama",
+                        "value": "AL"
+                    },
+                    {
+                        "name": "Alaska",
+                        "value": "AK"
+                    },
+                    {
+                        "name": "Texas",
+                        "value": "TX"
+                    }
+                ]
+            };
             //formTempates
             //formCategories
             //formItems
@@ -1042,6 +1110,9 @@
 
 
     <style>
+    .nothing-selected .field__input-wrapper--select select {
+        color: #999;
+    }
         button,
         input,
         optgroup,
@@ -1201,30 +1272,7 @@
             color: #999999;
         }
 
-        .sidebar .field__label {
-            color: #4d4d4d;
-        }
-
-        .floating-labels .sidebar .field__label {
-            color: #999999;
-        }
-
-        .content-box .field__label {
-            color: #4d4d4d;
-        }
-
-        .floating-labels .content-box .field__label {
-            color: #999999;
-        }
-
-        .leaflet-popup-content .field__label {
-            color: #4d4d4d;
-        }
-
-        .floating-labels .leaflet-popup-content .field__label {
-            color: #999999;
-        }
-
+       
         .main .field--active .field__label {
             color: #737373;
         }
@@ -1232,15 +1280,7 @@
         .sidebar .field--active .field__label {
             color: #737373;
         }
-
-        .content-box .field--active .field__label {
-            color: #737373;
-        }
-
-        .leaflet-popup-content .field--active .field__label {
-            color: #737373;
-        }
-
+        
         .floating-labels .field__label {
             font-size: 0.85714em;
             font-weight: normal;
@@ -1318,96 +1358,6 @@
         }
 
         .main .field__input:-ms-input-placeholder {
-            color: #999999;
-        }
-
-        .sidebar .field__input {
-            background-color: white;
-            color: #333333;
-        }
-
-        .no-js .sidebar .field__input,
-        .no-boxshadow .sidebar .field__input {
-            border: 1px solid #d5d5d5;
-        }
-
-        .boxshadow .sidebar .field__input {
-            box-shadow: 0 0 0 1px #d5d5d5;
-        }
-
-        .sidebar .field__input::-webkit-input-placeholder {
-            color: #999999;
-        }
-
-        .sidebar .field__input:-moz-placeholder {
-            color: #999999;
-        }
-
-        .sidebar .field__input::-moz-placeholder {
-            color: #999999;
-        }
-
-        .sidebar .field__input:-ms-input-placeholder {
-            color: #999999;
-        }
-
-        .content-box .field__input {
-            background-color: white;
-            color: #333333;
-        }
-
-        .no-js .content-box .field__input,
-        .no-boxshadow .content-box .field__input {
-            border: 1px solid #d9d9d9;
-        }
-
-        .boxshadow .content-box .field__input {
-            box-shadow: 0 0 0 1px #d9d9d9;
-        }
-
-        .content-box .field__input::-webkit-input-placeholder {
-            color: #999999;
-        }
-
-        .content-box .field__input:-moz-placeholder {
-            color: #999999;
-        }
-
-        .content-box .field__input::-moz-placeholder {
-            color: #999999;
-        }
-
-        .content-box .field__input:-ms-input-placeholder {
-            color: #999999;
-        }
-
-        .leaflet-popup-content .field__input {
-            background-color: white;
-            color: #333333;
-        }
-
-        .no-js .leaflet-popup-content .field__input,
-        .no-boxshadow .leaflet-popup-content .field__input {
-            border: 1px solid #d9d9d9;
-        }
-
-        .boxshadow .leaflet-popup-content .field__input {
-            box-shadow: 0 0 0 1px #d9d9d9;
-        }
-
-        .leaflet-popup-content .field__input::-webkit-input-placeholder {
-            color: #999999;
-        }
-
-        .leaflet-popup-content .field__input:-moz-placeholder {
-            color: #999999;
-        }
-
-        .leaflet-popup-content .field__input::-moz-placeholder {
-            color: #999999;
-        }
-
-        .leaflet-popup-content .field__input:-ms-input-placeholder {
             color: #999999;
         }
 
@@ -1496,24 +1446,6 @@
             background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
         }
 
-        .no-js .sidebar .field__input--select,
-        .no-pointerevents .sidebar .field__input--select {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
-        .no-js .content-box .field__input--select,
-        .no-pointerevents .content-box .field__input--select {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
-        .no-js .leaflet-popup-content .field__input--select,
-        .no-pointerevents .leaflet-popup-content .field__input--select {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
         .pointerevents .field__input-wrapper--select:before {
             content: '';
             position: absolute;
@@ -1527,21 +1459,6 @@
         }
 
         .pointerevents .main .field__input-wrapper--select:before {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
-        .pointerevents .sidebar .field__input-wrapper--select:before {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
-        .pointerevents .content-box .field__input-wrapper--select:before {
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
-            background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
-        }
-
-        .pointerevents .leaflet-popup-content .field__input-wrapper--select:before {
             background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-e0b56f8b6bd91b987ac4526a533b29444088db55ef80c9d47778945233c13c09.png);
             background-image: url(//cdn.shopify.com/s/assets/checkout_v2/dropdown-arrow-down-dark-03cace330ac9af908922bab6c8e659b8c356ca7093d8b680fb3b09cd4b642ecb.svg), none;
         }
@@ -1565,79 +1482,9 @@
 
         /*!= end(no-rtl) */
 
-        .flexbox .field__input-btn-wrapper {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-        }
-
-            .flexbox .field__input-btn-wrapper .field__input-wrapper {
-                -webkit-box-flex: 1;
-                -webkit-flex-grow: 1;
-                -ms-flex-positive: 1;
-                flex-grow: 1;
-            }
-
-        .flexbox .field__input-btn {
-            width: auto;
-            margin-left: 0.9em;
-            white-space: nowrap;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
-        .no-js .field__input-btn,
-        .no-flexbox .field__input-btn {
-            margin-top: 0.9em;
-            padding: 1em 1.5em;
-        }
+       
 
 
-
-        .hidden {
-            display: none !important;
-        }
-
-        .visually-hidden {
-            border: 0;
-            clip: rect(0, 0, 0, 0);
-            clip: rect(0 0 0 0);
-            width: 2px;
-            height: 2px;
-            margin: -2px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-        }
-
-        @media (max-width: 749px) {
-            .visually-hidden-on-mobile {
-                border: 0;
-                clip: rect(0, 0, 0, 0);
-                clip: rect(0 0 0 0);
-                width: 2px;
-                height: 2px;
-                margin: -2px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-            }
-        }
-
-        @media (min-width: 1000px) {
-            .visually-hidden-on-desktop {
-                border: 0;
-                clip: rect(0, 0, 0, 0);
-                clip: rect(0 0 0 0);
-                width: 2px;
-                height: 2px;
-                margin: -2px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-            }
-        }
     </style>
 </body>
 </html>
