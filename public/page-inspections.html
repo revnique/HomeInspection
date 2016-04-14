@@ -18,252 +18,218 @@
 <body data-ng-app="app" data-ng-controller="tempController" data-ng-class="{'shifted': isShifted}">
 
 
-    <style>
-        .p-header {
-            text-align: center;
-        }
+<style>
+    .p-header { text-align: center; }
 
-        .move {
-            padding-right: 200px;
-        }
+    .move { padding-right: 200px; }
 
-        .p-header-badge-container {
-        }
+    .p-header-badge-container { }
 
-        .p-header-badge {
-            padding-top: 5px;
-        }
+    .p-header-badge { padding-top: 5px; }
 
-            .p-header-badge .badge {
-                font-size: 10px;
-                margin: -21px 0px 0px -3px;
-            }
+    .p-header-badge .badge {
+        font-size: 10px;
+        margin: -21px 0px 0px -3px;
+    }
 
-        .p-container {
-            margin: 10px;
-        }
+    .p-container { margin: 10px; }
 
-        .speed-entry-button {
-            font-size: 30px;
-            margin-bottom: -10px;
-        }
+    .speed-entry-button {
+        font-size: 30px;
+        margin-bottom: -10px;
+    }
 
-        .speed-entry-input {
-            font-size: 12px;
-            width: 90%;
-        }
+    .speed-entry-input {
+        font-size: 12px;
+        width: 90%;
+    }
 
-        .speed-entry-button-group {
-            margin-top: 10px;
-            width: 100%;
-        }
+    .speed-entry-button-group {
+        margin-top: 10px;
+        width: 100%;
+    }
 
-        .speed-entry-input-topper {
-            background-color: #ddd;
-        }
+    .speed-entry-input-topper { background-color: #ddd; }
 
-        .action-cell {
-            padding-right: 10px;
-            width: 150px;
-        }
+    .action-cell {
+        padding-right: 10px;
+        width: 150px;
+    }
 
-        .first-cell {
-            padding-left: 10px;
-            width: 50px;
-        }
+    .first-cell {
+        padding-left: 10px;
+        width: 50px;
+    }
 
-        .selection-list {
-            width: 100%;
-        }
+    .selection-list { width: 100%; }
 
-        .selection-list-container {
-            padding-left: 25px;
-            width: 100%;
-        }
+    .selection-list-container {
+        padding-left: 25px;
+        width: 100%;
+    }
 
-        body {
-            margin: 0;
-        }
+    body { margin: 0; }
 
-            body.shifted {
-                overflow: hidden;
-            }
+    body.shifted { overflow: hidden; }
 
-        .menu-slider {
-            -moz-transition: all 300ms;
-            -webkit-transition: all 300ms;
-            bottom: 0;
-            display: block;
-            float: left;
-            height: 100%;
-            left: -100px;
-            max-width: 284px;
-            overflow-y: auto;
-            position: fixed;
-            top: 0;
-            transition: all 300ms;
-            width: 100%;
-        }
+    .menu-slider {
+        -moz-transition: all 300ms;
+        -webkit-transition: all 300ms;
+        bottom: 0;
+        display: block;
+        float: left;
+        height: 100%;
+        left: -100px;
+        max-width: 284px;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        transition: all 300ms;
+        width: 100%;
+    }
 
-            .menu-slider > ul {
-            }
+    .menu-slider > ul { }
 
-            .menu-slider.shifted {
-                left: 0px;
-            }
+    .menu-slider.shifted { left: 0px; }
 
-        .p-wrapper {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            -moz-transition: all 300ms;
-            -webkit-transition: all 300ms;
-            transition: all 300ms;
-            background: #fff;
-            border-radius: 0;
-            height: 100%;
-            left: 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+    .p-wrapper {
+        -moz-box-sizing: border-box;
+        -moz-transition: all 300ms;
+        -webkit-box-sizing: border-box;
+        -webkit-transition: all 300ms;
+        background: #fff;
+        border-radius: 0;
+        box-sizing: border-box;
+        height: 100%;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        transition: all 300ms;
+        width: 100%;
+    }
 
-            .p-wrapper.shifted {
-                left: 273px;
-            }
+    .p-wrapper.shifted { left: 273px; }
 
-        .link-badge i {
-            font-size: 30px;
-        }
+    .link-badge i { font-size: 30px; }
 
-        .link-badge .badge {
-            display: inline-block;
-            margin: -35px 0px 0px -7px;
-        }
+    .link-badge .badge {
+        display: inline-block;
+        margin: -35px 0px 0px -7px;
+    }
 
-        .link-badge div {
-            display: inline-block;
-        }
+    .link-badge div { display: inline-block; }
 
-        .p-header {
-            border-bottom: 1px solid #efefef;
-            padding-bottom: 10px;
-        }
+    .p-header {
+        border-bottom: 1px solid #efefef;
+        padding-bottom: 10px;
+    }
 
-        .logo-main {
-            display: inline-block;
-            opacity: .5;
-            padding: 3px;
-            width: 27px;
-        }
+    .logo-main {
+        display: inline-block;
+        opacity: .5;
+        padding: 3px;
+        width: 27px;
+    }
 
-        .logo-text {
-            display: inline-block;
-            margin-left: 5px;
-        }
+    .logo-text {
+        display: inline-block;
+        margin-left: 5px;
+    }
 
-        .shifted .logo-main,
-        .shifted .logo-text {
-            visibility: hidden;
-        }
+    .shifted .logo-main,
+    .shifted .logo-text { visibility: hidden; }
 
-        .logo {
-            display: inline-block;
-            opacity: .5;
-            padding: 3px;
-            width: 27px;
-        }
+    .logo {
+        display: inline-block;
+        opacity: .5;
+        padding: 3px;
+        width: 27px;
+    }
 
-        .menu-slider h5 {
-            display: inline-block;
-            margin-left: 5px;
-            color: #000;
-            opacity: .3;
-        }
+    .menu-slider h5 {
+        color: #000;
+        display: inline-block;
+        margin-left: 5px;
+        opacity: .3;
+    }
 
-        .menu-slider .header {
-            text-align: center;
-            text-transform: capitalize;
-            font-size: 18px;
-            color: #ffffff;
-            padding: 13px;
-        }
+    .menu-slider .header {
+        color: #ffffff;
+        font-size: 18px;
+        padding: 13px;
+        text-align: center;
+        text-transform: capitalize;
+    }
 
-        .menu-slider .header-container {
-            background: #2f4050;
-            color: #353d46;
-        }
+    .menu-slider .header-container {
+        background: #2f4050;
+        color: #353d46;
+    }
 
-        .menu-slider {
-            background-color: #2f4050;
-            color: #efefef;
-        }
+    .menu-slider {
+        background-color: #2f4050;
+        color: #efefef;
+    }
 
-        .p-container {
-            background-color: #556270;
-            margin: 0;
-            color: #fff;
-            padding-top: 5px;
-        }
+    .p-container {
+        background-color: #556270;
+        color: #fff;
+        margin: 0;
+        padding-top: 5px;
+    }
 
-            .p-container a {
-                color: #fff;
-            }
+    .p-container a { color: #fff; }
 
-            .p-container .menu-button {
-                margin: 3px 10px 0px 15px;
-                display: inline-block;
-                font-size: 20px;
-            }
+    .p-container .menu-button {
+        display: inline-block;
+        font-size: 20px;
+        margin: 3px 10px 0px 15px;
+    }
 
-            .p-container .edit-button {
-                margin: 0px 15px 0px 15px;
-                display: inline-block;
-                font-size: 25px;
-            }
+    .p-container .edit-button {
+        display: inline-block;
+        font-size: 25px;
+        margin: 0px 15px 0px 15px;
+    }
 
-        .p-header-text {
-            display: inline-block;
-            font-size: 20px;
-        }
+    .p-header-text {
+        display: inline-block;
+        font-size: 20px;
+    }
 
-        .menu-slider.shifted .list-group-item,
-        .menu-slider .list-group-item {
-            background-color: #2f4050;
-            color: #efefef;
-            border: 1px solid #5a5a5a;
-            border-left: none;
-        }
+    .menu-slider.shifted .list-group-item,
+    .menu-slider .list-group-item {
+        background-color: #2f4050;
+        border: 1px solid #5a5a5a;
+        border-left: none;
+        color: #efefef;
+    }
 
-            .menu-slider.shifted .list-group-item.active,
-            .menu-slider .list-group-item.active {
-                background-color: #fff;
-                background-image: none;
-                color: #000;
-                text-shadow: none;
-            }
+    .menu-slider.shifted .list-group-item.active,
+    .menu-slider .list-group-item.active {
+        background-color: #fff;
+        background-image: none;
+        color: #000;
+        text-shadow: none;
+    }
 
-            .menu-slider.shifted .list-group-item i,
-            .menu-slider .list-group-item i {
-                background-color: #5a5a5a;
-                color: #efefef;
-                display: inline-block;
-                font-size: 17px;
-                border-radius: 15px;
-                margin-right: 5px;
-                padding: 7px;
-            }
+    .menu-slider.shifted .list-group-item i,
+    .menu-slider .list-group-item i {
+        background-color: #5a5a5a;
+        border-radius: 15px;
+        color: #efefef;
+        display: inline-block;
+        font-size: 17px;
+        margin-right: 5px;
+        padding: 7px;
+    }
 
-            .menu-slider .list-group-item:first-child {
-                border-radius: 0px;
-            }
+    .menu-slider .list-group-item:first-child { border-radius: 0px; }
 
-        .list-group-item:last-child {
-            border-radius: 0px;
-        }
-    </style>
+    .list-group-item:last-child { border-radius: 0px; }
+</style>
 
     <nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
         <div class="header-container" data-ng-click="doit();">
@@ -328,8 +294,9 @@
                 <!--<ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>-->
                 <ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field field--optional"></ht-floating-text-field>
 
-                <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights"></ht-floating-select-field>
-                
+                <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights" ht-resize-width="500"></ht-floating-select-field>
+                <div ht-resize-height="400" ht-resize-width="300" style="background-color:yellow"></div>
+                <!-- <my-directive></my-directive> -->
 
             </form>
             <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
@@ -593,117 +560,118 @@
                 </a>
             </form>
         </div>
-        <style>
-            .slide {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
+    <style>
+        .slide {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
 
-                .slide.right {
-                    -moz-transition: all 1000ms;
-                    -webkit-transition: all 1000ms;
-                    transition: all 1000ms;
-                    transform: translate3d(5000px, 0, 0);
-                    visibility: hidden;
-                }
+        .slide.right {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(5000px, 0, 0);
+            transition: all 1000ms;
+            visibility: hidden;
+        }
 
-                .slide.left {
-                    -moz-transition: all 1000ms;
-                    -webkit-transition: all 1000ms;
-                    transition: all 1000ms;
-                    transform: translate3d(-5000px, 0, 0);
-                    visibility: hidden;
-                }
+        .slide.left {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(-5000px, 0, 0);
+            transition: all 1000ms;
+            visibility: hidden;
+        }
 
-                .slide.middle {
-                    -moz-transition: all 1000ms;
-                    -webkit-transition: all 1000ms;
-                    transition: all 1000ms;
-                    transform: translate3d(0px, 0, 0);
-                    visibility: visible;
-                }
-
-
-            .p-footer {
-                position: absolute;
-                background-color: #556270;
-                bottom: 0px;
-                height: 50px;
-                left: 0px;
-                right: 0px;
-            }
-
-            .p-scroll {
-                overflow-y: auto;
-                overflow-x: hidden;
-                position: absolute;
-                top: 50px;
-                bottom: 50px;
-                left: 0px;
-                right: 0px;
-            }
-
-            .bottom-btn {
-                color: #fff;
-                display: inline-block;
-                font-size: 33px;
-                position: absolute;
-                right: 10px;
-                bottom: 1px;
-            }
+        .slide.middle {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(0px, 0, 0);
+            transition: all 1000ms;
+            visibility: visible;
+        }
 
 
-            .p-footer .speed-entry-text {
-                display: inline-block;
-                font-size: 12px;
-                margin-bottom: 10px;
-                position: absolute;
-                left: 10px;
-                right: 50px;
-                bottom: 0px;
-                width: 84%;
-                height: 30px;
-                padding: 6px 12px;
-                font-size: 14px;
-                line-height: 1.42857143;
-                color: #555;
-                background-color: #fff;
-                background-image: none;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            }
+        .p-footer {
+            background-color: #556270;
+            bottom: 0px;
+            height: 50px;
+            left: 0px;
+            position: absolute;
+            right: 0px;
+        }
 
-            .p-mask {
-                z-index: -100;
-            }
+        .p-scroll {
+            bottom: 50px;
+            left: 0px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: absolute;
+            right: 0px;
+            top: 50px;
+        }
 
-            .shifted .p-mask {
-                z-index: 10;
-                position: absolute;
-                left: 0px;
-                right: 0px;
-                top: 0px;
-                bottom: 0px;
-                background-color: #333;
-                opacity: .7;
-            }
-        </style>
-        <div class="p-footer">
-            <input type="text" class="speed-entry-text" />
-            <a href="#" class="bottom-btn">
-                <i class="fa fa-plus-square-o"></i>
-            </a>
-        </div>
-        <div class="p-mask"></div>
+        .bottom-btn {
+            bottom: 1px;
+            color: #fff;
+            display: inline-block;
+            font-size: 33px;
+            position: absolute;
+            right: 10px;
+        }
+
+
+        .p-footer .speed-entry-text {
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            bottom: 0px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            color: #555;
+            display: inline-block;
+            font-size: 12px;
+            font-size: 14px;
+            height: 30px;
+            left: 10px;
+            line-height: 1.42857143;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            position: absolute;
+            right: 50px;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            width: 84%;
+        }
+
+        .p-mask { z-index: -100; }
+
+        .shifted .p-mask {
+            background-color: #333;
+            bottom: 0px;
+            left: 0px;
+            opacity: .7;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            z-index: 10;
+        }
+    </style>
+
+    <div class="p-footer main">
+        <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="60"
+                                size="{{ff2.size}}" data-label="{{ff2.label}}" enter-submits="true" css-class="field field--optional"></ht-floating-text-field>
+
+        <a href="#" class="bottom-btn">
+            <i class="fa fa-plus-square-o"></i>
+        </a>
     </div>
+    <div class="p-mask"></div>
+</div>
 
 
     <script>
@@ -714,6 +682,78 @@
             .controller('tempController', tempController);
 
         tempController.$inject = ['$scope', '$timeout'];
+
+
+        //<div ht-resize-width="45"></div>
+        app.directive('htResizeWidth', ['$window', function ($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
+
+            function link(scope, element, attrs) {
+                angular.element($window).bind('resize', function () {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+
+                angular.element($window).bind('load', function () {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+            }
+        }]);
+
+        //<div ht-resize-height="45"></div>
+        app.directive('htResizeHeight', ['$window', function ($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
+
+            function link(scope, element, attrs) {
+                angular.element($window).bind('resize', function () {
+                    var screenHeight2 = $window.innerHeight * 1;
+                    var offsetHeight2 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                });
+
+                angular.element($window).bind('load', function () {
+                    var screenHeight1 = $window.innerHeight * 1;
+                    var offsetHeight1 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight1 - offsetHeight1 + "px";
+                });
+            }
+        }]);
+
+        /*   app.directive('myDirective', ['$window', function ($window) {
+
+         return {
+            link: link,
+            restrict: 'E',
+            template: '<div>window size: {{width}}px</div>'
+         };
+
+         function link(scope, element, attrs){
+
+           scope.width = $window.innerWidth;
+
+           angular.element($window).bind('resize', function(){
+
+             scope.width = $window.innerWidth;
+
+             // manuall $digest required as resize event
+             // is outside of angular
+             scope.$digest();
+           });
+
+         }
+
+     }]);
+           */
+
 
         //<ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
         app.directive('htFloatingTextField', [
@@ -750,7 +790,7 @@
                             return true;
                         }
                     });
-        
+
                     scope.setMyClass = function () {
                         scope.labelIsFloating = scope.floatingField.value.length > 0;
                         var rtn = scope.cssClass;
@@ -761,8 +801,7 @@
                             rtn += " field--show-floating-label";
                         }
                         return rtn;
-                    }
-
+                    };
                 }
             };
         }]);
@@ -805,8 +844,7 @@
                             rtn += " nothing-selected";
                         }
                         return rtn;
-                    }
-
+                    };
                 }
             };
         }]);
@@ -830,6 +868,13 @@
                 "value": "",
                 "floatingFieldId": "firstName",
                 "label": "First Name",
+                "size": 35
+            };
+            $scope.ff2 = {
+                "isDisabled": false,
+                "value": "",
+                "floatingFieldId": "addNewTemplate",
+                "label": "Template",
                 "size": 35
             };
 
@@ -921,9 +966,10 @@
                     console.log(frm);
                     nextForm.cssClass = "middle";
                     $scope.selectedForm = nextForm;
+                    $scope.ff2.floatingFieldId = nextForm.formName;
+                    $scope.ff2.label = nextForm.title;
                 }
-            }
-
+            };
             $scope.prev = function (frm) {
                 if (frm.prevForm !== -1) {
                     var prevForm = $scope.forms[frm.prevForm - 1];
@@ -936,11 +982,10 @@
                     prevForm.cssClass = "middle";
                     $scope.selectedForm = prevForm;
                 }
-            }
+            };
             $scope.getStyle = function (frm) {
                 return frm.cssClass;
-            }
-
+            };
             $scope.inspectionTemplate = {
                 "title": "HarrisTeq Demo Template TWO",
                 "categories": [
@@ -1102,7 +1147,8 @@
                 } else {
                     $scope.menuActive = 'h';
                 }
-            }
+
+            };
             init();
 
         }
@@ -1110,9 +1156,10 @@
 
 
     <style>
-    .nothing-selected .field__input-wrapper--select select {
-        color: #999;
-    }
+        .nothing-selected .field__input-wrapper--select select {
+            color: #999;
+        }
+
         button,
         input,
         optgroup,
@@ -1272,7 +1319,7 @@
             color: #999999;
         }
 
-       
+
         .main .field--active .field__label {
             color: #737373;
         }
@@ -1280,7 +1327,7 @@
         .sidebar .field--active .field__label {
             color: #737373;
         }
-        
+
         .floating-labels .field__label {
             font-size: 0.85714em;
             font-weight: normal;
@@ -1371,21 +1418,21 @@
             padding-bottom: 0.38em;
         }
 
-            .floating-labels .field--show-floating-label .field__input::-webkit-input-placeholder {
-                color: transparent;
-            }
+        .floating-labels .field--show-floating-label .field__input::-webkit-input-placeholder {
+            color: transparent;
+        }
 
-            .floating-labels .field--show-floating-label .field__input:-moz-placeholder {
-                color: transparent;
-            }
+        .floating-labels .field--show-floating-label .field__input:-moz-placeholder {
+            color: transparent;
+        }
 
-            .floating-labels .field--show-floating-label .field__input::-moz-placeholder {
-                color: transparent;
-            }
+        .floating-labels .field--show-floating-label .field__input::-moz-placeholder {
+            color: transparent;
+        }
 
-            .floating-labels .field--show-floating-label .field__input:-ms-input-placeholder {
-                color: transparent;
-            }
+        .floating-labels .field--show-floating-label .field__input:-ms-input-placeholder {
+            color: transparent;
+        }
 
         .field__input:focus {
             outline: none;
@@ -1440,6 +1487,7 @@
             background-repeat: no-repeat;
         }
 
+
         .no-js .main .field__input--select,
         .no-pointerevents .main .field__input--select {
             background-image: url('https://homeinspection.harristeq.com/dropdown-arrow-down-dark.png');
@@ -1481,10 +1529,6 @@
 
 
         /*!= end(no-rtl) */
-
-       
-
-
     </style>
 </body>
 </html>
