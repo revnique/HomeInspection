@@ -16,665 +16,413 @@
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
 </head>
 <body data-ng-app="app" data-ng-controller="tempController" data-ng-class="{'shifted': isShifted}">
-
-
-<style>
-    .p-header { text-align: center; }
-
-    .move { padding-right: 200px; }
-
-    .p-header-badge-container { }
-
-    .p-header-badge { padding-top: 5px; }
-
-    .p-header-badge .badge {
-        font-size: 10px;
-        margin: -21px 0px 0px -3px;
-    }
-
-    .p-container { margin: 10px; }
-
-    .speed-entry-button {
-        font-size: 30px;
-        margin-bottom: -10px;
-    }
-
-    .speed-entry-input {
-        font-size: 12px;
-        width: 90%;
-    }
-
-    .speed-entry-button-group {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    .speed-entry-input-topper { background-color: #ddd; }
-
-    .action-cell {
-        padding-right: 10px;
-        width: 150px;
-    }
-
-    .first-cell {
-        padding-left: 10px;
-        width: 50px;
-    }
-
-    .selection-list { width: 100%; }
-
-    .selection-list-container {
-        padding-left: 25px;
-        width: 100%;
-    }
-
-    body { margin: 0; }
-
-    body.shifted { overflow: hidden; }
-
-    .menu-slider {
-        -moz-transition: all 300ms;
-        -webkit-transition: all 300ms;
-        bottom: 0;
-        display: block;
-        float: left;
-        height: 100%;
-        left: -100px;
-        max-width: 284px;
-        overflow-y: auto;
-        position: fixed;
-        top: 0;
-        transition: all 300ms;
-        width: 100%;
-    }
-
-    .menu-slider > ul { }
-
-    .menu-slider.shifted { left: 0px; }
-
-    .p-wrapper {
-        -moz-box-sizing: border-box;
-        -moz-transition: all 300ms;
-        -webkit-box-sizing: border-box;
-        -webkit-transition: all 300ms;
-        background: #fff;
-        border-radius: 0;
-        box-sizing: border-box;
-        height: 100%;
-        left: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        position: fixed;
-        top: 0;
-        transition: all 300ms;
-        width: 100%;
-    }
-
-    .p-wrapper.shifted { left: 273px; }
-
-    .link-badge i { font-size: 30px; }
-
-    .link-badge .badge {
-        display: inline-block;
-        margin: -35px 0px 0px -7px;
-    }
-
-    .link-badge div { display: inline-block; }
-
-    .p-header {
-        border-bottom: 1px solid #efefef;
-        padding-bottom: 10px;
-    }
-
-    .logo-main {
-        display: inline-block;
-        opacity: .5;
-        padding: 3px;
-        width: 27px;
-    }
-
-    .logo-text {
-        display: inline-block;
-        margin-left: 5px;
-    }
-
-    .shifted .logo-main,
-    .shifted .logo-text { visibility: hidden; }
-
-    .logo {
-        display: inline-block;
-        opacity: .5;
-        padding: 3px;
-        width: 27px;
-    }
-
-    .menu-slider h5 {
-        color: #000;
-        display: inline-block;
-        margin-left: 5px;
-        opacity: .3;
-    }
-
-    .menu-slider .header {
-        color: #ffffff;
-        font-size: 18px;
-        padding: 13px;
-        text-align: center;
-        text-transform: capitalize;
-    }
-
-    .menu-slider .header-container {
-        background: #2f4050;
-        color: #353d46;
-    }
-
-    .menu-slider {
-        background-color: #2f4050;
-        color: #efefef;
-    }
-
-    .p-container {
-        background-color: #556270;
-        color: #fff;
-        margin: 0;
-        padding-top: 5px;
-    }
-
-    .p-container a { color: #fff; }
-
-    .p-container .menu-button {
-        display: inline-block;
-        font-size: 20px;
-        margin: 3px 10px 0px 15px;
-    }
-
-    .p-container .edit-button {
-        display: inline-block;
-        font-size: 25px;
-        margin: 0px 15px 0px 15px;
-    }
-
-    .p-header-text {
-        display: inline-block;
-        font-size: 20px;
-    }
-
-    .menu-slider.shifted .list-group-item,
-    .menu-slider .list-group-item {
-        background-color: #2f4050;
-        border: 1px solid #5a5a5a;
-        border-left: none;
-        color: #efefef;
-    }
-
-    .menu-slider.shifted .list-group-item.active,
-    .menu-slider .list-group-item.active {
-        background-color: #fff;
-        background-image: none;
-        color: #000;
-        text-shadow: none;
-    }
-
-    .menu-slider.shifted .list-group-item i,
-    .menu-slider .list-group-item i {
-        background-color: #5a5a5a;
-        border-radius: 15px;
-        color: #efefef;
-        display: inline-block;
-        font-size: 17px;
-        margin-right: 5px;
-        padding: 7px;
-    }
-
-    .menu-slider .list-group-item:first-child { border-radius: 0px; }
-
-    .list-group-item:last-child { border-radius: 0px; }
-</style>
-
-    <nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
-        <div class="header-container" data-ng-click="doit();">
-            <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo" />
-            <h5>HarrisTeq</h5>-->
-            <div class="header">
-                Menu
-            </div>
+<nav class="menu-slider" data-ng-class="{'shifted': isShifted}">
+    <div class="header-container" data-ng-click="doit();">
+        <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo" />
+        <h5>HarrisTeq</h5>-->
+        <div class="header">
+            Menu
         </div>
-        <div class="list-group">
-            <a href="homepage.html" class="list-group-item" data-ng-class="{'active': menuActive=='h'}">
-                <i class="fa fa-home"></i>
-                Homepage
+    </div>
+    <div class="list-group">
+        <a href="homepage.html" class="list-group-item" data-ng-class="{'active': menuActive=='h'}">
+            <i class="fa fa-home"></i>
+            Homepage
+        </a>
+        <a href="page-inspections.html?p=i" class="list-group-item" data-ng-class="{'active': menuActive=='i'}">
+            <i class="fa fa-search"></i>
+            Inspections
+        </a>
+        <a href="page-inspections.html?p=t" class="list-group-item" data-ng-class="{'active': menuActive=='t'}">
+            <i class="fa fa-list-alt"></i>
+            Templates
+        </a>
+    </div>
+</nav>
+<div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
+    <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
+    <h5 class="logo-text">HarrisTeq</h5>-->
+    <div class="p-container">
+        <div class="p-header text-center">
+            <div class="pull-left" ng-show="selectedForm.formName!='Templates'">
+                <a href="#" class="menu-left-arrow" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+            </div>
+            <div class="pull-left">
+                <a href="#" class="menu-button" ng-click="doit();">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+
+            <div class="pull-left" ng-show="selectedForm.formName!='ItemOptions'">
+                <a href="#" class="menu-right-arrow" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <div class="pull-right">
+                <a href="#" class="edit-button" data-ng-click="toggleEditMode()" data-ng-hide="isEditMode">
+                    <i class="fa fa-pencil-square-o"></i>
+                </a>
+                <a href="#" class="ban-button" data-ng-click="toggleEditMode()" data-ng-show="isEditMode">
+                    <i class="fa fa-ban"></i>
+                </a>
+            </div>
+
+            <div class="p-header-badge">
+                <div class="p-header-text">
+                    {{selectedForm.title}}
+                </div>
+                <span class="badge badge-success">{{selectedForm.itemCount}}</span>
+            </div>
+            <span class="clearfix"></span>
+        </div>
+    </div>
+    <div class="p-scroll">
+        <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
+
+
+            <style>
+                .p-inner-container {
+                    padding: 0px 10px 10px 10px;
+                }
+                
+                .p-footer .select-mode {
+                    font-size: 20px;
+                }
+                .p-footer .select-mode a {
+                    color: #fff;
+                }
+                .p-footer .select-mode a:hover,
+                .p-footer .select-mode a:visited,
+                .p-footer .select-mode a:focus { 
+                    text-decoration: none;
+                }
+                .p-footer .center-link {
+                    margin: 15px 0px 0px 0px;
+                    display: inline-block;
+                }
+                .p-footer .left-link {
+                    margin: 15px 0px 0px 15px;
+                }
+                .p-footer .right-link {
+                    margin: 15px 15px 0px 0px;
+                }
+
+            </style>
+            <div class="p-inner-container">
+
+
+            </div>
+
+
+        </form>
+        <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
+            <div class="panel-body">
+                <div class="speed-entry-input-topper main">
+
+                    <br />
+
+                    <!--<ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>-->
+                    <ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field field--optional"></ht-floating-text-field>
+
+                    <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights" ht-resize-width="500"></ht-floating-select-field>
+                    <div ht-resize-height="400" ht-resize-width="300" style="background-color: yellow"></div>
+                    <!-- <my-directive></my-directive> -->
+
+
+                    <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                    <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+
+                    <div class="m-l m-r" style="padding: 10px 0 10px 0;">
+                        <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+                        <span class="pull-right text-muted small">
+                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
+                        </span>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-square-o"></i>
+                        </a>
+                        <div class="pull-right speed-entry-button-group">
+
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+
+                            <a class="link-badge" href="#">
+                                <div>
+                                    <i class="fa fa-arrow-down"></i>
+                                </div>
+                                <span class="badge badge-success">99</span>
+                            </a>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+
+                    <div class="list-group-item">
+                        <input type="text" class="form-control speed-entry-input pull-left" value="Windows"/>
+                        <div class="pull-right speed-entry-button-group">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-check-square"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                            <a class="link-badge" href="#">
+                                <div>
+                                    <i class="fa fa-arrow-down"></i>
+                                </div>
+                                <span class="badge badge-success">3</span>
+                            </a>
+                        </div>
+                        <span class="clearfix"></span>
+
+                        <div class="selection-list-container">
+
+                            <table class="table-responsive selection-list">
+                                <tr>
+                                    <td class="first-cell">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-circle-o"></i>
+                                        </a>
+                                    </td>
+                                    <td class="content-cell">Inspected</td>
+                                    <td class="action-cell">
+                                        <div class="pull-right text-muted small">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </a>
+                                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first-cell">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-circle"></i>
+                                        </a>
+                                    </td>
+                                    <td class="content-cell">Inspected</td>
+                                    <td class="action-cell">
+                                        <div class="pull-right text-muted small">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </a>
+                                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first-cell">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-square-o"></i>
+                                        </a>
+                                    </td>
+                                    <td class="content-cell">Inspected</td>
+                                    <td class="action-cell">
+                                        <div class="pull-right text-muted small">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </a>
+                                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first-cell">
+                                        <a href="#" class="speed-entry-button m-xs">
+                                            <i class="fa fa-check-square"></i>
+                                        </a>
+                                    </td>
+                                    <td class="content-cell">Inspected</td>
+                                    <td class="action-cell">
+                                        <div class="pull-right text-muted small">
+                                            <a href="#" class="speed-entry-button m-xs">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </a>
+                                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <ul class="list-group ddd">
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                Cras justo odio
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                Cras justo odio
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                Cras justo odio
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+        </form>
+        <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
+            <h1>
+                Items
+            </h1>
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                <i class="fa fa-chevron-left"></i>
             </a>
-            <a href="page-inspections.html?p=i" class="list-group-item" data-ng-class="{'active': menuActive=='i'}">
-                <i class="fa fa-search"></i>
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+            <div class="panel-body">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <input type="text" class="form-control speed-entry-input pull-left" value="Doors"/>
+                        <a href="#" class="speed-entry-button m-xs">
+                            <i class="fa fa-square-o"></i>
+                        </a>
+                        <div class="pull-right speed-entry-button-group">
+
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+
+                            <a class="link-badge" href="#">
+                                <div>
+                                    <i class="fa fa-arrow-down"></i>
+                                </div>
+                                <span class="badge badge-success">99</span>
+                            </a>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+
+                    <div class="list-group-item">
+                        <input type="text" class="form-control speed-entry-input pull-left" value="Windows"/>
+                        <div class="pull-right speed-entry-button-group">
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-check-square"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-floppy-o"></i>
+                            </a>
+                            <a href="#" class="speed-entry-button m-xs m-r-none">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                            <a class="link-badge" href="#">
+                                <div>
+                                    <i class="fa fa-arrow-down"></i>
+                                </div>
+                                <span class="badge badge-success">3</span>
+                            </a>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
+            <h1>
+                Item options
+            </h1>
+
+
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                <i class="fa fa-chevron-left"></i>
+            </a>
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </form>
+        <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
+            <h1>
                 Inspections
+            </h1>
+
+
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                <i class="fa fa-chevron-left"></i>
             </a>
-            <a href="page-inspections.html?p=t" class="list-group-item" data-ng-class="{'active': menuActive=='t'}">
-                <i class="fa fa-list-alt"></i>
-                Templates
+            <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                <i class="fa fa-chevron-right"></i>
             </a>
-        </div>
-    </nav>
-    <div class="p-wrapper" data-ng-class="{'shifted': isShifted}">
-        <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
-        <h5 class="logo-text">HarrisTeq</h5>-->
-        <div class="p-container">
-            <div class="p-header text-center">
-                <div class="pull-left">
-                    <a href="#" class="menu-button" ng-click="doit();">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <div class="pull-right">
-                    <a href="#" class="edit-button">
-                        <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                </div>
+        </form>
+    </div>
 
-                <div class="p-header-badge">
-                    <div class="p-header-text">
-                        {{selectedForm.title}}
-                    </div>
-                    <span class="badge badge-success">{{selectedForm.itemCount}}</span>
-                </div>
-                <span class="clearfix"></span>
-            </div>
-        </div>
-        <div class="p-scroll">
-            <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
-                <h1>
-                    Templates
-                </h1>
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-
-                <br />
-
-                <!--<ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>-->
-                <ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field field--optional"></ht-floating-text-field>
-
-                <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights" ht-resize-width="500"></ht-floating-select-field>
-                <div ht-resize-height="400" ht-resize-width="300" style="background-color:yellow"></div>
-                <!-- <my-directive></my-directive> -->
-
-            </form>
-            <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
-                <div class="panel-body">
-                    <div class="speed-entry-input-topper">
-
-                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-
-                        <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <span class="pull-right text-muted small">
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
-
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
-
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
-
-
-                            </span>
-                            <span class="clearfix"></span>
-                        </div>
-                    </div>
-
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-square-o"></i>
-                            </a>
-                            <div class="pull-right speed-entry-button-group">
-
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">99</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <div class="pull-right speed-entry-button-group">
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-check-square"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">3</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-
-                            <div class="selection-list-container">
-
-                                <table class="table-responsive selection-list">
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-circle-o"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-square-o"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-check-square"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <ul class="list-group ddd">
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                </div>
-            </form>
-            <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
-                <h1>
-                    Items
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-square-o"></i>
-                            </a>
-                            <div class="pull-right speed-entry-button-group">
-
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">99</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <div class="pull-right speed-entry-button-group">
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-check-square"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">3</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
-                <h1>
-                    Item options
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-            </form>
-            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
-                <h1>
-                    Inspections
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-            </form>
-        </div>
-    <style>
-        .slide {
-            bottom: 0;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-
-        .slide.right {
-            -moz-transition: all 1000ms;
-            -webkit-transition: all 1000ms;
-            transform: translate3d(5000px, 0, 0);
-            transition: all 1000ms;
-            visibility: hidden;
-        }
-
-        .slide.left {
-            -moz-transition: all 1000ms;
-            -webkit-transition: all 1000ms;
-            transform: translate3d(-5000px, 0, 0);
-            transition: all 1000ms;
-            visibility: hidden;
-        }
-
-        .slide.middle {
-            -moz-transition: all 1000ms;
-            -webkit-transition: all 1000ms;
-            transform: translate3d(0px, 0, 0);
-            transition: all 1000ms;
-            visibility: visible;
-        }
-
-
-        .p-footer {
-            background-color: #556270;
-            bottom: 0px;
-            height: 50px;
-            left: 0px;
-            position: absolute;
-            right: 0px;
-        }
-
-        .p-scroll {
-            bottom: 50px;
-            left: 0px;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: absolute;
-            right: 0px;
-            top: 50px;
-        }
-
-        .bottom-btn {
-            bottom: 1px;
-            color: #fff;
-            display: inline-block;
-            font-size: 33px;
-            position: absolute;
-            right: 10px;
-        }
-
-
-        .p-footer .speed-entry-text {
-            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            bottom: 0px;
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            color: #555;
-            display: inline-block;
-            font-size: 12px;
-            font-size: 14px;
-            height: 30px;
-            left: 10px;
-            line-height: 1.42857143;
-            margin-bottom: 10px;
-            padding: 6px 12px;
-            position: absolute;
-            right: 50px;
-            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-            width: 84%;
-        }
-
-        .p-mask { z-index: -100; }
-
-        .shifted .p-mask {
-            background-color: #333;
-            bottom: 0px;
-            left: 0px;
-            opacity: .7;
-            position: absolute;
-            right: 0px;
-            top: 0px;
-            z-index: 10;
-        }
-    </style>
 
     <div class="p-footer main">
-        <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="60"
-                                size="{{ff2.size}}" data-label="{{ff2.label}}" enter-submits="true" css-class="field field--optional"></ht-floating-text-field>
+        <div class="select-mode text-center" ng-show="isEditMode">
+            <div class="center-link">
+                <a href="#">
+                    <i class="fa fa-circle-o"></i>
+                    Unselect All
+                </a>
+            </div>
+            <div class="pull-left left-link">
+                <a href="#">
+                    <i class="fa fa-check-circle"></i>
+                    Select All
+                </a>
+            </div>
+            <div class="pull-right right-link">
+                <a href="#" class="">
+                    <i class="fa fa-trash-o"></i>
+                    Delete
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="add-mode" ng-hide="isEditMode">
+            <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="50"
+                                    size="{{ff2.size}}" data-label="{{ff2.label}}" enter-submits="true" css-class="field field--optional"></ht-floating-text-field>
 
-        <a href="#" class="bottom-btn">
-            <i class="fa fa-plus-square-o"></i>
-        </a>
+            <a href="#" class="bottom-btn">
+                <i class="fa fa-plus-square-o"></i>
+            </a>
+        </div>
     </div>
     <div class="p-mask"></div>
 </div>
 
 
-    <script>
+
+
+<script>
         var app = angular.module('app', []);
 
         angular
@@ -718,43 +466,18 @@
                     var screenHeight2 = $window.innerHeight * 1;
                     var offsetHeight2 = attrs.htResizeHeight * 1;
                     element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
                 });
 
                 angular.element($window).bind('load', function () {
                     var screenHeight1 = $window.innerHeight * 1;
                     var offsetHeight1 = attrs.htResizeHeight * 1;
                     element[0].style.height = screenHeight1 - offsetHeight1 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
                 });
             }
         }]);
-
-        /*   app.directive('myDirective', ['$window', function ($window) {
-
-         return {
-            link: link,
-            restrict: 'E',
-            template: '<div>window size: {{width}}px</div>'
-         };
-
-         function link(scope, element, attrs){
-
-           scope.width = $window.innerWidth;
-
-           angular.element($window).bind('resize', function(){
-
-             scope.width = $window.innerWidth;
-
-             // manuall $digest required as resize event
-             // is outside of angular
-             scope.$digest();
-           });
-
-         }
-
-     }]);
-           */
-
-
+    
         //<ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
         app.directive('htFloatingTextField', [
         function () {
@@ -861,6 +584,10 @@
             $scope.goto = function (formName) {
                 $scope.selectedFormName = formName;
                 $scope.selectedFormItemCount = "88";
+            };
+
+            $scope.toggleEditMode = function() {
+                $scope.isEditMode = !$scope.isEditMode;
             };
 
             $scope.ff = {
@@ -1147,7 +874,7 @@
                 } else {
                     $scope.menuActive = 'h';
                 }
-
+                $scope.isEditMode = false;
             };
             init();
 
@@ -1155,25 +882,354 @@
     </script>
 
 
-    <style>
-        .nothing-selected .field__input-wrapper--select select {
-            color: #999;
+
+
+
+
+<style>
+        .p-header {
+            text-align: center;
+            padding-bottom: 8px;
         }
+
+        .move { padding-right: 200px; }
+
+        .p-header-badge-container { }
+
+        .p-header-badge { padding-top: 5px; }
+
+        .p-header-badge .badge {
+            font-size: 10px;
+            margin: -21px 0px 0px -3px;
+        }
+        
+        .p-header-text {
+            display: inline-block;
+            font-size: 27px;
+        }
+        .p-container { margin: 10px; }
+
+        .speed-entry-button {
+            font-size: 30px;
+            margin-bottom: -10px;
+        }
+
+        .speed-entry-input {
+            font-size: 12px;
+            width: 90%;
+        }
+
+        .speed-entry-button-group {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .speed-entry-input-topper { background-color: #ddd; }
+
+        .action-cell {
+            padding-right: 10px;
+            width: 150px;
+        }
+
+        .first-cell {
+            padding-left: 10px;
+            width: 50px;
+        }
+
+        .selection-list { width: 100%; }
+
+        .selection-list-container {
+            padding-left: 25px;
+            width: 100%;
+        }
+
+        body { margin: 0; }
+
+        body.shifted { overflow: hidden; }
+
+        .menu-slider {
+            -moz-transition: all 300ms;
+            -webkit-transition: all 300ms;
+            bottom: 0;
+            display: block;
+            float: left;
+            height: 100%;
+            left: -100px;
+            max-width: 284px;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            transition: all 300ms;
+            width: 100%;
+        }
+
+        .menu-slider > ul { }
+
+        .menu-slider.shifted { left: 0px; }
+
+        .p-wrapper {
+            -moz-box-sizing: border-box;
+            -moz-transition: all 300ms;
+            -webkit-box-sizing: border-box;
+            -webkit-transition: all 300ms;
+            background: #fff;
+            border-radius: 0;
+            box-sizing: border-box;
+            height: 100%;
+            left: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            transition: all 300ms;
+            width: 100%;
+        }
+
+        .p-wrapper.shifted { left: 273px; }
+
+        .link-badge i { font-size: 30px; }
+
+        .link-badge .badge {
+            display: inline-block;
+            margin: -35px 0px 0px -7px;
+        }
+
+        .link-badge div { display: inline-block; }
+
+        .logo-main {
+            display: inline-block;
+            opacity: .5;
+            padding: 3px;
+            width: 27px;
+        }
+
+        .logo-text {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .shifted .logo-main,
+        .shifted .logo-text { visibility: hidden; }
+
+        .logo {
+            display: inline-block;
+            opacity: .5;
+            padding: 3px;
+            width: 27px;
+        }
+
+        .menu-slider h5 {
+            color: #000;
+            display: inline-block;
+            margin-left: 5px;
+            opacity: .3;
+        }
+
+        .menu-slider .header {
+            color: #ffffff;
+            font-size: 18px;
+            padding: 13px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .menu-slider .header-container {
+            background: #2f4050;
+            color: #353d46;
+        }
+
+        .menu-slider {
+            background-color: #2f4050;
+            color: #efefef;
+        }
+
+        .p-container {
+            background-color: #556270;
+            color: #fff;
+            margin: 0;
+            padding-top: 5px;
+        }
+
+        .p-container a { color: #fff; }
+
+        .p-container .menu-button {
+            display: inline-block;
+            font-size: 24px;
+            margin: 8px 10px 0px 15px;
+        }
+
+        .p-container .menu-left-arrow {
+            display: inline-block;
+            font-size: 20px;
+            margin: 11px 0px 0px 5px;
+        }
+
+        .p-container .menu-right-arrow {
+            display: inline-block;
+            font-size: 20px;
+            margin: 11px 0px 0px 5px;
+        }
+        
+        .p-container .edit-button {
+            display: inline-block;
+            font-size: 28px;
+            margin: 5px 15px 0px 0px;
+        }
+        
+        .p-container .ban-button {
+            display: inline-block;
+            font-size: 28px;
+            margin: 5px 19px 0px 0px;
+            color: #990000;
+        }
+        
+        .menu-slider.shifted .list-group-item,
+        .menu-slider .list-group-item {
+            background-color: #2f4050;
+            border: 1px solid #5a5a5a;
+            border-left: none;
+            color: #efefef;
+        }
+
+        .menu-slider.shifted .list-group-item.active,
+        .menu-slider .list-group-item.active {
+            background-color: #fff;
+            background-image: none;
+            color: #000;
+            text-shadow: none;
+        }
+
+        .menu-slider.shifted .list-group-item i,
+        .menu-slider .list-group-item i {
+            background-color: #5a5a5a;
+            border-radius: 15px;
+            color: #efefef;
+            display: inline-block;
+            font-size: 17px;
+            margin-right: 5px;
+            padding: 7px;
+        }
+
+        .menu-slider .list-group-item:first-child { border-radius: 0px; }
+
+        .list-group-item:last-child { border-radius: 0px; }
+
+        .slide {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .slide.right {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(5000px, 0, 0);
+            transition: all 1000ms;
+            visibility: hidden;
+        }
+
+        .slide.left {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(-5000px, 0, 0);
+            transition: all 1000ms;
+            visibility: hidden;
+        }
+
+        .slide.middle {
+            -moz-transition: all 1000ms;
+            -webkit-transition: all 1000ms;
+            transform: translate3d(0px, 0, 0);
+            transition: all 1000ms;
+            visibility: visible;
+        }
+
+
+        .p-footer {
+            background-color: #556270;
+            bottom: 0px;
+            height: 55px;
+            left: 0px;
+            position: absolute;
+            right: 0px;
+        }
+
+        .p-scroll {
+            bottom: 50px;
+            left: 0px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: absolute;
+            right: 0px;
+            top: 58px;
+        }
+
+        .bottom-btn {
+            bottom: 1px;
+            color: #fff;
+            display: inline-block;
+            font-size: 33px;
+            position: absolute;
+            right: 10px;
+        }
+
+
+        .p-footer .speed-entry-text {
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            bottom: 0px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            color: #555;
+            display: inline-block;
+            font-size: 12px;
+            font-size: 14px;
+            height: 30px;
+            left: 10px;
+            line-height: 1.42857143;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            position: absolute;
+            right: 50px;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            width: 84%;
+        }
+
+        .p-mask { z-index: -100; }
+
+        .shifted .p-mask {
+            background-color: #333;
+            bottom: 0px;
+            left: 0px;
+            opacity: .7;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            z-index: 10;
+        }
+
+        .nothing-selected .field__input-wrapper--select select { color: #999; }
 
         button,
         input,
         optgroup,
         select,
         textarea {
-            color: inherit;
-            font: inherit;
-            margin: 0;
-            padding: 0;
             -webkit-appearance: none;
             -webkit-font-smoothing: inherit;
-            border: none;
             background: transparent;
+            border: none;
+            color: inherit;
+            font: inherit;
             line-height: normal;
+            margin: 0;
+            padding: 0;
         }
 
 
@@ -1184,8 +1240,8 @@
         }
 
         body {
-            color: #737373;
             background: white;
+            color: #737373;
         }
 
         .wrap {
@@ -1194,43 +1250,39 @@
             zoom: 1;
         }
 
-            .wrap:after,
-            .wrap:before {
-                content: "";
-                display: table;
-            }
+        .wrap:after,
+        .wrap:before {
+            content: "";
+            display: table;
+        }
 
-            .wrap:after {
-                clear: both;
-            }
+        .wrap:after { clear: both; }
 
         @media (max-width: 999px) {
             .wrap {
-                width: 100%;
                 box-sizing: border-box;
                 padding: 0 1em;
+                width: 100%;
             }
         }
 
         @media (min-width: 1000px) {
             .wrap {
+                max-width: 78.57143em;
                 padding: 0 5%;
                 width: 90%;
-                max-width: 78.57143em;
             }
         }
 
 
 
         .section__header {
-            position: relative;
             margin-bottom: 1em;
+            position: relative;
         }
 
         @media (min-width: 750px) {
-            .section__header {
-                margin-bottom: 1.5em;
-            }
+            .section__header { margin-bottom: 1.5em; }
         }
 
 
@@ -1240,65 +1292,47 @@
             zoom: 1;
         }
 
-            .fieldset:after,
-            .fieldset:before {
-                content: "";
-                display: table;
-            }
+        .fieldset:after,
+        .fieldset:before {
+            content: "";
+            display: table;
+        }
 
-            .fieldset:after {
-                clear: both;
-            }
+        .fieldset:after { clear: both; }
 
 
 
         .field {
-            width: 100%;
+            box-sizing: border-box;
             float: left;
             padding: 0.45em;
-            box-sizing: border-box;
+            width: 100%;
         }
 
         @media (min-width: 750px) {
-            .floating-labels.boxsizing .field--two-thirds {
-                width: 66.66667%;
-            }
+            .floating-labels.boxsizing .field--two-thirds { width: 66.66667%; }
 
-            .floating-labels.boxsizing .field--half {
-                width: 50%;
-            }
+            .floating-labels.boxsizing .field--half { width: 50%; }
 
-            .floating-labels.boxsizing .field--three-eights {
-                width: 37.5%;
-            }
+            .floating-labels.boxsizing .field--three-eights { width: 37.5%; }
 
-            .floating-labels.boxsizing .field--third {
-                width: 33.33333%;
-            }
+            .floating-labels.boxsizing .field--third { width: 33.33333%; }
 
-            .floating-labels.boxsizing .field--quarter {
-                width: 25%;
-            }
+            .floating-labels.boxsizing .field--quarter { width: 25%; }
         }
 
-        .field__message {
-            font-size: 0.85714em;
-        }
+        .field__message { font-size: 0.85714em; }
 
         .field__message--error {
+            color: #ff6d6d;
             display: none;
             line-height: 1.3em;
             margin: 0.75em 0 0.25em;
-            color: #ff6d6d;
         }
 
-        .field--error .field__message--error {
-            display: block;
-        }
+        .field--error .field__message--error { display: block; }
 
-        .field__message--warning {
-            margin: 1em 0 0.5em;
-        }
+        .field__message--warning { margin: 1em 0 0.5em; }
 
         .field__message__icon {
             margin-right: 0.25em;
@@ -1306,59 +1340,51 @@
         }
 
         .field__label {
+            display: block;
             font-weight: 500;
             margin: 0.5em 0;
-            display: block;
         }
 
-        .main .field__label {
-            color: #4d4d4d;
-        }
+        .main .field__label { color: #4d4d4d; }
 
-        .floating-labels .main .field__label {
-            color: #999999;
-        }
+        .floating-labels .main .field__label { color: #999999; }
 
 
-        .main .field--active .field__label {
-            color: #737373;
-        }
+        .main .field--active .field__label { color: #737373; }
 
-        .sidebar .field--active .field__label {
-            color: #737373;
-        }
+        .sidebar .field--active .field__label { color: #737373; }
 
         .floating-labels .field__label {
+            -moz-user-select: none;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
+            -ms-user-select: none;
+            -webkit-transform: translateY(3px);
+            -webkit-user-select: none;
+            box-sizing: border-box;
+            filter: alpha(opacity=0);
             font-size: 0.85714em;
             font-weight: normal;
-            position: absolute;
-            top: 0;
-            width: 100%;
             margin-top: 0.3em;
-            padding: 0 0.93333em;
-            z-index: 1;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-transform: translateY(3px);
-            transform: translateY(3px);
-            pointer-events: none;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            box-sizing: border-box;
             opacity: 0;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
-            filter: alpha(opacity=0);
+            overflow: hidden;
+            padding: 0 0.93333em;
+            pointer-events: none;
+            position: absolute;
+            text-overflow: ellipsis;
+            top: 0;
+            transform: translateY(3px);
+            user-select: none;
+            white-space: nowrap;
+            width: 100%;
+            z-index: 1;
         }
 
         .floating-labels .field--show-floating-label .field__label {
-            -webkit-transform: none;
-            transform: none;
-            opacity: 1;
             -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 100 ")";
+            -webkit-transform: none;
             filter: alpha(opacity=100);
+            opacity: 1;
+            transform: none;
         }
 
         .animate-floating-labels .field__label {
@@ -1366,16 +1392,14 @@
             transition: all 0.2s ease-out;
         }
 
-        .field__input-wrapper {
-            position: relative;
-        }
+        .field__input-wrapper { position: relative; }
 
         .field__input {
             border-radius: 4px;
-            display: block;
             box-sizing: border-box;
-            width: 100%;
+            display: block;
             padding: 0.94em 0.8em;
+            width: 100%;
         }
 
         .main .field__input {
@@ -1384,29 +1408,17 @@
         }
 
         .no-js .main .field__input,
-        .no-boxshadow .main .field__input {
-            border: 1px solid #d9d9d9;
-        }
+        .no-boxshadow .main .field__input { border: 1px solid #d9d9d9; }
 
-        .boxshadow .main .field__input {
-            box-shadow: 0 0 0 1px #d9d9d9;
-        }
+        .boxshadow .main .field__input { box-shadow: 0 0 0 1px #d9d9d9; }
 
-        .main .field__input::-webkit-input-placeholder {
-            color: #999999;
-        }
+        .main .field__input::-webkit-input-placeholder { color: #999999; }
 
-        .main .field__input:-moz-placeholder {
-            color: #999999;
-        }
+        .main .field__input:-moz-placeholder { color: #999999; }
 
-        .main .field__input::-moz-placeholder {
-            color: #999999;
-        }
+        .main .field__input::-moz-placeholder { color: #999999; }
 
-        .main .field__input:-ms-input-placeholder {
-            color: #999999;
-        }
+        .main .field__input:-ms-input-placeholder { color: #999999; }
 
         .animate-floating-labels .field__input {
             -webkit-transition: all 0.2s ease-out;
@@ -1414,71 +1426,41 @@
         }
 
         .floating-labels .field--show-floating-label .field__input {
-            padding-top: 1.5em;
             padding-bottom: 0.38em;
+            padding-top: 1.5em;
         }
 
-        .floating-labels .field--show-floating-label .field__input::-webkit-input-placeholder {
-            color: transparent;
-        }
+        .floating-labels .field--show-floating-label .field__input::-webkit-input-placeholder { color: transparent; }
 
-        .floating-labels .field--show-floating-label .field__input:-moz-placeholder {
-            color: transparent;
-        }
+        .floating-labels .field--show-floating-label .field__input:-moz-placeholder { color: transparent; }
 
-        .floating-labels .field--show-floating-label .field__input::-moz-placeholder {
-            color: transparent;
-        }
+        .floating-labels .field--show-floating-label .field__input::-moz-placeholder { color: transparent; }
 
-        .floating-labels .field--show-floating-label .field__input:-ms-input-placeholder {
-            color: transparent;
-        }
+        .floating-labels .field--show-floating-label .field__input:-ms-input-placeholder { color: transparent; }
 
-        .field__input:focus {
-            outline: none;
-        }
+        .field__input:focus { outline: none; }
 
         .no-js .field__input:focus,
-        .no-boxshadow .field__input:focus {
-            border: 2px solid #556270;
-        }
+        .no-boxshadow .field__input:focus { border: 2px solid #556270; }
 
-        .boxshadow .field__input:focus {
-            box-shadow: 0 0 0 2px #556270;
-        }
+        .boxshadow .field__input:focus { box-shadow: 0 0 0 2px #556270; }
 
         .no-js .field--error .field__input,
-        .no-boxshadow .field--error .field__input {
-            border: 2px solid #ff6d6d;
-        }
+        .no-boxshadow .field--error .field__input { border: 2px solid #ff6d6d; }
 
-        .boxshadow .field--error .field__input {
-            box-shadow: 0 0 0 2px #ff6d6d;
-        }
+        .boxshadow .field--error .field__input { box-shadow: 0 0 0 2px #ff6d6d; }
 
-        .field__input--zip {
-            text-transform: uppercase;
-        }
+        .field__input--zip { text-transform: uppercase; }
 
-            .field__input--zip::-webkit-input-placeholder {
-                text-transform: none;
-            }
+        .field__input--zip::-webkit-input-placeholder { text-transform: none; }
 
-            .field__input--zip:-moz-placeholder {
-                text-transform: none;
-            }
+        .field__input--zip:-moz-placeholder { text-transform: none; }
 
-            .field__input--zip::-moz-placeholder {
-                text-transform: none;
-            }
+        .field__input--zip::-moz-placeholder { text-transform: none; }
 
-            .field__input--zip:-ms-input-placeholder {
-                text-transform: none;
-            }
+        .field__input--zip:-ms-input-placeholder { text-transform: none; }
 
-        .field__input--select::-ms-expand {
-            display: none;
-        }
+        .field__input--select::-ms-expand { display: none; }
 
         .no-js .field__input--select,
         .no-pointerevents .field__input--select {
@@ -1495,15 +1477,15 @@
         }
 
         .pointerevents .field__input-wrapper--select:before {
+            background-position: center center;
+            background-repeat: no-repeat;
+            bottom: 0;
             content: '';
+            pointer-events: none;
             position: absolute;
             right: 0;
             top: 0;
-            bottom: 0;
             width: 50px;
-            background-position: center center;
-            background-repeat: no-repeat;
-            pointer-events: none;
         }
 
         .pointerevents .main .field__input-wrapper--select:before {
@@ -1511,24 +1493,18 @@
             background-image: url('https://homeinspection.harristeq.com/dropdown-arrow-down-dark.svg'), none;
         }
 
-
-        /*!= begin(no-rtl) */
-
         .field__icon {
-            position: absolute;
-            top: 50%;
-            right: 0.2em;
-            width: 40px;
             height: 40px;
             margin-top: -20px;
+            position: absolute;
+            right: 0.2em;
+            top: 50%;
+            width: 40px;
         }
 
-            .field__icon:focus {
-                outline: none;
-            }
+        .field__icon:focus { outline: none; }
 
 
-        /*!= end(no-rtl) */
     </style>
 </body>
 </html>
