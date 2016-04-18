@@ -82,9 +82,112 @@
         <div class="p-scroll">
             <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
 
+                <style>
+                    .select-list {
+
+                    }
+                    .select-list-item {
+                        width: 100%;
+                        margin: 15px 0px 15px 0px;
+                    }
+                    .select-list-item-check {
+                        float: left;
+                        border-right: 1px solid #999;
+                        width: 20px;
+                        text-align: center;
+                        margin-top: 15px;
+                    }
+                    .select-list-item-main {
+                        float: left;
+                        padding-left: 5px;
+                        padding-right: 15px;
+                    }
+                    .select-list-item-main .first-line {
+                        
+                    }
+                    .select-list-item-main .first-line .item-title{
+                        font-size: 20px;
+                        float: left;
+                    }
+                    .select-list-item-main .first-line .item-date{
+                        font-size: 15px;
+                        float: right;
+                    }
+                    .select-list-item-main .second-line {
+                        
+                    }
+                    .select-list-item-main .second-line span {
+                        padding-left: 5px;
+                        font-weight: bold;
+                    }
+                    .select-list-item-main .second-line .first-item{
+                        float: left;
+                    }
+                    .select-list-item-main .second-line .second-item{
+                        float: left;
+                        padding-left: 15px;
+                    }
+                </style>
 
                 <div class="p-inner-container">
+                    <div class="select-list-item" ht-resize-width="0">
+                        <div class="select-list-item-check">
+                            <a href="#">
+                                <i class="fa fa-check-circle"></i>
+                            </a>
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="20">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    My first Template
+                                </div>
+                                <div class="item-date">
+                                    4/14/2016 7:27pm
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    # Inspections: <span>45</span>
+                                </div>
+                                <div class="second-item">
+                                    # Categories: <span>39</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
 
+                    </div>
+                    <div class="select-list-item" ht-resize-width="0">
+                        <div class="select-list-item-check">
+                            <a href="#">
+                                <i class="fa fa-check-circle"></i>
+                            </a>
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="20">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    My first Template
+                                </div>
+                                <div class="item-date">
+                                    4/14/2016 7:27pm
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    # Inspections: <span>45</span>
+                                </div>
+                                <div class="second-item">
+                                    # Categories: <span>39</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
 
                 </div>
 
@@ -381,7 +484,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="add-mode">
-                    <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="50"
+                    <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="45"
                                             size="{{ff2.size}}" data-label="{{ff2.label}}" enter-submits="true" css-class="field field--optional pull-left"></ht-floating-text-field>
 
                     <a href="#" class="bottom-btn">
