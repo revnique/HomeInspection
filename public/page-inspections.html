@@ -149,6 +149,37 @@
 </style>
 
                 <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                    <div class="select-list-item" ng-repeat="item in selectList">
+                        <div class="select-list-item-check">
+                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="60">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    {{item.title}}
+                                </div>
+                                <div class="item-date">
+                                    {{item.date}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                                </div>
+                                <div class="second-item">
+                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                                </div>
+                                <div class="third-item">
+                                    <span>{{item.time}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
                     <div class="select-list-item">
                         <div class="select-list-item-check">
                             <ht-checkbox use-circles="{{obj.useCircles}}" hide-label="{{obj.hideLabel}}" data-ng-disabled="obj.isDisabled" data-ng-model="obj.isChecked" data-checkbox-id="{{obj.id}}" data-label="{{ obj.label }}"/>
@@ -791,6 +822,94 @@
                     }
                 ]
             };
+
+            $scope.selectList = [
+                {
+                    "title": "DTown's Template",
+                    "date": "4/14/2014",
+                    "time": "4:14 pm",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk1",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": true
+                    }
+                },
+                {
+                    "title": "Griffen's Template",
+                    "date": "5/5/2008",
+                    "time": "5:05 pm",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk2",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": true
+                    }
+                },
+                {
+                    "title": "Template for the fun of it",
+                    "date": "5/15/2011",
+                    "time": "5:35 am",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "2133",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "545",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk3",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": true
+                    }
+                }
+            ];
+
+//<div class="select-list-item" ng-repeat="item in selectList">
+//    <div class="select-list-item-check">
+//        <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
+//    </div>
+//    <div class="select-list-item-main" ht-resize-width="60">
+//        <div class="first-line">
+//            <div class="item-title">
+//                {{item.title}}
+//            </div>
+//            <div class="item-date">
+//                {{item.date}}
+//            </div>
+//            <div class="clearfix"></div>
+//        </div>
+//        <div class="second-line">
+//            <div class="first-item">
+//                {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+//            </div>
+//            <div class="second-item">
+//                {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+//            </div>
+//            <div class="third-item">
+//                <span>{{item.time}}</span>
+//            </div>
+//            <div class="clearfix"></div>
+//        </div>
+//    </div>
+//    <div class="clearfix"></div>
+//</div>
+
+
+
+
             //formTempates
             //formCategories
             //formItems
