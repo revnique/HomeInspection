@@ -1204,12 +1204,14 @@
             });
         };
         $scope.deleteItems = function () {
-            angular.forEach($scope.selectList, function (item, key, obj) {
-                if (item.chk.isChecked === true) {
-                    obj.splice(key, 1);
+            var list = $scope.selectList;
+            var newList = [];
+            angular.forEach(list, function (item, key, obj) {
+                if (item.chk.isChecked === false) {
+                    newList.push(item);
                 }
             });
-
+            $scope.selectList = newList;
         };
 
         $scope.menuActive = 'i';
