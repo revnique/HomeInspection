@@ -55,7 +55,7 @@
                     </a>
                 </div>
 
-                <div class="pull-left" ng-show="selectedForm.formName!='ItemOptions'">
+                <div class="pull-left" ng-show="selectedForm.formName!='ItemOptions' && selectedForm.formName!='Templates'">
                     <a href="#" class="menu-right-arrow" data-ng-click="next(selectedForm)">
                         <i class="fa fa-chevron-right"></i>
                     </a>
@@ -134,7 +134,7 @@
 
                     .select-list-item-main .second-line .third-item { float: right; }
 
-                    .p-inner-container { padding: 0px 25px 10px 10px; }
+                    .p-inner-container { padding: 0px 10px 10px 5px; }
 
                     .select-mode .select-list-item-check {
                         transition-duration: .5s;
@@ -165,7 +165,7 @@
                         <div class="select-list-item-check">
                             <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
                         </div>
-                        <div class="select-list-item-main" ht-resize-width="80" ng-click="next(selectedForm)">
+                        <div class="select-list-item-main" ht-resize-width="60">
                             <div class="first-line">
                                 <div class="item-title">
                                     {{item.title}}
