@@ -109,7 +109,7 @@
 
                     .select-list-item-main .first-line .item-title {
                         float: left;
-                        font-size: 17px;
+                        font-size: 15px;
                     }
 
                     .select-list-item-main .first-line .item-date {
@@ -143,6 +143,20 @@
                         visibility: visible;
                         width: 25px;
                     }
+                    
+                    .select-list-item .right-arrow {
+                        float: right;
+                        margin-top: 4px;
+                        visibility: visible;
+                        width: 19px;
+                    }
+                    .select-mode .select-list-item .right-arrow {
+                        visibility: hidden;
+                        width: 0px;
+                    }
+                    .select-list-item .right-arrow img{
+                        width: 19px;
+                    }
                 </style>
 
                 <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
@@ -151,7 +165,7 @@
                         <div class="select-list-item-check">
                             <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
                         </div>
-                        <div class="select-list-item-main" ht-resize-width="60">
+                        <div class="select-list-item-main" ht-resize-width="80" ng-click="next(selectedForm)">
                             <div class="first-line">
                                 <div class="item-title">
                                     {{item.title}}
@@ -173,6 +187,11 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#" ng-click="next(selectedForm)">
+                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
+                            </a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
