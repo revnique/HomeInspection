@@ -201,6 +201,132 @@
 
             </form>
             <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
+                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                    <div class="select-list-item" ng-repeat="item in selectList">
+                        <div class="select-list-item-check">
+                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="65">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    {{item.title}}
+                                </div>
+                                <div class="item-date">
+                                    {{item.date}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                                </div>
+                                <div class="second-item">
+                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                                </div>
+                                <div class="third-item">
+                                    <span>{{item.time}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#" ng-click="next(selectedForm)">
+                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </form>
+            <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
+                <h1>
+                    Items
+                </h1>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
+                            <a href="#" class="speed-entry-button m-xs">
+                                <i class="fa fa-square-o"></i>
+                            </a>
+                            <div class="pull-right speed-entry-button-group">
+
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">99</span>
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                        </div>
+
+                        <div class="list-group-item">
+                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
+                            <div class="pull-right speed-entry-button-group">
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-check-square"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs">
+                                    <i class="fa fa-floppy-o"></i>
+                                </a>
+                                <a href="#" class="speed-entry-button m-xs m-r-none">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="link-badge" href="#">
+                                    <div>
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <span class="badge badge-success">3</span>
+                                </a>
+                            </div>
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
+                <h1>
+                    Item options
+                </h1>
+
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </form>
+            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
+                <h1>
+                    Inspections
+                </h1>
+
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+
+
                 <div class="panel-body">
                     <div class="speed-entry-input-topper main">
 
@@ -377,92 +503,6 @@
 
                     <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                 </div>
-            </form>
-            <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
-                <h1>
-                    Items
-                </h1>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-square-o"></i>
-                            </a>
-                            <div class="pull-right speed-entry-button-group">
-
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">99</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <div class="pull-right speed-entry-button-group">
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-check-square"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">3</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
-                <h1>
-                    Item options
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-            </form>
-            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
-                <h1>
-                    Inspections
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
             </form>
         </div>
 
@@ -962,7 +1002,60 @@
                 "cssClass": "middle",
                 "itemCount": 27,
                 "nextForm": 2,
-                "prevForm": -1
+                "prevForm": -1,
+                "list": [
+                    {
+                        "title": "DTown's Template",
+                        "date": "4/14/2014",
+                        "time": "4:14 pm",
+                        "firstDetailName": "INSPs",
+                        "firstDetailCount": "33",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "55",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chk1",
+                            "label": "Template",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    },
+                    {
+                        "title": "Griffen's Template",
+                        "date": "5/5/2008",
+                        "time": "5:05 pm",
+                        "firstDetailName": "INSPs",
+                        "firstDetailCount": "33",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "55",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chk2",
+                            "label": "Template",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    },
+                    {
+                        "title": "Template for the fun of it",
+                        "date": "5/15/2011",
+                        "time": "5:35 am",
+                        "firstDetailName": "INSPs",
+                        "firstDetailCount": "2133",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "545",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chk3",
+                            "label": "Template",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    }
+                ]
             },
             {
                 "id": 2,
@@ -971,7 +1064,57 @@
                 "cssClass": "right",
                 "itemCount": 11,
                 "nextForm": 3,
-                "prevForm": 1
+                "prevForm": 1,
+                "list": [
+                    {
+                        "title": "DTown's category",
+                        "date": "5/14/2014",
+                        "time": "5:14 pm",
+                        "firstDetailName": "Items",
+                        "firstDetailCount": "11",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "21",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chkCategories1",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    },
+                    {
+                        "title": "Category Griffen",
+                        "date": "6/5/2008",
+                        "time": "6:05 pm",
+                        "firstDetailName": "Items",
+                        "firstDetailCount": "23",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "32",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chkCategories2",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    },
+                    {
+                        "title": "category category for the fun",
+                        "date": "7/15/2011",
+                        "time": "7:35 am",
+                        "firstDetailName": "Items",
+                        "firstDetailCount": "2133",
+                        "secondDetailName": "CATs",
+                        "secondDetailCount": "545",
+                        "chk": {
+                            "isDisabled": false,
+                            "id": "chkCategories3",
+                            "hideLabel": true,
+                            "useCircles": true,
+                            "isChecked": false
+                        }
+                    }
+                ]
             },
             {
                 "id": 3,
@@ -1017,6 +1160,9 @@
                 $scope.selectedForm = nextForm;
                 $scope.ff2.floatingFieldId = nextForm.formName;
                 $scope.ff2.label = nextForm.title;
+                if (frm.id === 1 || frm.id === 2) {
+                    $scope.selectList = nextForm.list;
+                }
             }
         };
         $scope.prev = function (frm) {
@@ -1030,6 +1176,11 @@
                 console.log(frm);
                 prevForm.cssClass = "middle";
                 $scope.selectedForm = prevForm;
+                $scope.ff2.floatingFieldId = prevForm.formName;
+                $scope.ff2.label = prevForm.title;
+                if (frm.id === 1 || frm.id === 2) {
+                    $scope.selectList = prevForm.list;
+                }
             }
         };
         $scope.getStyle = function (frm) {
