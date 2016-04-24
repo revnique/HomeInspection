@@ -1186,157 +1186,6 @@
         $scope.getStyle = function (frm) {
             return frm.cssClass;
         };
-        $scope.inspectionTemplate = {
-            "title": "HarrisTeq Demo Template TWO",
-            "categories": [
-                {
-                    "categoryName": "Demo Exterior TWO",
-                    "categoryItems": [
-                        {
-                            "categoryItemName": "Siding",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Windows",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Doors",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Steps",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        }
-                    ]
-                }, {
-                    "categoryName": "Heating/Cooling",
-                    "categoryItems": [
-                        {
-                            "categoryItemName": "Heating Equipment",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Cooling Equipment",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        },
-                        {
-                            "categoryItemName": "Normal Operating Controls",
-                            "categoryItemOptions": [
-                                {
-                                    "categoryItemOptionName": "Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Not Inspected",
-                                    "isSelected": false
-                                },
-                                {
-                                    "categoryItemOptionName": "Replace\/Repair",
-                                    "isSelected": false
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
-
-
-        $scope.createItemOption = function (name, isSelected) {
-            var rtn = {};
-            rtn["categoryItemOptionName"] = name;
-            rtn["isSelected"] = isSelected;
-            return rtn;
-        };
-
-
-        $scope.createInspectedCategoryItemOptions = function () {
-            var rtn = [];
-            rtn.push(createItemOption("Inspected", false));
-            rtn.push(createItemOption("Not Inspected", false));
-            rtn.push(createItemOption("Replace\/Repair", false));
-
-            return rtn;
-        };
 
         $scope.seedNumber = 1;
 
@@ -1382,6 +1231,114 @@
                 }
             });
             $scope.selectList = newList;
+        };
+
+        $scope.hi = {
+            "templates": [
+                {
+                    "title": "DTown's Template",
+                    "date": "4/14/2014",
+                    "time": "4:14 pm",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk1",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    },
+                    "categories": [
+                        {
+                            "title": "DTown's category",
+                            "date": "5/14/2014",
+                            "time": "5:14 pm",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "11",
+                            "secondDetailName": "CATs",
+                            "secondDetailCount": "21",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories1",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        },
+                        {
+                            "title": "Category Griffen",
+                            "date": "6/5/2008",
+                            "time": "6:05 pm",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "23",
+                            "secondDetailName": "CATs",
+                            "secondDetailCount": "32",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories2",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        },
+                        {
+                            "title": "category category for the fun",
+                            "date": "7/15/2011",
+                            "time": "7:35 am",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "2133",
+                            "secondDetailName": "CATs",
+                            "secondDetailCount": "545",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories3",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "title": "Griffen's Template",
+                    "date": "5/5/2008",
+                    "time": "5:05 pm",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk2",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                },
+                {
+                    "title": "Template for the fun of it",
+                    "date": "5/15/2011",
+                    "time": "5:35 am",
+                    "firstDetailName": "INSPs",
+                    "firstDetailCount": "2133",
+                    "secondDetailName": "CATs",
+                    "secondDetailCount": "545",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk3",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                }
+            ],
+            "inspections": [
+            ]
         };
 
         $scope.menuActive = 'i';
