@@ -241,6 +241,100 @@
                 </div>
             </form>
             <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
+                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                    <div class="select-list-item" ng-repeat="item in selectList">
+                        <div class="select-list-item-check">
+                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="65">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    {{item.title}}
+                                </div>
+                                <div class="item-date">
+                                    {{item.date}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                                </div>
+                                <div class="second-item">
+                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                                </div>
+                                <div class="third-item">
+                                    <span>{{item.time}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#" ng-click="next(selectedForm)">
+                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </form>
+            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
+                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                    <div class="select-list-item" ng-repeat="item in selectList">
+                        <div class="select-list-item-check">
+                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
+                        </div>
+                        <div class="select-list-item-main" ht-resize-width="65">
+                            <div class="first-line">
+                                <div class="item-title">
+                                    {{item.title}}
+                                </div>
+                                <div class="item-date">
+                                    {{item.date}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="second-line">
+                                <div class="first-item">
+                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                                </div>
+                                <div class="second-item">
+                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                                </div>
+                                <div class="third-item">
+                                    <span>{{item.time}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#" ng-click="next(selectedForm)">
+                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </form>
+            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
+                <h1>
+                    Inspections
+                </h1>
+
+                <h1>
+                    Item options
+                </h1>
+
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
                 <h1>
                     Items
                 </h1>
@@ -299,33 +393,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
-            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
-                <h1>
-                    Item options
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-            </form>
-            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
-                <h1>
-                    Inspections
-                </h1>
-
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-
 
                 <div class="panel-body">
                     <div class="speed-entry-input-topper main">
