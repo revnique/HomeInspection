@@ -2,6 +2,7 @@
 <html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="//jashkenas.github.io/underscore/underscore-min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<meta name="viewport" content="width=device-width">-->
@@ -81,86 +82,7 @@
         </div>
         <div class="p-scroll">
             <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
-
-                <style>
-                    .select-list { }
-
-                    .select-list-item {
-                        margin: 15px 0px 15px 0px;
-                        width: 100%;
-                    }
-
-                    .select-list-item-check {
-                        float: left;
-                        padding-right: 15px;
-                        text-align: center;
-                        visibility: hidden;
-                        width: 0px;
-                    }
-
-                    .select-list-item-check .htcheckbox { font-size: 20px; }
-
-                    .select-list-item-main {
-                        float: left;
-                        padding-left: 10px;
-                    }
-
-                    .select-list-item-main .first-line { }
-
-                    .select-list-item-main .first-line .item-title {
-                        float: left;
-                        font-size: 15px;
-                    }
-
-                    .select-list-item-main .first-line .item-date {
-                        float: right;
-                        font-size: 12px;
-                        margin: 5px 0px 0px 0px;
-                    }
-
-                    .select-list-item-main .second-line { font-size: 12px; }
-
-                    .select-list-item-main .second-line span {
-                        font-weight: bold;
-                        padding-left: 5px;
-                    }
-
-                    .select-list-item-main .second-line .first-item { float: left; }
-
-                    .select-list-item-main .second-line .second-item {
-                        float: left;
-                        padding-left: 15px;
-                    }
-
-                    .select-list-item-main .second-line .third-item { float: right; }
-
-                    .p-inner-container { padding: 0px 15px 10px 5px; }
-
-                    .select-mode .select-list-item-check {
-                        transition-duration: .5s;
-                        transition-property: all;
-                        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-                        visibility: visible;
-                        width: 25px;
-                    }
-                    
-                    .select-list-item .right-arrow {
-                        float: right;
-                        margin-top: 4px;
-                        visibility: visible;
-                        width: 19px;
-                    }
-                    .select-mode .select-list-item .right-arrow {
-                        visibility: hidden;
-                        width: 0px;
-                    }
-                    .select-list-item .right-arrow img{
-                        width: 19px;
-                    }
-                </style>
-
                 <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
-
                     <div class="select-list-item" ng-repeat="item in selectList">
                         <div class="select-list-item-check">
                             <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
@@ -189,16 +111,13 @@
                             </div>
                         </div>
                         <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm)">
+                            <a href="#" ng-click="next(selectedForm, item)">
                                 <img src="https://homeinspection.harristeq.com/chevron-right.png" />
                             </a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    
                 </div>
-
-
             </form>
             <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
                 <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
@@ -231,7 +150,7 @@
                             </div>
                         </div>
                         <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm)">
+                            <a href="#" ng-click="next(selectedForm, item)">
                                 <img src="https://homeinspection.harristeq.com/chevron-right.png" />
                             </a>
                         </div>
@@ -271,7 +190,7 @@
                             </div>
                         </div>
                         <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm)">
+                            <a href="#" ng-click="next(selectedForm, item)">
                                 <img src="https://homeinspection.harristeq.com/chevron-right.png" />
                             </a>
                         </div>
@@ -311,7 +230,7 @@
                             </div>
                         </div>
                         <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm)">
+                            <a href="#" ng-click="next(selectedForm, item)">
                                 <img src="https://homeinspection.harristeq.com/chevron-right.png" />
                             </a>
                         </div>
@@ -324,252 +243,6 @@
                 <h1>
                     Inspections
                 </h1>
-
-                <h1>
-                    Item options
-                </h1>
-
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-                <h1>
-                    Items
-                </h1>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-square-o"></i>
-                            </a>
-                            <div class="pull-right speed-entry-button-group">
-
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">99</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <div class="pull-right speed-entry-button-group">
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-check-square"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">3</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-body">
-                    <div class="speed-entry-input-topper main">
-
-                        <br />
-
-                        <!--<ht-floating-text-field floating-field="ff" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>-->
-                        <ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field field--optional"></ht-floating-text-field>
-
-                        <ht-floating-select-field floating-field="ffCbo" floating-field-id="{{ffCbo.floatingFieldId}}" data-label="{{ffCbo.label}}" css-class="field field--required field--three-eights" ht-resize-width="500"></ht-floating-select-field>
-                        <div ht-resize-height="400" ht-resize-width="300" style="background-color: yellow"></div>
-                        <!-- <my-directive></my-directive> -->
-
-
-                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="prev(selectedForm)">
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                        <a href="#" class="speed-entry-button m-xs m-r-none" data-ng-click="next(selectedForm)">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-
-                        <div class="m-l m-r" style="padding: 10px 0 10px 0;">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <span class="pull-right text-muted small">
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-bars"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-pencil-square-o"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-ban"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-plus-square-o"></i></a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none"><i class="fa fa-minus-circle"></i></a>
-                            </span>
-                            <span class="clearfix"></span>
-                        </div>
-                    </div>
-
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Doors" />
-                            <a href="#" class="speed-entry-button m-xs">
-                                <i class="fa fa-square-o"></i>
-                            </a>
-                            <div class="pull-right speed-entry-button-group">
-
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">99</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </div>
-
-                        <div class="list-group-item">
-                            <input type="text" class="form-control speed-entry-input pull-left" value="Windows" />
-                            <div class="pull-right speed-entry-button-group">
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-check-square"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs">
-                                    <i class="fa fa-floppy-o"></i>
-                                </a>
-                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a class="link-badge" href="#">
-                                    <div>
-                                        <i class="fa fa-arrow-down"></i>
-                                    </div>
-                                    <span class="badge badge-success">3</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-
-                            <div class="selection-list-container">
-
-                                <table class="table-responsive selection-list">
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-circle-o"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-square-o"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-cell">
-                                            <a href="#" class="speed-entry-button m-xs">
-                                                <i class="fa fa-check-square"></i>
-                                            </a>
-                                        </td>
-                                        <td class="content-cell">Inspected</td>
-                                        <td class="action-cell">
-                                            <div class="pull-right text-muted small">
-                                                <a href="#" class="speed-entry-button m-xs">
-                                                    <i class="fa fa-floppy-o"></i>
-                                                </a>
-                                                <a href="#" class="speed-entry-button m-xs m-r-none">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <ul class="list-group ddd">
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    Cras justo odio
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                </div>
             </form>
         </div>
 
@@ -618,26 +291,26 @@
         return this;
     };
 
-    Date.prototype.addHours = function (h) {
+    Date.prototype.addHours = function(h) {
         this.setHours(this.getHours() + h);
         return this;
     };
 
-    Date.prototype.addDays = function (d) {
+    Date.prototype.addDays = function(d) {
         this.setHours(this.getHours() + (d * 24));
         return this;
     };
     Date.prototype.formatSmallDateTime = function(useSlashNotation) {
-        var day = this.getDate();        // yields dayofmonth
+        var day = this.getDate(); // yields dayofmonth
         if (day < 10) {
             day = "0" + day;
         }
-        var month = this.getMonth() + 1;// yields month
+        var month = this.getMonth() + 1; // yields month
         if (month < 10) {
             month = "0" + month;
         }
-        var year = this.getFullYear();  // yields year
-        var hour = this.getHours();     // yields hours 
+        var year = this.getFullYear(); // yields year
+        var hour = this.getHours(); // yields hours 
         var minute = this.getMinutes(); // yields minutes
         var second = this.getSeconds(); // yields seconds
         var rtn = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
@@ -647,9 +320,9 @@
         // After this construct a string with the above results as below
         return rtn;
     };
-    Date.prototype.dateDiff = function (endDateObject) {
+    Date.prototype.dateDiff = function(endDateObject) {
         var days, hours, minutes, seconds, totalMilliseconds, displayString = "";
-    
+
         totalMilliseconds = (endDateObject - this);
         days = Math.round(totalMilliseconds / 86400000); // days
         hours = Math.round((totalMilliseconds % 86400000) / 3600000); // hours
@@ -713,66 +386,70 @@
 
 
     //<div ht-resize-width="45"></div>
-    app.directive('htResizeWidth', ['$window', function ($window) {
-        return {
-            link: link,
-            restrict: 'A'
-        };
+    app.directive('htResizeWidth', [
+        '$window', function($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
 
-        function link(scope, element, attrs) {
-            scope.$watchCollection('selectList', function (newValue) {
-                var screenWidth = $window.innerWidth * 1;
-                var offsetWidth = attrs.htResizeWidth * 1;
-                element[0].style.width = screenWidth - offsetWidth + "px";
-            });
-            angular.element($window).bind('resize', function () {
-                var screenWidth = $window.innerWidth * 1;
-                var offsetWidth = attrs.htResizeWidth * 1;
-                element[0].style.width = screenWidth - offsetWidth + "px";
-            });
+            function link(scope, element, attrs) {
+                scope.$watchCollection('selectList', function(newValue) {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+                angular.element($window).bind('resize', function() {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
 
-            angular.element($window).bind('load', function () {
-                var screenWidth = $window.innerWidth * 1;
-                var offsetWidth = attrs.htResizeWidth * 1;
-                element[0].style.width = screenWidth - offsetWidth + "px";
-            });
+                angular.element($window).bind('load', function() {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+            }
         }
-    }]);
+    ]);
 
     //<div ht-resize-height="45"></div>
-    app.directive('htResizeHeight', ['$window', function ($window) {
-        return {
-            link: link,
-            restrict: 'A'
-        };
+    app.directive('htResizeHeight', [
+        '$window', function($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
 
-        function link(scope, element, attrs) {
-            scope.$watchCollection('selectList', function (newValue) {
-                var screenHeight2 = $window.innerHeight * 1;
-                var offsetHeight2 = attrs.htResizeHeight * 1;
-                element[0].style.height = screenHeight2 - offsetHeight2 + "px";
-                console.log(element[0].style.height, $window.innerHeight);
-            });
+            function link(scope, element, attrs) {
+                scope.$watchCollection('selectList', function(newValue) {
+                    var screenHeight2 = $window.innerHeight * 1;
+                    var offsetHeight2 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
 
-            angular.element($window).bind('resize', function () {
-                var screenHeight2 = $window.innerHeight * 1;
-                var offsetHeight2 = attrs.htResizeHeight * 1;
-                element[0].style.height = screenHeight2 - offsetHeight2 + "px";
-                console.log(element[0].style.height, $window.innerHeight);
-            });
+                angular.element($window).bind('resize', function() {
+                    var screenHeight2 = $window.innerHeight * 1;
+                    var offsetHeight2 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
 
-            angular.element($window).bind('load', function () {
-                var screenHeight1 = $window.innerHeight * 1;
-                var offsetHeight1 = attrs.htResizeHeight * 1;
-                element[0].style.height = screenHeight1 - offsetHeight1 + "px";
-                console.log(element[0].style.height, $window.innerHeight);
-            });
+                angular.element($window).bind('load', function() {
+                    var screenHeight1 = $window.innerHeight * 1;
+                    var offsetHeight1 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight1 - offsetHeight1 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
+            }
         }
-    }]);
+    ]);
 
     //<ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
     app.directive('htFloatingTextField', [
-        function () {
+        function() {
             return {
                 restrict: 'E',
                 replace: true,
@@ -794,8 +471,8 @@
                     'ng-model="floatingField.value" id="floatingField{{floatingFieldId}}" ng-keydown="checkForEnter($event)">' +
                     '</div>' +
                     '</div>',
-                link: function (scope, el, attrs) {
-                    el.bind('keydown', function ($event) {
+                link: function(scope, el, attrs) {
+                    el.bind('keydown', function($event) {
                         //spacebar or enter for other controls
                         //if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
                         if (scope.enterSubmits && $event.keyCode === 13) {
@@ -818,7 +495,7 @@
                     //    }
                     //};
 
-                    scope.setMyClass = function () {
+                    scope.setMyClass = function() {
                         scope.labelIsFloating = scope.floatingField.value.length > 0;
                         var rtn = scope.cssClass;
                         if (attrs.disabled) {
@@ -831,12 +508,13 @@
                     };
                 }
             };
-        }]);
+        }
+    ]);
 
 
     //<ht-floating-select-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" css-class="field field--required field--three-eights"></ht-floating-select-field>
     app.directive('htFloatingSelectField', [
-        function () {
+        function() {
             return {
                 restrict: 'E',
                 replace: true,
@@ -856,8 +534,8 @@
                     '</select>' +
                     '</div>' +
                     '</div>',
-                link: function (scope, el, attrs) {
-                    scope.setMyClass = function () {
+                link: function(scope, el, attrs) {
+                    scope.setMyClass = function() {
                         console.log("ff", scope.floatingField);
                         scope.labelIsFloating = (scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.length > 0)
                             || scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.value != null && scope.floatingField.selectedItem.value.length > 0;
@@ -874,11 +552,12 @@
                     };
                 }
             };
-        }]);
+        }
+    ]);
 
     //<ht-checkbox use-circles="{{obj.useCircles}}" hide-label="{{obj.hideLabel}}" data-ng-disabled="obj.isDisabled" data-ng-model="obj" data-checkbox-id="{{obj.id}}" data-label="{{ obj.label }}"/>
     app.directive('htCheckbox', [
-        function () {
+        function() {
             return {
                 restrict: 'E',
                 replace: true,
@@ -892,8 +571,8 @@
                 },
                 template: '<a id="{{ checkboxId }}" href="javascript:void(0)" ng-click="checkUncheckMe()" ng-class="setMyClass()">' +
                     '<label ng-hide="hideLabel" for="{{ checkboxId }}">{{ label }}</label><i class="fa fa-fw" ng-class="setMyIconClass()"></i></a>',
-                link: function (scope, el, attrs) {
-                    el.bind('keydown', function ($event) {
+                link: function(scope, el, attrs) {
+                    el.bind('keydown', function($event) {
                         if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
                             $event.preventDefault();
                             $event.currentTarget.click();
@@ -902,14 +581,14 @@
                             return true;
                     });
 
-                    scope.checkUncheckMe = function () {
+                    scope.checkUncheckMe = function() {
                         if (attrs.disabled) {
                             return;
                         }
                         scope.ngModel = !scope.ngModel;
                     };
 
-                    scope.setMyIconClass = function () {
+                    scope.setMyIconClass = function() {
                         var rtn = "";
                         if (scope.useCircles === "true") {
                             rtn = scope.ngModel === true ? "fa-check-circle" : "fa-circle-o";
@@ -918,7 +597,7 @@
                         }
                         return rtn;
                     };
-                    scope.setMyClass = function () {
+                    scope.setMyClass = function() {
                         var rtn = "htcheckbox";
                         if (attrs.disabled) {
                             rtn += " disabled";
@@ -927,49 +606,32 @@
                     };
                 }
             };
-        }]);
+        }
+    ]);
 
 
     function tempController($scope, $timeout) {
         $scope.dtown = "hello world";
         $scope.isShifted = false;
-        $scope.doit = function () {
+        $scope.doit = function() {
             $scope.isShifted = !$scope.isShifted;
         };
         $scope.selectedFormName = "Templates";
         $scope.selectedFormItemCount = "77";
-        $scope.goto = function (formName) {
+        $scope.goto = function(formName) {
             $scope.selectedFormName = formName;
             $scope.selectedFormItemCount = "88";
         };
 
-        $scope.toggleEditMode = function () {
+        $scope.toggleEditMode = function() {
             $scope.isEditMode = !$scope.isEditMode;
         };
 
-        $scope.gotoCategory = function () {
+        $scope.selectList = [];
+        $scope.selectedCategory = {};
+        $scope.selectedCategoryItem = {};
+        $scope.selectedTemplate = {};
 
-        };
-
-        $scope.gotoTemplates = function () {
-
-        };
-
-        $scope.gotoCategoryItems = function () {
-
-        };
-
-        $scope.gotoItemOptions = function () {
-
-        };
-
-        $scope.ff = {
-            "isDisabled": false,
-            "value": "",
-            "floatingFieldId": "firstName",
-            "label": "First Name",
-            "size": 35
-        };
         $scope.ff2 = {
             "isDisabled": false,
             "value": "",
@@ -977,98 +639,6 @@
             "label": "Template",
             "size": 35
         };
-        $scope.obj = {
-            "isDisabled": false,
-            "id": "chk1",
-            "label": "Template",
-            "hideLabel": true,
-            "useCircles": true,
-            "isChecked": false
-        };
-        $scope.obj2 = {
-            "isDisabled": false,
-            "id": "chk1",
-            "label": "Template",
-            "hideLabel": true,
-            "useCircles": true,
-            "isChecked": true
-        };
-        $scope.ffCbo = {
-            "isDisabled": false,
-            "selectedItem": "",
-            "floatingFieldId": "firstName",
-            "label": "State",
-            "size": 35,
-            "options": [
-                {
-                    "name": "Alabama",
-                    "value": "AL"
-                },
-                {
-                    "name": "Alaska",
-                    "value": "AK"
-                },
-                {
-                    "name": "Texas",
-                    "value": "TX"
-                }
-            ]
-        };
-
-        $scope.selectList = [
-            {
-                "title": "DTown's Template",
-                "date": "4/14/2014",
-                "time": "4:14 pm",
-                "firstDetailName": "INSPs",
-                "firstDetailCount": "33",
-                "secondDetailName": "CATs",
-                "secondDetailCount": "55",
-                "chk": {
-                    "isDisabled": false,
-                    "id": "chk1",
-                    "label": "Template",
-                    "hideLabel": true,
-                    "useCircles": true,
-                    "isChecked": false
-                }
-            },
-            {
-                "title": "Griffen's Template",
-                "date": "5/5/2008",
-                "time": "5:05 pm",
-                "firstDetailName": "INSPs",
-                "firstDetailCount": "33",
-                "secondDetailName": "CATs",
-                "secondDetailCount": "55",
-                "chk": {
-                    "isDisabled": false,
-                    "id": "chk2",
-                    "label": "Template",
-                    "hideLabel": true,
-                    "useCircles": true,
-                    "isChecked": false
-                }
-            },
-            {
-                "title": "Template for the fun of it",
-                "date": "5/15/2011",
-                "time": "5:35 am",
-                "firstDetailName": "INSPs",
-                "firstDetailCount": "2133",
-                "secondDetailName": "CATs",
-                "secondDetailCount": "545",
-                "chk": {
-                    "isDisabled": false,
-                    "id": "chk3",
-                    "label": "Template",
-                    "hideLabel": true,
-                    "useCircles": true,
-                    "isChecked": false
-                }
-            }
-        ];
-
 
 
         //formTempates
@@ -1083,128 +653,22 @@
                 "title": "Templates",
                 "formName": "Templates",
                 "cssClass": "middle",
-                "itemCount": 27,
                 "nextForm": 2,
-                "prevForm": -1,
-                "list": [
-                    {
-                        "title": "DTown's Template",
-                        "date": "4/14/2014",
-                        "time": "4:14 pm",
-                        "firstDetailName": "INSPs",
-                        "firstDetailCount": "33",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "55",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chk1",
-                            "label": "Template",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    },
-                    {
-                        "title": "Griffen's Template",
-                        "date": "5/5/2008",
-                        "time": "5:05 pm",
-                        "firstDetailName": "INSPs",
-                        "firstDetailCount": "33",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "55",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chk2",
-                            "label": "Template",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    },
-                    {
-                        "title": "Template for the fun of it",
-                        "date": "5/15/2011",
-                        "time": "5:35 am",
-                        "firstDetailName": "INSPs",
-                        "firstDetailCount": "2133",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "545",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chk3",
-                            "label": "Template",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    }
-                ]
+                "prevForm": -1
             },
             {
                 "id": 2,
                 "title": "Categories",
                 "formName": "Categories",
                 "cssClass": "right",
-                "itemCount": 11,
                 "nextForm": 3,
-                "prevForm": 1,
-                "list": [
-                    {
-                        "title": "DTown's category",
-                        "date": "5/14/2014",
-                        "time": "5:14 pm",
-                        "firstDetailName": "Items",
-                        "firstDetailCount": "11",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "21",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chkCategories1",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    },
-                    {
-                        "title": "Category Griffen",
-                        "date": "6/5/2008",
-                        "time": "6:05 pm",
-                        "firstDetailName": "Items",
-                        "firstDetailCount": "23",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "32",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chkCategories2",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    },
-                    {
-                        "title": "category category for the fun",
-                        "date": "7/15/2011",
-                        "time": "7:35 am",
-                        "firstDetailName": "Items",
-                        "firstDetailCount": "2133",
-                        "secondDetailName": "CATs",
-                        "secondDetailCount": "545",
-                        "chk": {
-                            "isDisabled": false,
-                            "id": "chkCategories3",
-                            "hideLabel": true,
-                            "useCircles": true,
-                            "isChecked": false
-                        }
-                    }
-                ]
+                "prevForm": 1
             },
             {
                 "id": 3,
                 "title": "Items",
                 "formName": "Items",
                 "cssClass": "right",
-                "itemCount": 22,
                 "nextForm": 4,
                 "prevForm": 2
             },
@@ -1213,7 +677,6 @@
                 "title": "Item Options",
                 "formName": "ItemOptions",
                 "cssClass": "right",
-                "itemCount": 33,
                 "nextForm": -1,
                 "prevForm": 3
             },
@@ -1222,7 +685,6 @@
                 "title": "Inspections",
                 "formName": "Inspections",
                 "cssClass": "right",
-                "itemCount": 44,
                 "nextForm": -1,
                 "prevForm": -1
             }
@@ -1230,7 +692,7 @@
 
         $scope.selectedForm = $scope.forms[0];
 
-        $scope.next = function (frm) {
+        $scope.next = function(frm, item) {
             if (frm.nextForm !== -1) {
                 var nextForm = $scope.forms[frm.nextForm - 1];
                 if (nextForm.cssClass === "right") {
@@ -1243,12 +705,25 @@
                 $scope.selectedForm = nextForm;
                 $scope.ff2.floatingFieldId = nextForm.formName;
                 $scope.ff2.label = nextForm.title;
-                if (frm.id === 1 || frm.id === 2) {
-                    $scope.selectList = nextForm.list;
+
+                if (item["templateId"] != undefined) {
+                    $scope.selectList = item.categories || [];
+                    $scope.selectedTemplate = item;
+                } else if (item["categoryId"] != undefined) {
+                    $scope.selectList = item.categoryItems || [];
+                    $scope.selectedCategory = item;
+                } else if (item["categoryItemId"] != undefined) {
+                    $scope.selectList = item.categoryItemOptions || [];
+                    $scope.selectedCategoryItem = item;
+                } else if (item["categoryItemOptionId"] != undefined) {
+                    
                 }
+               
             }
+
+            console.log("$scope.selectedTemplate.categories", $scope.selectedTemplate.categories);
         };
-        $scope.prev = function (frm) {
+        $scope.prev = function(frm) {
             if (frm.prevForm !== -1) {
                 var prevForm = $scope.forms[frm.prevForm - 1];
                 if (prevForm.cssClass === "right") {
@@ -1261,54 +736,105 @@
                 $scope.selectedForm = prevForm;
                 $scope.ff2.floatingFieldId = prevForm.formName;
                 $scope.ff2.label = prevForm.title;
-                if (frm.id === 1 || frm.id === 2) {
-                    $scope.selectList = prevForm.list;
+
+                if (frm.id === 2) {
+                    $scope.selectList = $scope.hi.templates;
+                } else if (frm.id === 3) {
+                    $scope.selectList = $scope.selectedTemplate.categories;
+                } else if (frm.id === 4) {
+                    $scope.selectList = $scope.selectedCategory.categoryItems;
                 }
             }
         };
-        $scope.getStyle = function (frm) {
+        $scope.getStyle = function(frm) {
             return frm.cssClass;
         };
 
         $scope.seedNumber = 1;
 
         $scope.addItem = function () {
+            var firstDetailName = "",
+                secondDetailName = "",
+                selectedForm = $scope.selectedForm.id;
+
+            if (selectedForm === 1) {
+                firstDetailName = "INSPs";
+                secondDetailName = "CATs";
+            } else if (selectedForm === 2) {
+                firstDetailName = "ITMs";
+                secondDetailName = "CATs";
+            } else if (selectedForm === 3) {
+                firstDetailName = "OPTs";
+                secondDetailName = "CATs";
+            } else if (selectedForm === 4) {
+                firstDetailName = "---";
+                secondDetailName = "--";
+            }
+
             var newObj = {
                 "title": $scope.ff2.value,
                 "date": new Date().formatSmallDateTime(true),
                 "time": new Date().formatAMPM(),
-                "firstDetailName": "INSPs",
+                "firstDetailName": firstDetailName,
                 "firstDetailCount": 0,
-                "secondDetailName": "CATs",
+                "secondDetailName": secondDetailName,
                 "secondDetailCount": 0,
                 "chk": {
                     "isDisabled": false,
                     "id": "chk" + $scope.seedNumber,
-                    "label": "Template",
                     "hideLabel": true,
                     "useCircles": true,
                     "isChecked": false
                 }
             };
+
+
+            if (selectedForm === 1) {
+                newObj.templateId = $scope.seedNumber + 500;
+                if ($scope.hi.templates == undefined) {
+                    $scope.hi.templates = [];
+                }
+                $scope.hi.templates.unshift(newObj);
+            } else if (selectedForm === 2) {
+                newObj.categoryId = $scope.seedNumber + 500;
+                if ($scope.selectedTemplate.categories == undefined) {
+                    $scope.selectedTemplate.categories = [];
+                }
+                $scope.selectedTemplate.categories.unshift(newObj);
+            } else if (selectedForm === 3) {
+                newObj.categoryItemId = $scope.seedNumber + 500;
+                if ($scope.selectedCategory.categoryItems == undefined) {
+                    $scope.selectedCategory.categoryItems = [];
+                }
+                $scope.selectedCategory.categoryItems.unshift(newObj);
+            } else if (selectedForm === 4) {
+                newObj.categoryItemOptionId = $scope.seedNumber + 500;
+                if ($scope.selectedCategoryItem.categoryItemOptions == undefined) {
+                    $scope.selectedCategoryItem.categoryItemOptions = [];
+                }
+                $scope.selectedCategoryItem.categoryItemOptions.unshift(newObj);
+            }
+
+            console.log("$scope.selectedTemplate.categories", $scope.selectedTemplate.categories);
             $scope.selectList.unshift(newObj);
             $scope.seedNumber += 1;
             $scope.ff2.value = "";
         };
 
-        $scope.selectAll = function () {
-            angular.forEach($scope.selectList, function (item, key, obj) {
+        $scope.selectAll = function() {
+            angular.forEach($scope.selectList, function(item, key, obj) {
                 item.chk.isChecked = true;
             });
         };
-        $scope.unselectAll = function () {
-            angular.forEach($scope.selectList, function (item, key, obj) {
+        $scope.unselectAll = function() {
+            angular.forEach($scope.selectList, function(item, key, obj) {
                 item.chk.isChecked = false;
             });
         };
-        $scope.deleteItems = function () {
+        $scope.deleteItems = function() {
             var list = $scope.selectList;
             var newList = [];
-            angular.forEach(list, function (item, key, obj) {
+            angular.forEach(list, function(item, key, obj) {
                 if (item.chk.isChecked === false) {
                     newList.push(item);
                 }
@@ -1319,6 +845,7 @@
         $scope.hi = {
             "templates": [
                 {
+                    "templateId": 1,
                     "title": "DTown's Template",
                     "date": "4/14/2014",
                     "time": "4:14 pm",
@@ -1336,6 +863,7 @@
                     },
                     "categories": [
                         {
+                            "categoryId": 1,
                             "title": "DTown's category",
                             "date": "5/14/2014",
                             "time": "5:14 pm",
@@ -1349,77 +877,82 @@
                                 "hideLabel": true,
                                 "useCircles": true,
                                 "isChecked": false
-                            },							
-							"categoryItems": [
-								{
-									"title": "DTown's category item",
-									"date": "5/14/2014",
-									"time": "5:14 pm",
-									"firstDetailName": "OPTs",
-									"firstDetailCount": "11",
-									"secondDetailName": "CATs",
-									"secondDetailCount": "21",
-									"chk": {
-										"isDisabled": false,
-										"id": "chkCategoryItem1",
-										"hideLabel": true,
-										"useCircles": true,
-										"isChecked": false
-									},
-									"categoryItemOptions": [
-										{
-											"title": "DTown's category item Options",
-											"date": "5/14/2014",
-											"time": "5:14 pm",
-											"firstDetailName": "OPTs",
-											"firstDetailCount": "11",
-											"secondDetailName": "CATs",
-											"secondDetailCount": "21",
-											"chk": {
-												"isDisabled": false,
-												"id": "chkCategoryItemOption1",
-												"hideLabel": true,
-												"useCircles": true,
-												"isChecked": false
-											}
-										},
-										{
-											"title": "Category Griffen item Options",
-											"date": "6/5/2008",
-											"time": "6:05 pm",
-											"firstDetailName": "OPTs",
-											"firstDetailCount": "11",
-											"secondDetailName": "CATs",
-											"secondDetailCount": "21",
-											"chk": {
-												"isDisabled": false,
-												"id": "chkCategoryItemOption2",
-												"hideLabel": true,
-												"useCircles": true,
-												"isChecked": false
-											}
-										}
-									],
-								},
-								{
-									"title": "Category Griffen item",
-									"date": "6/5/2008",
-									"time": "6:05 pm",
-									"firstDetailName": "OPTs",
-									"firstDetailCount": "11",
-									"secondDetailName": "CATs",
-									"secondDetailCount": "21",
-									"chk": {
-										"isDisabled": false,
-										"id": "chkCategoryItem2",
-										"hideLabel": true,
-										"useCircles": true,
-										"isChecked": false
-									}
-								}
-							]
+                            },
+                            "categoryItems": [
+                                {
+                                    "categoryItemId": 1,
+                                    "title": "DTown's category item",
+                                    "date": "5/14/2014",
+                                    "time": "5:14 pm",
+                                    "firstDetailName": "OPTs",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "CATs",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItem1",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    },
+                                    "categoryItemOptions": [
+                                        {
+                                            "categoryItemOptionId": 1,
+                                            "title": "DTown's category item Options",
+                                            "date": "5/14/2014",
+                                            "time": "5:14 pm",
+                                            "firstDetailName": "OPTs",
+                                            "firstDetailCount": "11",
+                                            "secondDetailName": "CATs",
+                                            "secondDetailCount": "21",
+                                            "chk": {
+                                                "isDisabled": false,
+                                                "id": "chkCategoryItemOption1",
+                                                "hideLabel": true,
+                                                "useCircles": true,
+                                                "isChecked": false
+                                            }
+                                        },
+                                        {
+                                            "categoryItemOptionId": 2,
+                                            "title": "Category Griffen item Options",
+                                            "date": "6/5/2008",
+                                            "time": "6:05 pm",
+                                            "firstDetailName": "OPTs",
+                                            "firstDetailCount": "11",
+                                            "secondDetailName": "CATs",
+                                            "secondDetailCount": "21",
+                                            "chk": {
+                                                "isDisabled": false,
+                                                "id": "chkCategoryItemOption2",
+                                                "hideLabel": true,
+                                                "useCircles": true,
+                                                "isChecked": false
+                                            }
+                                        }
+                                    ],
+                                },
+                                {
+                                    "categoryItemId": 2,
+                                    "title": "Category Griffen item",
+                                    "date": "6/5/2008",
+                                    "time": "6:05 pm",
+                                    "firstDetailName": "OPTs",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "CATs",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItem2",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    }
+                                }
+                            ]
                         },
                         {
+                            "categoryId": 2,
                             "title": "Category Griffen",
                             "date": "6/5/2008",
                             "time": "6:05 pm",
@@ -1436,6 +969,7 @@
                             }
                         },
                         {
+                            "categoryId": 3,
                             "title": "category category for the fun",
                             "date": "7/15/2011",
                             "time": "7:35 am",
@@ -1450,10 +984,28 @@
                                 "useCircles": true,
                                 "isChecked": false
                             }
+                        },
+                        {
+                            "categoryId": 4,
+                            "title": "4 category category for the fun",
+                            "date": "7/15/2011",
+                            "time": "7:35 am",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "2",
+                            "secondDetailName": "CATs",
+                            "secondDetailCount": "545",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories4",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
                         }
                     ]
                 },
                 {
+                    "templateId": 2,
                     "title": "Griffen's Template",
                     "date": "5/5/2008",
                     "time": "5:05 pm",
@@ -1471,6 +1023,7 @@
                     }
                 },
                 {
+                    "templateId": 3,
                     "title": "Template for the fun of it",
                     "date": "5/15/2011",
                     "time": "5:35 am",
@@ -1493,7 +1046,7 @@
         };
 
         $scope.menuActive = 'i';
-        var init = function () {
+        var init = function() {
             var page = location.href;
             if (page.indexOf("p=i") > -1) {
                 $scope.menuActive = 'i';
@@ -1503,11 +1056,92 @@
                 $scope.menuActive = 'h';
             }
             $scope.isEditMode = false;
+            $timeout(function() {
+                $scope.selectList = $scope.hi.templates;
+            },300);
+            
         };
         init();
-
     }
 </script>
+
+
+<style>
+    .select-list { }
+
+    .select-list-item {
+        margin: 15px 0px 15px 0px;
+        width: 100%;
+    }
+
+    .select-list-item-check {
+        float: left;
+        padding-right: 15px;
+        text-align: center;
+        visibility: hidden;
+        width: 0px;
+    }
+
+    .select-list-item-check .htcheckbox { font-size: 20px; }
+
+    .select-list-item-main {
+        float: left;
+        padding-left: 10px;
+    }
+
+    .select-list-item-main .first-line { }
+
+    .select-list-item-main .first-line .item-title {
+        float: left;
+        font-size: 15px;
+    }
+
+    .select-list-item-main .first-line .item-date {
+        float: right;
+        font-size: 12px;
+        margin: 5px 0px 0px 0px;
+    }
+
+    .select-list-item-main .second-line { font-size: 12px; }
+
+    .select-list-item-main .second-line span {
+        font-weight: bold;
+        padding-left: 5px;
+    }
+
+    .select-list-item-main .second-line .first-item { float: left; }
+
+    .select-list-item-main .second-line .second-item {
+        float: left;
+        padding-left: 15px;
+    }
+
+    .select-list-item-main .second-line .third-item { float: right; }
+
+    .p-inner-container { padding: 0px 15px 10px 5px; }
+
+    .select-mode .select-list-item-check {
+        transition-duration: .5s;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+        visibility: visible;
+        width: 25px;
+    }
+
+    .select-list-item .right-arrow {
+        float: right;
+        margin-top: 4px;
+        visibility: visible;
+        width: 19px;
+    }
+
+    .select-mode .select-list-item .right-arrow {
+        visibility: hidden;
+        width: 0px;
+    }
+
+    .select-list-item .right-arrow img { width: 19px; }
+</style>
 
 
 <style>
