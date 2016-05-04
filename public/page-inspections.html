@@ -40,7 +40,7 @@
             </a>
         </div>
     </nav>
-    <div class="p-wrapper" data-ng-class="{'shifted': isShifted, 'footer-slide': isEditMode}">
+    <div class="p-wrapper" data-ng-class="{'shifted': isShifted, 'footer-slide': isEditMode, 'has-detail': hasDetail}">
         <!--<img src="https://homeinspection.harristeq.com/justlogoIcon.png" class="logo-main"/>
         <h5 class="logo-text">HarrisTeq</h5>-->
         <div class="p-container">
@@ -56,11 +56,11 @@
                     </a>
                 </div>
 
-                <div class="pull-left" ng-show="selectedForm.formName!='ItemOptions' && selectedForm.formName!='Templates'">
+                <!--<div class="pull-left" ng-show="selectedForm.formName!='ItemOptions' && selectedForm.formName!='Templates'">
                     <a href="#" class="menu-right-arrow" data-ng-click="next(selectedForm)">
                         <i class="fa fa-chevron-right"></i>
                     </a>
-                </div>
+                </div>-->
 
                 <div class="pull-right">
                     <a href="#" class="edit-button" data-ng-click="toggleEditMode()" data-ng-hide="isEditMode">
@@ -73,11 +73,14 @@
 
                 <div class="p-header-badge">
                     <div class="p-header-text">
-                        {{selectedForm.title}}
+                        {{headerTitle}}
                     </div>
-                    <span class="badge badge-success">{{selectedForm.itemCount}}</span>
+                    <span class="badge badge-success">{{headerCount}}</span>
                 </div>
                 <span class="clearfix"></span>
+                <div class="header-detail">
+                    {{headerDetail}}
+                </div>
             </div>
         </div>
         <div class="p-scroll">
@@ -229,7 +232,7 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="right-arrow">
+                        <div class="right-arrow ng-hide">
                             <a href="#" ng-click="next(selectedForm, item)">
                                 <img src="https://homeinspection.harristeq.com/chevron-right.png" />
                             </a>
@@ -691,6 +694,9 @@
         ];
 
         $scope.selectedForm = $scope.forms[0];
+        $scope.hasDetail = true;
+        $scope.headerDetailDefault = "(please add or select a template to get started)";
+        $scope.headerDetail = $scope.headerDetailDefault;
 
         $scope.next = function(frm, item) {
             if (frm.nextForm !== -1) {
@@ -700,7 +706,6 @@
                 } else if (nextForm.cssClass === "left") {
                     frm.cssClass = "right";
                 }
-                console.log(frm);
                 nextForm.cssClass = "middle";
                 $scope.selectedForm = nextForm;
                 $scope.ff2.floatingFieldId = nextForm.formName;
@@ -718,10 +723,12 @@
                 } else if (item["categoryItemOptionId"] != undefined) {
                     
                 }
-               
+
+                $scope.headerTitle = nextForm.title;
+                $scope.headerCount = $scope.selectList.length;
+                $scope.headerDetail = item.title;
             }
 
-            console.log("$scope.selectedTemplate.categories", $scope.selectedTemplate.categories);
         };
         $scope.prev = function(frm) {
             if (frm.prevForm !== -1) {
@@ -731,7 +738,6 @@
                 } else if (prevForm.cssClass === "left") {
                     frm.cssClass = "right";
                 }
-                console.log(frm);
                 prevForm.cssClass = "middle";
                 $scope.selectedForm = prevForm;
                 $scope.ff2.floatingFieldId = prevForm.formName;
@@ -739,11 +745,16 @@
 
                 if (frm.id === 2) {
                     $scope.selectList = $scope.hi.templates;
+                    $scope.headerDetail = $scope.headerDetailDefault;
                 } else if (frm.id === 3) {
                     $scope.selectList = $scope.selectedTemplate.categories;
+                    $scope.headerDetail = $scope.selectedTemplate.title;
                 } else if (frm.id === 4) {
                     $scope.selectList = $scope.selectedCategory.categoryItems;
+                    $scope.headerDetail = $scope.selectedCategory.title;
                 }
+                $scope.headerTitle = prevForm.title;
+                $scope.headerCount = $scope.selectList.length;
             }
         };
         $scope.getStyle = function(frm) {
@@ -790,33 +801,35 @@
 
 
             if (selectedForm === 1) {
-                newObj.templateId = $scope.seedNumber + 500;
+                newObj.templateId = ($scope.seedNumber + 500) * -1;
                 if ($scope.hi.templates == undefined) {
                     $scope.hi.templates = [];
                 }
                 $scope.hi.templates.unshift(newObj);
             } else if (selectedForm === 2) {
-                newObj.categoryId = $scope.seedNumber + 500;
+                newObj.categoryId = ($scope.seedNumber + 500) * -1;
                 if ($scope.selectedTemplate.categories == undefined) {
                     $scope.selectedTemplate.categories = [];
+                    $scope.selectList = $scope.selectedTemplate.categories;
                 }
                 $scope.selectedTemplate.categories.unshift(newObj);
             } else if (selectedForm === 3) {
-                newObj.categoryItemId = $scope.seedNumber + 500;
+                newObj.categoryItemId = ($scope.seedNumber + 500) * -1;
                 if ($scope.selectedCategory.categoryItems == undefined) {
                     $scope.selectedCategory.categoryItems = [];
+                    $scope.selectList = $scope.selectedCategory.categoryItems;
                 }
                 $scope.selectedCategory.categoryItems.unshift(newObj);
             } else if (selectedForm === 4) {
-                newObj.categoryItemOptionId = $scope.seedNumber + 500;
+                newObj.categoryItemOptionId = ($scope.seedNumber + 500) * -1;
                 if ($scope.selectedCategoryItem.categoryItemOptions == undefined) {
                     $scope.selectedCategoryItem.categoryItemOptions = [];
+                    $scope.selectList = $scope.selectedCategoryItem.categoryItemOptions;
                 }
                 $scope.selectedCategoryItem.categoryItemOptions.unshift(newObj);
             }
 
-            console.log("$scope.selectedTemplate.categories", $scope.selectedTemplate.categories);
-            $scope.selectList.unshift(newObj);
+            $scope.headerCount = $scope.selectList.length;
             $scope.seedNumber += 1;
             $scope.ff2.value = "";
         };
@@ -839,7 +852,33 @@
                     newList.push(item);
                 }
             });
+
+            //var hasChildren = $scope.checkIfHasChildren(selectedForm.id,)
             $scope.selectList = newList;
+
+
+        };
+
+        $scope.checkIfHasChildren = function (selectedFormId, selectedObj) {
+            var rtn = false;
+
+            if (selectedFormId === 1) {
+                if (selectedObj.categories != undefined && selectedObj.categories.length > 0) {
+                    rtn = true;
+                }
+            } else if (selectedFormId === 2) {
+                if (selectedObj.categoryItems != undefined && selectedObj.categoryItems.length > 0) {
+                    rtn = true;
+                }
+            } else if (selectedFormId === 3) {
+                if (selectedObj.categoryItemOptions != undefined && selectedObj.categoryItemOptions.length > 0) {
+                    rtn = true;
+                }
+            } else if (selectedFormId === 4) {
+                rtn = false;
+            }
+
+            return rtn;
         };
 
         $scope.hi = {
@@ -1058,6 +1097,8 @@
             $scope.isEditMode = false;
             $timeout(function() {
                 $scope.selectList = $scope.hi.templates;
+                $scope.headerCount = $scope.hi.templates.length;
+                $scope.headerTitle = "Templates";
             },300);
             
         };
@@ -1819,6 +1860,10 @@ position: relative;
     .htcheckbox.disabled {
         color: #999;
         cursor: not-allowed;
+    }
+
+    .has-detail .p-scroll {
+        top: 72px;
     }
 </style>
 </body>
