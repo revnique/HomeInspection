@@ -56,12 +56,6 @@
                     </a>
                 </div>
 
-                <!--<div class="pull-left" ng-show="selectedForm.formName!='ItemOptions' && selectedForm.formName!='Templates'">
-                    <a href="#" class="menu-right-arrow" data-ng-click="next(selectedForm)">
-                        <i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>-->
-
                 <div class="pull-right">
                     <a href="#" class="edit-button" data-ng-click="toggleEditMode()" data-ng-hide="isEditMode">
                         <i class="fa fa-pencil-square-o"></i>
@@ -86,27 +80,16 @@
                         margin-bottom: -8px;
                     }
 
-                        .header-detail .level-1 {
-                            background-color: blue;
-                        }
-
-                        .header-detail .level-2 {
-                            background-color: steelblue;
-                        }
-
-                        .header-detail .level-3 {
-                            background-color: lightsteelblue;
-                        }
                 </style>
                 <div class="header-detail">
                     <div class="level-1">
-                        {{headerDetail}}
+                        {{headerLevel1}}
                     </div>
                     <div class="level-2">
-                        Level 2
+                        {{headerLevel2}}
                     </div>
                     <div class="level-3">
-                        Level 3
+                        {{headerLevel3}}
                     </div>
                 </div>
             </div>
@@ -736,7 +719,6 @@
         $scope.selectedForm = $scope.forms[0];
         $scope.hasDetail = false;
         $scope.headerDetailDefault = "(please add or select a template to get started)";
-        $scope.headerDetail = $scope.headerDetailDefault;
 
         $scope.next = function (frm, item) {
             $scope.hasDetail = true;
@@ -756,20 +738,22 @@
                     $scope.selectList = item.categories || [];
                     $scope.selectedTemplate = item;
                     $scope.childLevel = 1;
+                    $scope.headerLevel1 = item.title;
                 } else if (item["categoryId"] != undefined) {
                     $scope.selectList = item.categoryItems || [];
                     $scope.selectedCategory = item;
                     $scope.childLevel = 2;
+                    $scope.headerLevel2 = item.title;
                 } else if (item["categoryItemId"] != undefined) {
                     $scope.selectList = item.categoryItemOptions || [];
                     $scope.selectedCategoryItem = item;
                     $scope.childLevel = 3;
+                    $scope.headerLevel3 = item.title;
                 } else if (item["categoryItemOptionId"] != undefined) {
                 }
 
                 $scope.headerTitle = nextForm.title;
                 $scope.headerCount = $scope.selectList.length;
-                $scope.headerDetail = item.title;
             }
 
         };
@@ -790,15 +774,14 @@
                 if (frm.id === 2) {
                     $scope.hasDetail = false;
                     $scope.selectList = $scope.hi.templates;
-                    $scope.headerDetail = $scope.headerDetailDefault;
                 } else if (frm.id === 3) {
                     $scope.childLevel = 1;
                     $scope.selectList = $scope.selectedTemplate.categories;
-                    $scope.headerDetail = $scope.selectedTemplate.title;
+                    $scope.headerLevel1 = $scope.selectedTemplate.title;
                 } else if (frm.id === 4) {
                     $scope.childLevel = 2;
                     $scope.selectList = $scope.selectedCategory.categoryItems;
-                    $scope.headerDetail = $scope.selectedCategory.title;
+                    $scope.headerLevel1 = $scope.selectedCategory.title;
                 }
                 $scope.headerTitle = prevForm.title;
                 $scope.headerCount = $scope.selectList.length;
@@ -1917,28 +1900,36 @@ position: relative;
     }
 
     .has-detail.level-1 .p-scroll { 
-        top: 75px;
+        top: 79px;
     }
     
     .has-detail.level-2 .p-scroll { 
-        top: 92px;
+        top: 103px;
     }
 
     .has-detail.level-3 .p-scroll { 
-        top: 107px;
+        top: 129px;
     }
     
-    .header-detail .level-1 {
-        background-color: blue;
+    
+    .header-detail .level-1,
+    .header-detail .level-2,
+    .header-detail .level-3 {
         display: none;
+        padding-top: 5px;
+        height: 27px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+
+    .header-detail .level-1 {
+        background-color: #637283;
     }
     .header-detail .level-2 {
-        background-color: steelblue;
-        display: none;
+        background-color: #7c8c9c;
     }
     .header-detail .level-3 {
-        background-color: lightsteelblue;
-        display: none;
+        background-color: #99a5b2;
     }
     .header-detail {
         display: none;
