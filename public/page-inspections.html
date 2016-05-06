@@ -721,6 +721,7 @@
         $scope.headerDetailDefault = "(please add or select a template to get started)";
 
         $scope.next = function (frm, item) {
+            $scope.isEditMode = false;
             $scope.hasDetail = true;
             if (frm.nextForm !== -1) {
                 var nextForm = $scope.forms[frm.nextForm - 1];
@@ -758,6 +759,7 @@
 
         };
         $scope.prev = function (frm) {
+            $scope.isEditMode = false;
             $scope.hasDetail = true;
             if (frm.prevForm !== -1) {
                 var prevForm = $scope.forms[frm.prevForm - 1];
@@ -896,6 +898,9 @@
                 }
             }
             $scope.headerCount = list.length;
+            if (list.length === 0) {
+                $scope.isEditMode = false;
+            }
         };
 
         $scope.checkIfHasChildren = function (selectedFormId, selectedObj) {
