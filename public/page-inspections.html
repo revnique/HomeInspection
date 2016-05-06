@@ -408,7 +408,7 @@
         .module('app')
         .controller('tempController', tempController);
 
-    tempController.$inject = ['$scope', '$timeout'];
+    tempController.$inject = ['$scope', '$timeout', '$filter'];
 
 
     //<div ht-resize-width="45"></div>
@@ -636,7 +636,7 @@
     ]);
 
 
-    function tempController($scope, $timeout) {
+    function tempController($scope, $timeout, $filter) {
         $scope.dtown = "hello world";
         $scope.isShifted = false;
         $scope.doit = function() {
@@ -829,7 +829,6 @@
                 }
             };
 
-
             if (selectedForm === 1) {
                 newObj.templateId = ($scope.seedNumber + 500) * -1;
                 if ($scope.hi.templates == undefined) {
@@ -874,19 +873,29 @@
                 item.chk.isChecked = false;
             });
         };
-        $scope.deleteItems = function() {
-            var list = $scope.selectList;
-            var newList = [];
-            angular.forEach(list, function(item, key, obj) {
-                if (item.chk.isChecked === false) {
-                    newList.push(item);
+
+        $scope.deleteItems = function () {
+            var list = [];
+            switch ($scope.selectedForm.id) {
+            case 1:
+                list = $scope.hi.templates;
+                break;
+            case 2:
+                list = $scope.selectedTempate.categories;
+                break;
+            case 3:
+                list = $scope.selectedCategory.categoryItems;
+                break;
+            case 4:
+                list = $scope.selectedCategoryItem.categoryItemOptions;
+                break;
+            }
+            for (var i = list.length - 1; i >= 0; i--) {
+                if (list[i].chk.isChecked === true) {
+                    list.splice(i, 1);
                 }
-            });
-
-            //var hasChildren = $scope.checkIfHasChildren(selectedForm.id,)
-            $scope.selectList = newList;
-
-
+            }
+            $scope.headerCount = list.length;
         };
 
         $scope.checkIfHasChildren = function (selectedFormId, selectedObj) {
