@@ -96,7 +96,7 @@
             </div>
         </div>
     <div class="p-scroll">
-        <div class="socketio-msg">
+        <div class="socketio-msg ng-hide">
             socket.io message: show me...<span></span>
         </div>
         <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
@@ -1152,10 +1152,10 @@
         };
 
         $scope.login = function() {
-            //https://homeinspection.harristeq.com/authentication/signin
+            //https://homeinspection.harristeq.com/api/auth/signin
             //{"username":"asdf","password":"Password1*"}
             var data = { "username": "asdf", "password": "Password1*" };
-            $http.post('https://homeinspection.harristeq.com/authentication/signin', data)
+            $http.post('https://homeinspection.harristeq.com/api/auth/signin', data)
                 .success(function(response) {
                     // Show user success message and clear form
                     $scope.success = response.message;
