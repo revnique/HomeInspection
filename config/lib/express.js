@@ -42,6 +42,8 @@ module.exports.initLocalVariables = function (app) {
   app.use(function (req, res, next) {
     res.locals.host = req.protocol + '://' + req.hostname;
     res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
 };

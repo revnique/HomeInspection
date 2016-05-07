@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
 <head>
+    <script type="text/javascript" src="https://homeinspection.harristeq.com/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <script src="//jashkenas.github.io/underscore/underscore-min.js"></script>
     <meta charset="utf-8">
@@ -94,183 +95,186 @@
                 </div>
             </div>
         </div>
-        <div class="p-scroll">
-            <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
-                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
-                    <div class="select-list-item" ng-repeat="item in selectList">
-                        <div class="select-list-item-check">
-                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
-                        </div>
-                        <div class="select-list-item-main" ht-resize-width="65">
-                            <div class="first-line">
-                                <div class="item-title">
-                                    {{item.title}}
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="second-line">
-                                <div class="first-item">
-                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
-                                </div>
-                                <div class="second-item">
-                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="third-line">
-                                <div class="item-date">
-                                    {{item.date}}
-                                </div>
-                                <div class="item-time">
-                                    <span>{{item.time}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm, item)">
-                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
-                            </a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </form>
-            <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
-                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
-
-                    <div class="select-list-item" ng-repeat="item in selectList">
-                        <div class="select-list-item-check">
-                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
-                        </div>
-                        <div class="select-list-item-main" ht-resize-width="65">
-                            <div class="first-line">
-                                <div class="item-title">
-                                    {{item.title}}
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="second-line">
-                                <div class="first-item">
-                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
-                                </div>
-                                <div class="second-item">
-                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="third-line">
-                                <div class="item-date">
-                                    {{item.date}}
-                                </div>
-                                <div class="item-time">
-                                    <span>{{item.time}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm, item)">
-                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
-                            </a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                </div>
-            </form>
-            <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
-                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
-
-                    <div class="select-list-item" ng-repeat="item in selectList">
-                        <div class="select-list-item-check">
-                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
-                        </div>
-                        <div class="select-list-item-main" ht-resize-width="65">
-                            <div class="first-line">
-                                <div class="item-title">
-                                    {{item.title}}
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="second-line">
-                                <div class="first-item">
-                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
-                                </div>
-                                <div class="second-item">
-                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="third-line">
-                                <div class="item-date">
-                                    {{item.date}}
-                                </div>
-                                <div class="item-time">
-                                    <span>{{item.time}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="right-arrow">
-                            <a href="#" ng-click="next(selectedForm, item)">
-                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
-                            </a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                </div>
-            </form>
-            <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
-                <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
-
-                    <div class="select-list-item" ng-repeat="item in selectList">
-                        <div class="select-list-item-check">
-                            <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}" />
-                        </div>
-                        <div class="select-list-item-main" ht-resize-width="65">
-                            <div class="first-line">
-                                <div class="item-title">
-                                    {{item.title}}
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="second-line">
-                                <div class="first-item">
-                                    {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
-                                </div>
-                                <div class="second-item">
-                                    {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="third-line">
-                                <div class="item-date">
-                                    {{item.date}}
-                                </div>
-                                <div class="item-time">
-                                    <span>{{item.time}}</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="right-arrow ng-hide">
-                            <a href="#" ng-click="next(selectedForm, item)">
-                                <img src="https://homeinspection.harristeq.com/chevron-right.png" />
-                            </a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                </div>
-            </form>
-            <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
-                <h1>
-                    Inspections
-                </h1>
-            </form>
+    <div class="p-scroll">
+        <div class="socketio-msg">
+            socket.io message: show me...<span></span>
         </div>
+        <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
+            <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+                <div class="select-list-item" ng-repeat="item in selectList">
+                    <div class="select-list-item-check">
+                        <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}"/>
+                    </div>
+                    <div class="select-list-item-main" ht-resize-width="65">
+                        <div class="first-line">
+                            <div class="item-title">
+                                {{item.title}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="second-line">
+                            <div class="first-item">
+                                {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                            </div>
+                            <div class="second-item">
+                                {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="third-line">
+                            <div class="item-date">
+                                {{item.date}}
+                            </div>
+                            <div class="item-time">
+                                <span>{{item.time}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="right-arrow">
+                        <a href="#" ng-click="next(selectedForm, item)">
+                            <img src="https://homeinspection.harristeq.com/chevron-right.png"/>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </form>
+        <form id="formCategories" method="post" name="vm.form.inspectionForm" class="slide" data-ng-class="getStyle(forms[1])">
+            <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                <div class="select-list-item" ng-repeat="item in selectList">
+                    <div class="select-list-item-check">
+                        <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}"/>
+                    </div>
+                    <div class="select-list-item-main" ht-resize-width="65">
+                        <div class="first-line">
+                            <div class="item-title">
+                                {{item.title}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="second-line">
+                            <div class="first-item">
+                                {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                            </div>
+                            <div class="second-item">
+                                {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="third-line">
+                            <div class="item-date">
+                                {{item.date}}
+                            </div>
+                            <div class="item-time">
+                                <span>{{item.time}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="right-arrow">
+                        <a href="#" ng-click="next(selectedForm, item)">
+                            <img src="https://homeinspection.harristeq.com/chevron-right.png"/>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </form>
+        <form id="formItems" class="slide" data-ng-class="getStyle(forms[2])">
+            <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                <div class="select-list-item" ng-repeat="item in selectList">
+                    <div class="select-list-item-check">
+                        <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}"/>
+                    </div>
+                    <div class="select-list-item-main" ht-resize-width="65">
+                        <div class="first-line">
+                            <div class="item-title">
+                                {{item.title}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="second-line">
+                            <div class="first-item">
+                                {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                            </div>
+                            <div class="second-item">
+                                {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="third-line">
+                            <div class="item-date">
+                                {{item.date}}
+                            </div>
+                            <div class="item-time">
+                                <span>{{item.time}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="right-arrow">
+                        <a href="#" ng-click="next(selectedForm, item)">
+                            <img src="https://homeinspection.harristeq.com/chevron-right.png"/>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </form>
+        <form id="formItemOptions" class="slide" data-ng-class="getStyle(forms[3])">
+            <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
+
+                <div class="select-list-item" ng-repeat="item in selectList">
+                    <div class="select-list-item-check">
+                        <ht-checkbox use-circles="{{item.chk.useCircles}}" hide-label="{{item.chk.hideLabel}}" data-ng-disabled="item.chk.isDisabled" data-ng-model="item.chk.isChecked" data-checkbox-id="{{item.chk.id}}" data-label="{{ item.chk.label }}"/>
+                    </div>
+                    <div class="select-list-item-main" ht-resize-width="65">
+                        <div class="first-line">
+                            <div class="item-title">
+                                {{item.title}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="second-line">
+                            <div class="first-item">
+                                {{item.firstDetailName}} <span>{{item.firstDetailCount}}</span>
+                            </div>
+                            <div class="second-item">
+                                {{item.secondDetailName}} <span>{{item.secondDetailCount}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="third-line">
+                            <div class="item-date">
+                                {{item.date}}
+                            </div>
+                            <div class="item-time">
+                                <span>{{item.time}}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="right-arrow ng-hide">
+                        <a href="#" ng-click="next(selectedForm, item)">
+                            <img src="https://homeinspection.harristeq.com/chevron-right.png"/>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </form>
+        <form id="formInspections" class="slide" data-ng-class="getStyle(forms[4])">
+            <h1>
+                Inspections
+            </h1>
+        </form>
+    </div>
 
         <div class="p-footer main">
             <div class="p-footer-container">
@@ -408,7 +412,7 @@
         .module('app')
         .controller('tempController', tempController);
 
-    tempController.$inject = ['$scope', '$timeout', '$filter'];
+    tempController.$inject = ['$scope', '$timeout', '$http'];
 
 
     //<div ht-resize-width="45"></div>
@@ -636,7 +640,7 @@
     ]);
 
 
-    function tempController($scope, $timeout, $filter) {
+    function tempController($scope, $timeout, $http) {
         $scope.dtown = "hello world";
         $scope.isShifted = false;
         $scope.doit = function() {
@@ -1147,6 +1151,20 @@
             ]
         };
 
+        $scope.login = function() {
+            //https://homeinspection.harristeq.com/authentication/signin
+            //{"username":"asdf","password":"Password1*"}
+            var data = { "username": "asdf", "password": "Password1*" };
+            $http.post('https://homeinspection.harristeq.com/authentication/signin', data)
+                .success(function(response) {
+                    // Show user success message and clear form
+                    $scope.success = response.message;
+                }).error(function(response) {
+                    // Show user error message and clear form
+                    $scope.error = response.message;
+                });
+        };
+
         $scope.menuActive = 'i';
         var init = function() {
             var page = location.href;
@@ -1162,6 +1180,7 @@
                 $scope.selectList = $scope.hi.templates;
                 $scope.headerCount = $scope.hi.templates.length;
                 $scope.headerTitle = "Templates";
+                $scope.login();
             },300);
 
         };
@@ -1932,19 +1951,19 @@ position: relative;
         cursor: not-allowed;
     }
 
-    .has-detail.level-1 .p-scroll { 
+    .has-detail.level-1 .p-scroll {
         top: 79px;
     }
-    
-    .has-detail.level-2 .p-scroll { 
+
+    .has-detail.level-2 .p-scroll {
         top: 103px;
     }
 
-    .has-detail.level-3 .p-scroll { 
+    .has-detail.level-3 .p-scroll {
         top: 129px;
     }
-    
-    
+
+
     .header-detail .level-1,
     .header-detail .level-2,
     .header-detail .level-3 {
@@ -1968,7 +1987,7 @@ position: relative;
     .header-detail {
         display: none;
     }
-    .has-detail .header-detail, 
+    .has-detail .header-detail,
     .has-detail.level-1 .header-detail .level-1,
     .has-detail.level-2 .header-detail .level-1,
     .has-detail.level-3 .header-detail .level-1,
@@ -1979,5 +1998,6 @@ position: relative;
     }
 
 </style>
+
 </body>
 </html>
