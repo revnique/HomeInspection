@@ -82,14 +82,14 @@
 
                 </style>
                 <div class="header-detail">
-                    <div class="level-1">
-                        {{headerLevel1}}
+                    <div class="level-1" ng-click="goto(1)">
+                            {{headerLevel1}}
                     </div>
-                    <div class="level-2">
-                        {{headerLevel2}}
+                    <div class="level-2" ng-click="goto(2)">
+                            {{headerLevel2}}
                     </div>
-                    <div class="level-3">
-                        {{headerLevel3}}
+                    <div class="level-3" ng-click="goto(3)">
+                            {{headerLevel3}}
                     </div>
                 </div>
             </div>
@@ -644,9 +644,28 @@
         };
         $scope.selectedFormName = "Templates";
         $scope.selectedFormItemCount = "77";
-        $scope.goto = function(formName) {
-            $scope.selectedFormName = formName;
-            $scope.selectedFormItemCount = "88";
+        $scope.goto = function (frmId) {
+
+            $scope.animateTo(frmId, $scope.childLevel);
+            //switch (frmId) {
+            //    case 1:
+            //        $scope.prev($scope.forms[3]);
+            //        $scope.prev($scope.forms[2]);
+            //        $scope.prev($scope.forms[1]);
+            //        break;
+            //    case 2:
+            //        $scope.prev($scope.forms[2]);
+            //        break;
+            //    case 3:
+            //        $scope.prev($scope.forms[3]);
+            //        break;
+            //}
+        };
+
+        $scope.animateTo = function (gotoFormId, fromFormId) {
+            for (var i = fromFormId; i >= gotoFormId; i--) {
+                $scope.prev($scope.forms[i+1]);
+            }
         };
 
         $scope.toggleEditMode = function() {
@@ -783,7 +802,7 @@
                 } else if (frm.id === 4) {
                     $scope.childLevel = 2;
                     $scope.selectList = $scope.selectedCategory.categoryItems;
-                    $scope.headerLevel1 = $scope.selectedCategory.title;
+                    $scope.headerLevel2 = $scope.selectedCategory.title;
                 }
                 $scope.headerTitle = prevForm.title;
                 $scope.headerCount = $scope.selectList.length;
@@ -1934,6 +1953,7 @@ position: relative;
         height: 27px;
         font-size: 13px;
         text-overflow: ellipsis;
+        cursor: pointer;
     }
 
     .header-detail .level-1 {
