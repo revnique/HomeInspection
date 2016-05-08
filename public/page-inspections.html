@@ -1,14 +1,20 @@
 ﻿<!DOCTYPE html>
 <html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
 <head>
+
     <script type="text/javascript" src="https://homeinspection.harristeq.com/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.0/angular-animate.min.js"></script>
     <script src="//jashkenas.github.io/underscore/underscore-min.js"></script>
     <script src="https://homeinspection.harristeq.com/angular.socket.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<meta name="viewport" content="width=device-width">-->
     <title>HomeInspections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
+
+
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/metisMenu/dist/metisMenu.min.css">
@@ -97,9 +103,7 @@
             </div>
         </div>
     <div class="p-scroll">
-        <div class="socketio-msg ng-hide">
-            socket.io message: show me...<span></span>
-        </div>
+        <toaster-container style="margin-top: 300px;"></toaster-container>
         <form id="formTempates" class="slide main" data-ng-class="getStyle(forms[0])">
             <div class="p-inner-container" ht-resize-width="0" ng-class="{'select-mode': isEditMode}">
                 <div class="select-list-item" ng-repeat="item in selectList">
@@ -407,13 +411,15 @@
         var strTime = hours + ':' + minutes + ' ' + ampm;
         return strTime;
     };
-    var app = angular.module('app', ['btford.socket-io']);
+
+
+    var app = angular.module('app', ['btford.socket-io', 'toaster', 'ngAnimate']);
 
     angular
         .module('app')
         .controller('tempController', tempController);
 
-    tempController.$inject = ['$scope', '$timeout', '$http', 'Socket'];
+    tempController.$inject = ['$scope', '$timeout', '$http', 'Socket', 'toaster'];
 
 
     //<div ht-resize-width="45"></div>
@@ -643,14 +649,15 @@
     //socket factory that provides the socket service
     app.factory('Socket', ['socketFactory',
         function (socketFactory) {
+            var url = location.href.indexOf("localhost") > -1 ? 'http://localhost:3000' : 'https://homeinspection.harristeq.com';
             return socketFactory({
                 prefix: '',
-                ioSocket: io.connect('http://localhost:3000')
+                ioSocket: io.connect(url)
             });
         }
     ]);
 
-    function tempController($scope, $timeout, $http, Socket) {
+    function tempController($scope, $timeout, $http, Socket, toaster) {
         $scope.dtown = "hello world";
         $scope.isShifted = false;
         $scope.doit = function() {
@@ -1191,13 +1198,16 @@
                 $scope.headerCount = $scope.hi.templates.length;
                 $scope.headerTitle = "Templates";
                 $scope.login();
-
-                Socket.on('demoSocketIO.called', function (demo) {
-                    console.log("demoSocketIO.called", demo);
-                });
             },300);
-
         };
+
+        Socket.on('demoSocketIO.called', function (demo) {
+            $timeout(function () {
+                toaster.pop('success', "title", "text");
+            }, 300);
+            console.log("demoSocketIO.called", demo);
+        });
+
         init();
     }
     </script>

@@ -18,7 +18,9 @@ var config = require('../config'),
     flash = require('connect-flash'),
     consolidate = require('consolidate'),
     path = require('path'),
-    cors = require('cors');
+    cors = require('cors'),
+    http = require('http'),
+    socketio = require('socket.io');
 
 /**
  * Initialize local variables
@@ -212,6 +214,14 @@ module.exports.initErrorRoutes = function (app) {
 module.exports.configureSocketIO = function (app, db) {
   // Load the Socket.io configuration
   var server = require('./socket.io')(app, db);
+
+
+    // Attach Socket.io
+ // var server = http.createServer(app);
+  var io = socketio.listen(server);
+  app.set('socketio', io);
+  app.set('server', server);
+
 
   // Return server object
   return server;

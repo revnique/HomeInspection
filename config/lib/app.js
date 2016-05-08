@@ -55,6 +55,7 @@ module.exports.start = function start(callback) {
 
       if (callback) callback(app, db, config);
     });
+    //app.get('server').listen(config.port);
 
   });
 

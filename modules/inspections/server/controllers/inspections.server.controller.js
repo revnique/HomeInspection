@@ -15,9 +15,22 @@ var mongoose = require('mongoose'),
 
 
 exports.demoSocketIO = function (req, res) {
-    var app = require('express')();
-    var http = require('http').Server(app);
-    var socketio = require('socket.io')(http);
+    //var app = require('express')();
+    //var http = require('http').Server(app);
+    //var socketio = require('socket.io')(http);
+
+    //var server = http.createServer(app);
+
+
+    //http.listen(3000, function () {
+    //    console.log('listening on *:3000');
+    //});
+
+    //var io = socketio.listen(server);
+    //app.set('socketio', io);
+    //app.set('server', server);
+
+
     //console.log("demoSocketIO", socketio);
 
     //var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
@@ -26,8 +39,9 @@ exports.demoSocketIO = function (req, res) {
         title: "potato salad",
         date: new Date()
     };
-
-    socketio.sockets.emit('demoSocketIO.called', demo); // emit an event for all connec
+    var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+    socketio.sockets.emit('demoSocketIO.called', demo); // emit
+   // socketio.sockets.emit('demoSocketIO.called', demo); // emit an event for all connec
 
     return res.jsonp({ info: "create cat" });
 };
