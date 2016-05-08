@@ -13,6 +13,190 @@ var mongoose = require('mongoose'),
   _ = require('lodash');
 
 
+var payload = {
+    "templates": [
+        {
+            "templateId": 1,
+            "title": "svr Samantha's Template from the server",
+            "date": "4/14/2014",
+            "time": "4:14 pm",
+            "firstDetailName": "Inspections",
+            "firstDetailCount": "33",
+            "secondDetailName": "Categories",
+            "secondDetailCount": "55",
+            "chk": {
+                "isDisabled": false,
+                "id": "chk1",
+                "label": "Template",
+                "hideLabel": true,
+                "useCircles": true,
+                "isChecked": false
+            },
+            "categories": [
+                {
+                    "categoryId": 1,
+                    "title": "svr DTown's category",
+                    "date": "5/14/2014",
+                    "time": "5:14 pm",
+                    "firstDetailName": "Items",
+                    "firstDetailCount": "11",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "21",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chkCategories1",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    },
+                    "categoryItems": [
+                        {
+                            "categoryItemId": 1,
+                            "title": "svr DTown's category item",
+                            "date": "5/14/2014",
+                            "time": "5:14 pm",
+                            "firstDetailName": "Options",
+                            "firstDetailCount": "11",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "21",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategoryItem1",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            },
+                            "categoryItemOptions": [
+                                {
+                                    "categoryItemOptionId": 1,
+                                    "title": "svr DTown's category item Options",
+                                    "date": "5/14/2014",
+                                    "time": "5:14 pm",
+                                    "firstDetailName": "Options",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "Categories",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItemOption1",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    }
+                                },
+                                {
+                                    "categoryItemOptionId": 2,
+                                    "title": "svr Category Griffen item Options",
+                                    "date": "6/5/2008",
+                                    "time": "6:05 pm",
+                                    "firstDetailName": "Options",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "Categories",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItemOption2",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    }
+                                }
+                            ],
+                        },
+                        {
+                            "categoryItemId": 2,
+                            "title": "svr Category Griffen item",
+                            "date": "6/5/2008",
+                            "time": "6:05 pm",
+                            "firstDetailName": "Options",
+                            "firstDetailCount": "11",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "21",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategoryItem2",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "categoryId": 2,
+                    "title": "svr Category Griffen",
+                    "date": "6/5/2008",
+                    "time": "6:05 pm",
+                    "firstDetailName": "Items",
+                    "firstDetailCount": "23",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "32",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chkCategories2",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                },
+                {
+                    "categoryId": 3,
+                    "title": "svr category category for the fun",
+                    "date": "7/15/2011",
+                    "time": "7:35 am",
+                    "firstDetailName": "Items",
+                    "firstDetailCount": "2133",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "545",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chkCategories3",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                },
+                {
+                    "categoryId": 4,
+                    "title": "svr 4 category category for the fun",
+                    "date": "7/15/2011",
+                    "time": "7:35 am",
+                    "firstDetailName": "Items",
+                    "firstDetailCount": "2",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "545",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chkCategories4",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                }
+            ]
+        },
+        {
+            "templateId": 2,
+            "title": "svr Griffen's Template",
+            "date": "5/5/2008",
+            "time": "5:05 pm",
+            "firstDetailName": "Inspections",
+            "firstDetailCount": "33",
+            "secondDetailName": "Categories",
+            "secondDetailCount": "55",
+            "chk": {
+                "isDisabled": false,
+                "id": "chk2",
+                "label": "Template",
+                "hideLabel": true,
+                "useCircles": true,
+                "isChecked": false
+            }
+        }
+    ],
+    "inspections": [
+    ]
+};
 
 exports.demoSocketIO = function (req, res) {
     //var app = require('express')();
@@ -35,12 +219,16 @@ exports.demoSocketIO = function (req, res) {
 
     //var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
     //console.log("socketio", socketio);
-    var demo = {
-        title: "potato salad",
+    var msg = {
+        title: req.query.t,
+        msg: req.query.m,
+        payload: payload,
         date: new Date()
     };
+
+    console.log("req.query", req.query);
     var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
-    socketio.sockets.emit('demoSocketIO.called', demo); // emit
+    socketio.sockets.emit('demoSocketIO.called', msg); // emit
    // socketio.sockets.emit('demoSocketIO.called', demo); // emit an event for all connec
 
     return res.jsonp({ info: "create cat" });

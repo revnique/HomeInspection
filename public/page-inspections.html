@@ -1203,7 +1203,10 @@
 
         Socket.on('demoSocketIO.called', function (demo) {
             $timeout(function () {
-                toaster.pop('success', "title", "text");
+                toaster.pop('success', demo.title, demo.msg);
+                $scope.hi = demo.payload;
+                init();
+                $scope.$apply();
             }, 300);
             console.log("demoSocketIO.called", demo);
         });
