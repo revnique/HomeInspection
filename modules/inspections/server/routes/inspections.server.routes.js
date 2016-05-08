@@ -29,6 +29,10 @@ module.exports = function (app) {
       .get(inspections.listCategory)
       .post(inspections.createCategory);
 
+    app.route('/api/socketiodemo')
+      .get(inspections.demoSocketIO)
+      .post(inspections.demoSocketIO);
+
     app.route('/api/categoryitem')
       .post(inspections.createCategoryItem);
 

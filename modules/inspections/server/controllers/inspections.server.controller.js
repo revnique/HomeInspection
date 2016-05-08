@@ -14,6 +14,24 @@ var mongoose = require('mongoose'),
 
 
 
+exports.demoSocketIO = function (req, res) {
+    var app = require('express')();
+    var http = require('http').Server(app);
+    var socketio = require('socket.io')(http);
+    //console.log("demoSocketIO", socketio);
+
+    //var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+    //console.log("socketio", socketio);
+    var demo = {
+        title: "potato salad",
+        date: new Date()
+    };
+
+    socketio.sockets.emit('demoSocketIO.called', demo); // emit an event for all connec
+
+    return res.jsonp({ info: "create cat" });
+};
+
 
 
 exports.createInpsectionTemplate = function (req, res) {
