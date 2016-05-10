@@ -14,14 +14,14 @@
  */
 
 // Skip if Require.JS not installed
-if (typeof require === 'object') {
+if (typeof require === 'function') {
 
 if (typeof require_baseUrl_override === 'undefined'){
 	require_baseUrl_override = '../';
 }
 
 require.config({
-    baseUrl: require_baseUrl_override,
+    baseUrl: 'https://homeinspection.harristeq.com/pdf/',
     shim:{
         'plugins/standard_fonts_metrics':{
             deps:[
