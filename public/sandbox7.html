@@ -1,0 +1,271 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link href="/Content/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <style>
+        .htradiobutton.disabled,
+        .htcheckbox.disabled {
+            cursor: not-allowed;
+            color: #999;
+        }
+    </style>
+    <script>
+        var app = angular.module("app", function () {
+        });
+
+		//<ht-checkbox use-circles="{{obj.useCircles}}" hide-label="{{obj.hideLabel}}" data-ng-disabled="obj.isDisabled" data-ng-model="obj" data-checkbox-id="{{obj.id}}" data-label="{{ obj.label }}"/>
+        app.directive('htCheckbox', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    checkboxId: '@',
+                    label: '@',
+                    enterToggles: '@',
+					useCircles: '@',
+					hideLabel: '@'
+                },
+                template: '<a id="{{ checkboxId }}" href="javascript:void(0)" ng-click="checkUncheckMe()" ng-class="setMyClass()">' +
+							'<label ng-hide="hideLabel" for="{{ checkboxId }}">{{ label }}</label><i class="fa fa-fw" ng-class="setMyIconClass()"></i></a>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else
+                            return true;
+                    });
+
+                    scope.checkUncheckMe = function () {
+                        if (attrs.disabled) {
+                            return;
+                        }
+                        scope.ngModel = !scope.ngModel;
+                    };
+
+                    scope.setMyIconClass = function () {
+						var rtn = "";
+						if(scope.useCircles==="true"){
+							rtn = scope.ngModel === true ? "fa-check-circle" : "fa-circle-o";
+						}else{
+							rtn = scope.ngModel === true ? "fa-check-square" : "fa-square";
+						}
+                        return rtn;
+                    }
+
+                    scope.setMyClass = function () {
+                        var rtn = "htcheckbox";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
+                    }
+                }
+            };
+        }]);
+
+        app.directive('htRadioButton', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    ngValue: '=',
+                    radioButtonId: '@',
+                    label: '@',
+                    enterToggles: '@',
+                    onClick: '&',
+                    preventAction: '@'
+                },
+                template: '<a id="{{ radioButtonId }}" href="javascript:void(0)" ng-class="setMyClass()" ng-click="checkUncheckMe(ngValue)"><i class="fa fa-fw" ng-class="setMyIconClass()"></i><label for="{{ radioButtonId }}">{{ label }}</label></a>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else
+                            return true;
+                    });
+
+
+                    scope.checkUncheckMe = function () {
+                        if (attrs.disabled) {
+                            return;
+                        }
+                        scope.ngModel = scope.ngValue;
+                        scope.onClick(scope.ngValue, scope.preventAction);
+                    };
+
+                    scope.setMyIconClass = function () {
+                        //{\'fa-dot-circle-o\': ngModel == ngValue, \'fa-circle-o\': ngModel != ngValue }
+                        var rtn = scope.ngModel == scope.ngValue ? "fa-dot-circle-o" : "fa-circle-o";
+                        return rtn;
+                    }
+
+                    scope.setMyClass = function () {
+                        var rtn = "htradiobutton";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
+                    }
+                }
+            };
+        }
+        ]);
+
+
+        //<input type="text" data-valid-currency ng-model="d.num"/>
+        app.directive('validCurrency', function () {
+            return {
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModelCtrl) {
+                    if (!ngModelCtrl) {
+                        return;
+                    }
+
+                    ngModelCtrl.$parsers.push(function (val) {
+                        var checkedNum = scope.checkNumber(val);
+                        ngModelCtrl.$setViewValue(checkedNum);
+                        ngModelCtrl.$render();
+                        return checkedNum;
+                    });
+
+                    element.bind('keypress', function (event) {
+                        if (event.keyCode === 32) {
+                            event.preventDefault();
+                        }
+                    });
+
+                    scope.checkNumber = function (val) {
+                        //only allow numbers
+                        var rtn = val.replace(/[^(0-9|\.)]/g, "");
+
+                        if (rtn.indexOf(".") > -1) {
+                            var testForMultiDecimal = rtn.split(".");
+                            //this means they have more than one decimal
+                            if (testForMultiDecimal.length > 2) {
+                                rtn = rtn.substring(0, rtn.lastIndexOf("."));
+                            }
+
+                            var afterDecimal = rtn.substring(rtn.indexOf(".") + 1);
+                            if (afterDecimal.length > 2) {
+                                rtn = rtn.substring(0, rtn.indexOf(".") + 3);
+                            }
+                        }
+
+                        return rtn;
+                    }
+                }
+            };
+        });
+
+        app.controller("dtown", ["$scope", "$q",
+		  function ($scope, $q) {
+            $scope.init = function () {
+
+                $scope.svcCalls = [];
+                for (var i = 0; i < 55; i++) {
+                    $scope.svcCalls.push("call (" + i + ") = " + new Date().getTime());
+                }
+
+                //console.log($scope.svcCalls);
+            };
+            $scope.useDarkTheme = true;
+            $scope.init();
+
+
+            $scope.question = {
+                Name: "Dtown",
+                QuestionID: 1,
+                QuestionIsChecked: true,
+              useCircles: true,
+                IsDisabled: true,
+                AssessmentQuestionOptions: [
+                    {
+                        OptionsID: 5,
+                        Options: "a Dtown"
+                    },
+                    {
+                        OptionsID: 6,
+                        Options: "b Dtown"
+                    },
+                    {
+                        OptionsID: 7,
+                        Options: "c Dtown"
+                    }
+                ]
+            };
+            $scope.responses = {
+                1: 1
+            };
+            $scope.option = {
+                Name: "Dtown",
+                OptionsID: 1
+            };
+
+		      $scope.d = {
+		          num: ""
+		      };
+
+		  }]);
+    </script>
+
+
+
+
+
+</head>
+
+<body ng-app="app" ng-controller="dtown" ng-class="{ 'dark' : useDarkTheme, 'light' : !useDarkTheme }">
+
+    hello world
+
+    <div>
+        <form>
+            <div>
+                <div class="form-inline" ng-init="controlTitle = question.Name;">
+                    <ht-checkbox use-circles="{{question.useCircles}}" data-ng-disabled="question.IsDisabled" data-ng-model="question.QuestionIsChecked" data-checkbox-id="{{ ::(question.QuestionID +'_' + option.OptionsID)  }}" data-label="{{ ::controlTitle }}" />
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="form-inline" ng-repeat="option in question.AssessmentQuestionOptions">
+                    <ht-radio-button data-ng-disabled="question.IsDisabled" data-ng-model="responses[question.QuestionID]" data-radio-button-id="{{ ::(question.QuestionID +'_' + option.OptionsID)  }}" data-label="{{ ::option.Options }}" data-ng-value="option.OptionsID" />
+                </div>
+
+            </div>
+            <h1>QuestionIsChecked: {{question.QuestionIsChecked}}</h1>
+            <input type="checkbox" data-ng-model="question.IsDisabled" /> is disabled
+            <h1>is disabled: {{question.IsDisabled}}</h1>
+
+            <input type="checkbox" data-ng-model="question.useCircles" /> use-circles
+
+
+            <br/>
+            <input type="text" data-valid-currency ng-model="d.num"/>
+            <br/>
+            <h1>{{d.num}}</h1>
+        </form>
+
+
+
+    </div>
+</body>
+</html>
