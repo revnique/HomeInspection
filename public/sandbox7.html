@@ -9,6 +9,7 @@
 
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
+    <script src="https://homeinspection.harristeq.com/pdf/jspdf.js"></script>
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
     <link href="/Content/css" rel="stylesheet" />
@@ -23,8 +24,8 @@
 <script>
     require_baseUrl_override = '../..';
 
-    require(['../../libs/require/config'], function () {
-        require(['html2pdf'], function () {
+    require(['https://homeinspection.harristeq.com/pdf/libs/require/config.js'], function () {
+        require(['https://homeinspection.harristeq.com/pdf/libs/html2pdf.js'], function () {
             var pdf = new jsPDF('p', 'pt', 'letter');
             var canvas = pdf.canvas;
             canvas.height = 72 * 11;
