@@ -14,18 +14,21 @@
     <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
     <link href="/Content/css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-    <style>
-        .htradiobutton.disabled,
-        .htcheckbox.disabled {
-            cursor: not-allowed;
-            color: #999;
-        }
-    </style>
+<style>
+    .htradiobutton.disabled,
+    .htcheckbox.disabled {
+        cursor: not-allowed;
+        color: #999;
+    }
+</style>
+
+
+    <script src="https://homeinspection.harristeq.com/pdf/libs/html2pdf.js"></script>
+
 <script>
-    require_baseUrl_override = '../..';
 
     require(['https://homeinspection.harristeq.com/pdf/libs/require/config.js'], function () {
-        require(['https://homeinspection.harristeq.com/pdf/libs/html2pdf.js'], function () {
+        require(['html2pdf'], function () {
             var pdf = new jsPDF('p', 'pt', 'letter');
             var canvas = pdf.canvas;
             canvas.height = 72 * 11;

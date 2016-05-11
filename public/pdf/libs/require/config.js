@@ -14,28 +14,28 @@
  */
 
 // Skip if Require.JS not installed
-if (typeof require === 'object') {
+if (typeof require === 'function') {
 
 if (typeof require_baseUrl_override === 'undefined'){
-	require_baseUrl_override = '../';
+    require_baseUrl_override = 'https://homeinspection.harristeq.com/pdf/';
 }
 
 require.config({
     baseUrl: require_baseUrl_override,
     shim:{
-        'plugins/standard_fonts_metrics':{
+        'plugins/standard_fonts_metrics': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/split_text_to_size':{
+        'plugins/split_text_to_size': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/annotations' : {
+        'plugins/annotations': {
         	deps:[
             'jspdf',
             'plugins/standard_fonts_metrics',
@@ -43,19 +43,19 @@ require.config({
             ]
         },
 
-        'plugins/outline':{
+        'plugins/outline': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/addimage':{
+        'plugins/addimage': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/png_support':{
+        'plugins/png_support': {
             deps:[
 	            'jspdf',
 	            'libs/png_support/png',
@@ -63,13 +63,13 @@ require.config({
             ]
         },
 
-        'plugins/from_html':{
+        'plugins/from_html': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/context2d':{
+        'plugins/context2d': {
             deps:[
 	            'jspdf',
 	            'plugins/png_support',
@@ -78,13 +78,13 @@ require.config({
             ]
         },
 
-        'libs/html2canvas/dist/html2canvas':{
+        'libs/html2canvas/dist/html2canvas': {
             deps:[
 	            'jspdf'
             ]
         },
 
-        'plugins/canvas' : {
+        'plugins/canvas': {
             deps:[
 	            'jspdf'
             ]
@@ -97,7 +97,7 @@ require.config({
             ]
         },
 
-        'html2pdf' : {
+        'html2pdf': {
         	deps:[
             'jspdf',
             'plugins/standard_fonts_metrics',
@@ -111,7 +111,7 @@ require.config({
             ]
         },
 
-        'test/test_harness':{
+        'test/test_harness': {
             deps:[
 	            'jspdf',
 	            'jspdf.plugin.standard_fonts_metrics',
@@ -120,7 +120,7 @@ require.config({
         }
      },
      paths:{
-    	 'html2pdf': 'libs/html2pdf'
+         'html2pdf': 'libs/html2pdf'
      }
 });
 } // Require.JS
