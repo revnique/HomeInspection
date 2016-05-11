@@ -21,7 +21,7 @@ if (typeof require_baseUrl_override === 'undefined'){
 }
 
 require.config({
-    baseUrl: require_baseUrl_override,
+    baseUrl: 'https://homeinspection.harristeq.com/pdf/',
     shim:{
         'plugins/standard_fonts_metrics': {
             deps:[
