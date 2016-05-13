@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
+<head>
+
+    <script type="text/javascript" src="https://homeinspection.harristeq.com/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.0/angular-animate.min.js"></script>
+    <script src="https://homeinspection.harristeq.com/underscore-min.js"></script>
+    <script src="https://homeinspection.harristeq.com/angular.socket.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width">-->
+    <title>HomeInspections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/metisMenu/dist/metisMenu.min.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/timeline.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/sb-admin-2.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/morrisjs/morris.css">
+    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
+</head>
+<body data-ng-app="app" data-ng-controller="tempController">
+
+<style>
+    .page-divider {
+        border-top: 1px solid #000;
+        width: 100%;
+        clear: both;
+    }
+    .page-top {
+        
+    }
+    .page-top .category-name{
+        float: left;
+        font-size: 40px;
+        font-weight: bold;
+        color: #888;
+        text-transform: uppercase;
+    }
+    .page-top .disclaimer{
+        float: right;
+        font-size: 11px;
+    }
+</style>
+
+<div class="printable-container">
+    <div class="page">
+        <div class="page-top">
+            <div class="category-name">
+                Exterior
+            </div>
+            <div class="disclaimer">
+                This is a Report of conditions observed at the time of
+                <br />
+                Inspection only. This is NOT a Guarantee or Warranty.
+            </div>
+        </div>
+    </div>
+    <div class="page-divider"></div>
+    <div class="page">
+        <div class="page-top">
+            <div class="category-name">
+                Roof and Attic
+            </div>
+            <div class="disclaimer">
+                This is a Report of conditions observed at the time of
+                <br />
+                Inspection only. This is NOT a Guarantee or Warranty.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Date.prototype.addMinutes = function(m) {
+        this.setMinutes(this.getMinutes() + m);
+        return this;
+    };
+
+    Date.prototype.addHours = function(h) {
+        this.setHours(this.getHours() + h);
+        return this;
+    };
+
+    Date.prototype.addDays = function(d) {
+        this.setHours(this.getHours() + (d * 24));
+        return this;
+    };
+    Date.prototype.formatSmallDateTime = function(useSlashNotation) {
+        var day = this.getDate(); // yields dayofmonth
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var month = this.getMonth() + 1; // yields month
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var year = this.getFullYear(); // yields year
+        var hour = this.getHours(); // yields hours
+        var minute = this.getMinutes(); // yields minutes
+        var second = this.getSeconds(); // yields seconds
+        var rtn = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+        if (useSlashNotation) {
+            rtn = month + "/" + day + "/" + year;
+        }
+        // After this construct a string with the above results as below
+        return rtn;
+    };
+    Date.prototype.dateDiff = function(endDateObject) {
+        var days, hours, minutes, seconds, totalMilliseconds, displayString = "";
+
+        totalMilliseconds = (endDateObject - this);
+        days = Math.round(totalMilliseconds / 86400000); // days
+        hours = Math.round((totalMilliseconds % 86400000) / 3600000); // hours
+        minutes = Math.round(((totalMilliseconds % 86400000) % 3600000) / 60000); // minutes
+        seconds = Math.round((((totalMilliseconds % 86400000) % 3600000) % 60000) / 1000); // secs
+
+        if (days > 0) {
+            displayString = days + " days";
+        }
+        if (hours > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += hours + " hours";
+        }
+        if (minutes > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += minutes + " minutes";
+        }
+        if (seconds > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += seconds + " seconds";
+        }
+        if (seconds === 0) {
+            if (displayString === "") {
+                displayString = "less than 1 second";
+            }
+        }
+
+        var rtn = {
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+            totalMilliseconds: totalMilliseconds,
+            displayString: displayString
+        };
+
+        console.log("rtn", rtn);
+        return rtn;
+    };
+
+    Date.prototype.formatAMPM = function() {
+        var hours = this.getHours();
+        var minutes = this.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    };
+
+
+    var app = angular.module('app', ['btford.socket-io', 'toaster', 'ngAnimate']);
+
+    angular
+        .module('app')
+        .controller('tempController', tempController);
+
+    tempController.$inject = ['$scope', '$timeout', '$http'];
+
+
+    function tempController($scope, $timeout, $http) {
+        $scope.dtown = "hello world";
+        
+        $scope.hi = {
+            "templates": [
+                {
+                    "templateId": 1,
+                    "title": "DTown's Template",
+                    "date": "4/14/2014",
+                    "time": "4:14 pm",
+                    "firstDetailName": "Inspections",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk1",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    },
+                    "categories": [
+                        {
+                            "categoryId": 1,
+                            "title": "DTown's category",
+                            "date": "5/14/2014",
+                            "time": "5:14 pm",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "11",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "21",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories1",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            },
+                            "categoryItems": [
+                                {
+                                    "categoryItemId": 1,
+                                    "title": "DTown's category item",
+                                    "date": "5/14/2014",
+                                    "time": "5:14 pm",
+                                    "firstDetailName": "Options",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "Categories",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItem1",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    },
+                                    "categoryItemOptions": [
+                                        {
+                                            "categoryItemOptionId": 1,
+                                            "title": "DTown's category item Options",
+                                            "date": "5/14/2014",
+                                            "time": "5:14 pm",
+                                            "firstDetailName": "Options",
+                                            "firstDetailCount": "11",
+                                            "secondDetailName": "Categories",
+                                            "secondDetailCount": "21",
+                                            "chk": {
+                                                "isDisabled": false,
+                                                "id": "chkCategoryItemOption1",
+                                                "hideLabel": true,
+                                                "useCircles": true,
+                                                "isChecked": false
+                                            }
+                                        },
+                                        {
+                                            "categoryItemOptionId": 2,
+                                            "title": "Category Griffen item Options",
+                                            "date": "6/5/2008",
+                                            "time": "6:05 pm",
+                                            "firstDetailName": "Options",
+                                            "firstDetailCount": "11",
+                                            "secondDetailName": "Categories",
+                                            "secondDetailCount": "21",
+                                            "chk": {
+                                                "isDisabled": false,
+                                                "id": "chkCategoryItemOption2",
+                                                "hideLabel": true,
+                                                "useCircles": true,
+                                                "isChecked": false
+                                            }
+                                        }
+                                    ],
+                                },
+                                {
+                                    "categoryItemId": 2,
+                                    "title": "Category Griffen item",
+                                    "date": "6/5/2008",
+                                    "time": "6:05 pm",
+                                    "firstDetailName": "Options",
+                                    "firstDetailCount": "11",
+                                    "secondDetailName": "Categories",
+                                    "secondDetailCount": "21",
+                                    "chk": {
+                                        "isDisabled": false,
+                                        "id": "chkCategoryItem2",
+                                        "hideLabel": true,
+                                        "useCircles": true,
+                                        "isChecked": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "categoryId": 2,
+                            "title": "Category Griffen",
+                            "date": "6/5/2008",
+                            "time": "6:05 pm",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "23",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "32",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories2",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        },
+                        {
+                            "categoryId": 3,
+                            "title": "category category for the fun",
+                            "date": "7/15/2011",
+                            "time": "7:35 am",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "2133",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "545",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories3",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        },
+                        {
+                            "categoryId": 4,
+                            "title": "4 category category for the fun",
+                            "date": "7/15/2011",
+                            "time": "7:35 am",
+                            "firstDetailName": "Items",
+                            "firstDetailCount": "2",
+                            "secondDetailName": "Categories",
+                            "secondDetailCount": "545",
+                            "chk": {
+                                "isDisabled": false,
+                                "id": "chkCategories4",
+                                "hideLabel": true,
+                                "useCircles": true,
+                                "isChecked": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "templateId": 2,
+                    "title": "Griffen's Template",
+                    "date": "5/5/2008",
+                    "time": "5:05 pm",
+                    "firstDetailName": "Inspections",
+                    "firstDetailCount": "33",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "55",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk2",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                },
+                {
+                    "templateId": 3,
+                    "title": "Template for the fun of it",
+                    "date": "5/15/2011",
+                    "time": "5:35 am",
+                    "firstDetailName": "Inspections",
+                    "firstDetailCount": "2133",
+                    "secondDetailName": "Categories",
+                    "secondDetailCount": "545",
+                    "chk": {
+                        "isDisabled": false,
+                        "id": "chk3",
+                        "label": "Template",
+                        "hideLabel": true,
+                        "useCircles": true,
+                        "isChecked": false
+                    }
+                }
+            ],
+            "inspections": [
+            ]
+        };
+
+        var init = function() {
+            $scope.isEditMode = false;
+            $timeout(function() {
+                
+            },300);
+        };
+
+        init();
+    }
+    </script>
+
+</body>
+</html>
