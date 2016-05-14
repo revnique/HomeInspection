@@ -1,70 +1,86 @@
 ﻿<!DOCTYPE html>
 <html class=" boxshadow pointerevents opacity cssanimations csstransitions boxsizing display-table floating-labels animate-floating-labels">
 <head>
-
-    <script type="text/javascript" src="https://homeinspection.harristeq.com/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.4.0/angular-animate.min.js"></script>
-    <script src="https://homeinspection.harristeq.com/underscore-min.js"></script>
-    <script src="https://homeinspection.harristeq.com/angular.socket.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<meta name="viewport" content="width=device-width">-->
-    <title>HomeInspections</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
-
-
+    <title>printable pdf</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
+    <script src="https://homeinspection.harristeq.com/pdf/jspdf.js"></script>
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/metisMenu/dist/metisMenu.min.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/timeline.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/sb-admin-2.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/morrisjs/morris.css">
-    <link rel="stylesheet" href="https://homeinspection.harristeq.com/dist/application.min.css">
+    <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link href="/Content/css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://homeinspection.harristeq.com/pdf/libs/html2pdf.js"></script>
+
+    <script>
+
+        require(['https://homeinspection.harristeq.com/pdf/libs/require/config.js'], function() {
+            require(['html2pdf'], function() {
+                var pdf = new jsPDF('p', 'pt', 'letter');
+                var canvas = pdf.canvas;
+                canvas.height = 72 * 11;
+                canvas.width = 72 * 8.5;;
+
+                // can also be document.body
+                var html = $("body");
+
+                html2pdf(html, pdf, function (pdf) {
+                    //dataurl
+                    pdf.API.save("c:\\delme\\d.pdf");
+                    //pdf.output('dataurlnewwindow');
+                });
+            }); //require
+        }); //require
+    </script>
+
 </head>
 <body data-ng-app="app" data-ng-controller="tempController">
 
 <style>
     .page-divider {
         border-top: 10px solid #444;
-        width: 100%;
         clear: both;
+        width: 100%;
     }
+
     .page {
+        height: 792px;
         padding: 20px;
-        height: 1210px;
-        width: 935px;
         text-align: left;
+        width: 612px;
     }
-    .page-top {
-        
-    }
-    .page-top .category-name{
+
+    .page-top { }
+
+    .page-top .category-name {
+        color: #888;
         float: left;
         font-size: 28px;
         font-weight: bold;
-        color: #888;
-        text-transform: uppercase;
         line-height: 28px;
+        text-transform: uppercase;
     }
-    .page-top .disclaimer{
+
+    .page-top .disclaimer {
         float: right;
         font-size: 10px;
         padding-top: 1px;
     }
+
     .printable-container {
-        width: 100%;
         text-align: center;
+        width: 100%;
     }
+
     .page-content {
-        padding-top: 25px;
         font-size: 13px;
+        padding-top: 25px;
     }
 </style>
 
 <div class="printable-container">
+    <div class="page"></div>
     <div class="page">
         <div class="page-top">
             <div class="category-name">
@@ -80,20 +96,19 @@
         <div class="page-content">
             Window Types
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Sliding
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Casement
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Fixed
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             w/Storm Windows
         </div>
     </div>
-    <div class="page-divider"></div>
     <div class="page">
         <div class="page-top">
             <div class="category-name">
@@ -101,7 +116,7 @@
             </div>
             <div class="disclaimer">
                 This is a Report of conditions observed at the time of
-                <br />
+                <br/>
                 Inspection only. This is NOT a Guarantee or Warranty.
             </div>
         </div>
@@ -109,20 +124,19 @@
         <div class="page-content">
             Window Types
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Sliding
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Casement
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Fixed
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             w/Storm Windows
         </div>
     </div>
-    <div class="page-divider"></div>
     <div class="page">
         <div class="page-top">
             <div class="category-name">
@@ -138,16 +152,16 @@
         <div class="page-content">
             Window Types
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Sliding
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Casement
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Fixed
             &nbsp;&nbsp;
-            <input type="checkbox" />
+            <input type="checkbox"/>
             w/Storm Windows
         </div>
     </div>
@@ -247,7 +261,7 @@
     };
 
 
-    var app = angular.module('app', ['btford.socket-io', 'toaster', 'ngAnimate']);
+    var app = angular.module('app', []);
 
     angular
         .module('app')
@@ -258,7 +272,7 @@
 
     function tempController($scope, $timeout, $http) {
         $scope.dtown = "hello world";
-        
+
         $scope.hi = {
             "templates": [
                 {
@@ -465,13 +479,12 @@
         var init = function() {
             $scope.isEditMode = false;
             $timeout(function() {
-                
-            },300);
+
+            }, 300);
         };
 
         init();
     }
-    </script>
-
+</script>
 </body>
 </html>

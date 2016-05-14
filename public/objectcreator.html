@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="app" data-ng-controller="tempController">
+<head>
+    <title>ng 1 pager</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+</head>
+<body>
+<h3>{{collection}}</h3>
+
+<script>
+    Date.prototype.addMinutes = function(m) {
+        this.setMinutes(this.getMinutes() + m);
+        return this;
+    };
+
+    Date.prototype.addHours = function(h) {
+        this.setHours(this.getHours() + h);
+        return this;
+    };
+
+    Date.prototype.addDays = function(d) {
+        this.setHours(this.getHours() + (d * 24));
+        return this;
+    };
+    Date.prototype.formatSmallDateTime = function(useSlashNotation) {
+        var day = this.getDate(); // yields dayofmonth
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var month = this.getMonth() + 1; // yields month
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var year = this.getFullYear(); // yields year
+        var hour = this.getHours(); // yields hours
+        var minute = this.getMinutes(); // yields minutes
+        var second = this.getSeconds(); // yields seconds
+        var rtn = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+        if (useSlashNotation) {
+            rtn = month + "/" + day + "/" + year;
+        }
+        // After this construct a string with the above results as below
+        return rtn;
+    };
+    Date.prototype.dateDiff = function(endDateObject) {
+        var days, hours, minutes, seconds, totalMilliseconds, displayString = "";
+
+        totalMilliseconds = (endDateObject - this);
+        days = Math.round(totalMilliseconds / 86400000); // days
+        hours = Math.round((totalMilliseconds % 86400000) / 3600000); // hours
+        minutes = Math.round(((totalMilliseconds % 86400000) % 3600000) / 60000); // minutes
+        seconds = Math.round((((totalMilliseconds % 86400000) % 3600000) % 60000) / 1000); // secs
+
+        if (days > 0) {
+            displayString = days + " days";
+        }
+        if (hours > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += hours + " hours";
+        }
+        if (minutes > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += minutes + " minutes";
+        }
+        if (seconds > 0) {
+            if (displayString !== "")
+                displayString += ", ";
+            displayString += seconds + " seconds";
+        }
+        if (seconds === 0) {
+            if (displayString === "") {
+                displayString = "less than 1 second";
+            }
+        }
+
+        var rtn = {
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+            totalMilliseconds: totalMilliseconds,
+            displayString: displayString
+        };
+
+        console.log("rtn", rtn);
+        return rtn;
+    };
+
+    Date.prototype.formatAMPM = function() {
+        var hours = this.getHours();
+        var minutes = this.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    };
+
+    var app = angular.module('app', []);
+
+    angular
+        .module('app')
+        .controller('tempController', tempController);
+
+
+    //<div ht-resize-width="45"></div>
+    app.directive('htResizeWidth', [
+        '$window', function ($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
+
+            function link(scope, element, attrs) {
+                scope.$watchCollection('selectList', function (newValue) {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+                angular.element($window).bind('resize', function () {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+
+                angular.element($window).bind('load', function () {
+                    var screenWidth = $window.innerWidth * 1;
+                    var offsetWidth = attrs.htResizeWidth * 1;
+                    element[0].style.width = screenWidth - offsetWidth + "px";
+                });
+            }
+        }
+    ]);
+
+    //<div ht-resize-height="45"></div>
+    app.directive('htResizeHeight', [
+        '$window', function ($window) {
+            return {
+                link: link,
+                restrict: 'A'
+            };
+
+            function link(scope, element, attrs) {
+                scope.$watchCollection('selectList', function (newValue) {
+                    var screenHeight2 = $window.innerHeight * 1;
+                    var offsetHeight2 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
+
+                angular.element($window).bind('resize', function () {
+                    var screenHeight2 = $window.innerHeight * 1;
+                    var offsetHeight2 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight2 - offsetHeight2 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
+
+                angular.element($window).bind('load', function () {
+                    var screenHeight1 = $window.innerHeight * 1;
+                    var offsetHeight1 = attrs.htResizeHeight * 1;
+                    element[0].style.height = screenHeight1 - offsetHeight1 + "px";
+                    console.log(element[0].style.height, $window.innerHeight);
+                });
+            }
+        }
+    ]);
+
+    //<ht-floating-text-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" enter-submits="true" autocomplete="shipping given-name" css-class="field--half field field--optional"></ht-floating-text-field>
+    app.directive('htFloatingTextField', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    floatingField: '=',
+                    floatingFieldId: '@',
+                    cssClass: '@',
+                    enterSubmits: '@',
+                    autocomplete: '@',
+                    size: '@',
+                    label: '@',
+                    hotkeyPress: '&'
+                },
+                template: '<div id="floatingFieldParent{{ floatingFieldId }}" ng-class="setMyClass()">' +
+                    '<div class="field__input-wrapper">' +
+                    '<label class="field__label" for="floatingField{{floatingFieldId}}">{{ label }}</label>' +
+                    '<input placeholder="{{ label }}" autocomplete="{{autocomplete}}" class="field__input" ' +
+                    'size="{{size}}" type="text" name="floatingField{{floatingFieldId}}" ' +
+                    'ng-model="floatingField.value" id="floatingField{{floatingFieldId}}" ng-keydown="checkForEnter($event)">' +
+                    '</div>' +
+                    '</div>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        //spacebar or enter for other controls
+                        //if (($event.keyCode === 32) || (scope.enterSubmits && $event.keyCode === 13)) {
+                        if (scope.enterSubmits && $event.keyCode === 13) {
+                            $event.preventDefault();
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+
+                    scope.checkForEnter = function (keyEvent) {
+                        if (scope.enterSubmits && keyEvent.which === 13) {
+                            scope.hotkeyPress();
+                        }
+                    };
+
+                    //scope.hotkeyPress = function (keyEvent) {
+                    //    if (scope.enterSubmits && keyEvent.which === 13) {
+
+                    //    }
+                    //};
+
+                    scope.setMyClass = function () {
+                        scope.labelIsFloating = scope.floatingField.value.length > 0;
+                        var rtn = scope.cssClass;
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        if (scope.labelIsFloating) {
+                            rtn += " field--show-floating-label";
+                        }
+                        return rtn;
+                    };
+                }
+            };
+        }
+    ]);
+
+
+    //<ht-floating-select-field floating-field="ff" floating-field-id="{{ff.floatingFieldId}}" size="{{ff.size}}" data-label="{{ff.label}}" css-class="field field--required field--three-eights"></ht-floating-select-field>
+    app.directive('htFloatingSelectField', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    floatingField: '=',
+                    floatingFieldId: '@',
+                    cssClass: '@',
+                    label: '@'
+                },
+                template: '<div ng-class="setMyClass()">' +
+                    '<div class="field__input-wrapper field__input-wrapper--select">' +
+                    '<label class="field__label" for="floatingField{{floatingFieldId}}">{{ label }}</label>' +
+                    '<input type="hidden" name="floatingField{{floatingFieldId}}">' +
+                    '<select placeholder="{{ label }}" class="field__input field__input--select" name="floatingField{{floatingFieldId}}" id="floatingField{{floatingFieldId}}" ng-model="floatingField.selectedItem"' +
+                    ' ng-options="option.name for option in floatingField.options">' +
+                    '<option value="" selected>-- {{ label }} --</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '</div>',
+                link: function (scope, el, attrs) {
+                    scope.setMyClass = function () {
+                        console.log("ff", scope.floatingField);
+                        scope.labelIsFloating = (scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.length > 0)
+                            || scope.floatingField.selectedItem != null && scope.floatingField.selectedItem.value != null && scope.floatingField.selectedItem.value.length > 0;
+                        var rtn = scope.cssClass;
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        if (scope.labelIsFloating) {
+                            rtn += " field--show-floating-label";
+                        } else {
+                            rtn += " nothing-selected";
+                        }
+                        return rtn;
+                    };
+                }
+            };
+        }
+    ]);
+
+    //<ht-checkbox use-circles="{{obj.useCircles}}" hide-label="{{obj.hideLabel}}" data-ng-disabled="obj.isDisabled" data-ng-model="obj" data-checkbox-id="{{obj.id}}" data-label="{{ obj.label }}"/>
+    app.directive('htCheckbox', [
+        function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    checkboxId: '@',
+                    label: '@',
+                    enterToggles: '@',
+                    useCircles: '@',
+                    hideLabel: '@'
+                },
+                template: '<a id="{{ checkboxId }}" href="javascript:void(0)" ng-click="checkUncheckMe()" ng-class="setMyClass()">' +
+                    '<label ng-hide="hideLabel" for="{{ checkboxId }}">{{ label }}</label><i class="fa fa-fw" ng-class="setMyIconClass()"></i></a>',
+                link: function (scope, el, attrs) {
+                    el.bind('keydown', function ($event) {
+                        if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+                            $event.preventDefault();
+                            $event.currentTarget.click();
+                            return false;
+                        } else
+                            return true;
+                    });
+
+                    scope.checkUncheckMe = function () {
+                        if (attrs.disabled) {
+                            return;
+                        }
+                        scope.ngModel = !scope.ngModel;
+                    };
+
+                    scope.setMyIconClass = function () {
+                        var rtn = "";
+                        if (scope.useCircles === "true") {
+                            rtn = scope.ngModel === true ? "fa-check-circle" : "fa-circle-o";
+                        } else {
+                            rtn = scope.ngModel === true ? "fa-check-square" : "fa-square";
+                        }
+                        return rtn;
+                    };
+                    scope.setMyClass = function () {
+                        var rtn = "htcheckbox";
+                        if (attrs.disabled) {
+                            rtn += " disabled";
+                        }
+                        return rtn;
+                    };
+                }
+            };
+        }
+    ]);
+
+
+
+
+    tempController.$inject = ['$scope', '$timeout'];
+
+    function tempController($scope, $timeout) {
+        $scope.dtown = "hello world";
+        $scope.d = "";
+        $scope.collection = [];
+        $scope.nextId = 100;
+        $scope.addChk = function(name) {
+            var rtn = {};
+            
+            return rtn;
+        };
+
+        $scope.ff2 = {
+            "isDisabled": false,
+            "value": "",
+            "floatingFieldId": "addNewTemplate",
+            "label": "Template",
+            "size": 35
+        };
+
+        $scope.add = function () {
+            $scope.nextId += 1;
+            var rootName = "categoryItem";
+            var obj = {};
+            
+            obj[rootName + "Id"] = $scope.nextId;
+            obj["title"] = $scope.ff2.value;
+            obj["date"] = new Date().formatSmallDateTime(true);
+            obj["time"] =  new Date().formatAMPM();
+            $scope.nextId += 1;
+            var chk = {
+                "isDisabled": false,
+                "id": "chk" + $scope.nextId,
+                "hideLabel": true,
+                "useCircles": true,
+                "isChecked": false
+            }
+            obj["chk"] =  chk;
+
+            $scope.collection.push(obj);
+            $scope.ff2.value = "";
+        };
+
+
+
+        $scope.addComponentItems = function () {
+            $scope.nextId += 1;
+            var rootName = "componentParentItem";
+            var obj = {};
+
+            obj[rootName + "Id"] = $scope.nextId;
+            obj["title"] = $scope.ff2.value;
+            obj["date"] = new Date().formatSmallDateTime(true);
+            obj["time"] = new Date().formatAMPM();
+            $scope.nextId += 1;
+            var chk = {
+                "isDisabled": false,
+                "id": "chk" + $scope.nextId,
+                "hideLabel": true,
+                "useCircles": true,
+                "isChecked": false
+            }
+            obj["chk"] = chk;
+
+            $scope.collection.push(obj);
+            $scope.ff2.value = "";
+        };
+
+        $scope.addParentChild = function() {
+            var prnt = $scope.parentItem;
+            var children = $scope.childrenItems;
+            $scope.nextId += 1;
+            var rootName = "categoryItem";
+            var obj = {};
+
+            obj[rootName + "Id"] = $scope.nextId;
+            obj["title"] = prnt;
+            obj["date"] = new Date().formatSmallDateTime(true);
+            obj["time"] = new Date().formatAMPM();
+            $scope.nextId += 1;
+            var chk = {
+                "isDisabled": false,
+                "id": "chk" + $scope.nextId,
+                "hideLabel": true,
+                "useCircles": true,
+                "isChecked": false
+            }
+            obj["chk"] = chk;
+            var childObjs = [];
+
+            obj["categoryItemOptions"] = childObjs;
+            //$scope.collection.push(obj);
+            //$scope.ff2.value = "";
+        };
+        $scope.buildChildrenFromList = function() {
+            
+        };
+    }
+</script>
+    <ht-floating-text-field floating-field="ff2" floating-field-id="{{ff2.floatingFieldId}}" ht-resize-width="45"
+                            size="{{ff2.size}}" data-label="{{ff2.label}}" enter-submits="true" hotkey-press="add()" css-class="field field--optional pull-left"></ht-floating-text-field>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+<br/>
+parent item
+<input type="text" ng-model="parentItem"/>
+Child list
+    <textarea style="width: 500px; height: 500px;" ng-model="childrenItems"></textarea>
+
+<button ng-click="addParentChild">add</button>
+</body>
+</html>
