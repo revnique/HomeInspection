@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
 </head>
 <body>
-<h3>{{collection}}</h3>
+<!--<h3>{{collection}}</h3>-->
 
 <script>
     Date.prototype.addMinutes = function(m) {
@@ -403,15 +403,14 @@
             $scope.ff2.value = "";
         };
 
-        $scope.addParentChild = function() {
-            var prnt = $scope.parentItem;
-            var children = $scope.childrenItems;
+        $scope.addParentChild = function () {
+            $scope.collection = [];
             $scope.nextId += 1;
             var rootName = "categoryItem";
             var obj = {};
 
             obj[rootName + "Id"] = $scope.nextId;
-            obj["title"] = prnt;
+            obj["title"] = $scope.parentItem;
             obj["date"] = new Date().formatSmallDateTime(true);
             obj["time"] = new Date().formatAMPM();
             $scope.nextId += 1;
@@ -423,14 +422,50 @@
                 "isChecked": false
             }
             obj["chk"] = chk;
-            var childObjs = [];
+            //obj["isComponentList"] = true;
+            //obj["componentList"] = [
+            //    "Acceptable",
+            //    "Marginal",
+            //    "Unacceptable"
+            //];
 
-            obj["categoryItemOptions"] = childObjs;
-            //$scope.collection.push(obj);
-            //$scope.ff2.value = "";
-        };
-        $scope.buildChildrenFromList = function() {
+            obj["categoryItemOptions"] = $scope.buildChildrenFromList();
+            $scope.collection.push(obj);
             
+        };
+        $scope.buildChildrenFromList = function () {
+            var rtn = [];
+            var list = $scope.childrenItems;
+            var aList = list.split("\n");
+            for (var i = 0; i < aList.length; i++) {
+                $scope.nextId += 1;
+                var name = aList[i].trim();
+                aList[i] = aList[i].trim();
+                
+                var rootName = "categoryItemOption";
+                var obj = {};
+
+                obj[rootName + "Id"] = $scope.nextId;
+                obj["title"] = name;
+                obj["date"] = new Date().formatSmallDateTime(true);
+                obj["time"] = new Date().formatAMPM();
+                $scope.nextId += 1;
+                var chk = {
+                    "isDisabled": false,
+                    "id": "chk" + $scope.nextId,
+                    "hideLabel": true,
+                    "useCircles": true,
+                    "isChecked": false
+                }
+                obj["chk"] = chk;
+                obj["componentItemValue"] = null;
+                obj["isSelected"] = null;
+                obj["comment"] = null;
+                obj["value"] = null;
+                rtn.push(obj);
+            }
+            console.log('alist', aList);
+            return rtn;
         };
     }
 </script>
@@ -439,17 +474,29 @@
 
 
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 <br/>
 parent item
-<input type="text" ng-model="parentItem"/>
-Child list
-    <textarea style="width: 500px; height: 500px;" ng-model="childrenItems"></textarea>
+<input type="text" ng-model="parentItem"/><br/>
+seed value
+    <input type="number" ng-model="nextId"/>
+<br/>
+<table>
+    <tr>
+        <td>
+            Child list
+            <br/>
+            <textarea style="width: 500px; height: 300px;" ng-model="childrenItems"></textarea><br />
+        </td>
+        <td>
+            output
+            <br/>
+            <textarea style="width: 500px; height: 300px;" >{{collection}}</textarea><br/>
 
-<button ng-click="addParentChild">add</button>
+        </td>
+    </tr>
+</table>
+<br />
+
+<button ng-click="addParentChild()">add</button>
 </body>
 </html>
