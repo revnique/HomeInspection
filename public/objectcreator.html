@@ -422,13 +422,13 @@
                 "isChecked": false
             }
             obj["chk"] = chk;
-            //obj["isComponentList"] = true;
-            //obj["componentList"] = [
-            //    "Acceptable",
-            //    "Marginal",
-            //    "Unsatisfactory",
-            //    "Not Operational"
-            //];
+            obj["isComponentList"] = true;
+            obj["componentList"] = [
+                "Acceptable",
+                "Marginal",
+                "Unsatisfactory",
+                "Not Operational"
+            ];
 
             obj["categoryItemOptions"] = $scope.buildChildrenFromList();
             $scope.collection.push(obj);
