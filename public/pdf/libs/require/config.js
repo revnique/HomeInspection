@@ -120,7 +120,8 @@ require.config({
         }
      },
      paths:{
-         'html2pdf': 'libs/html2pdf'
+         'html2pdf': 'libs/html2pdf',
+         'FileSaver': 'FileSaver'
      }
 });
 } // Require.JS
