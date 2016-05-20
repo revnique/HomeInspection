@@ -15,7 +15,7 @@
 
     <script>
 
-        require(['https://homeinspection.harristeq.com/pdf/libs/require/config.js'], function() {
+        require(['pdf/libs/require/config.js'], function() {
             require(['html2pdf'], function() {
                 var pdf = new jsPDF('p', 'pt', 'letter');
                 var canvas = pdf.canvas;

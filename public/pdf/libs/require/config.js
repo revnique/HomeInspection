@@ -28,6 +28,7 @@ require.config({
 	            'jspdf'
             ]
         },
+        'FileSaver': 'FileSaver',
 
         'plugins/split_text_to_size': {
             deps:[
@@ -120,8 +121,7 @@ require.config({
         }
      },
      paths:{
-         'html2pdf': 'libs/html2pdf',
-         'FileSaver': 'FileSaver'
+         'html2pdf': 'libs/html2pdf'
      }
 });
 } // Require.JS
