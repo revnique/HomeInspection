@@ -20,8 +20,36 @@
             }); //require
         }); //require
 
+        window.addEventListener('message', function (event) {
+
+            // IMPORTANT: Check the origin of the data!
+            if (event.origin.indexOf('http://localhost:3000/' > -1)
+                || event.origin.indexOf('https://jsfiddle.net/' > -1)
+                || event.origin.indexOf('https://plnkr.co/' > -1)
+                || event.origin.indexOf('https://homeinspection.harristeq.com/' > -1)
+                || event.origin.indexOf('http://jsbin.com/' > -1)) {
+                // The data has been sent from your site
+
+                // The data sent with postMessage is stored in event.data
+                console.log(event.data);
+                angular.element(body).scope().template = event.data;
+                angular.element(body).scope().$apply();
+                setTimeout(function() {
+                    printPdf(event.data);
+                }, 500);
+                
+            } else {
+                // The data hasn't been sent from your site!
+                // Be careful! Do not use it.
+                return;
+            }
+        });
 
         var printPdf = function (item) {
+
+
+
+
 
             var pdf = new jsPDF('p', 'pt', 'letter');
             var canvas = pdf.canvas;
@@ -43,7 +71,7 @@
 
     </script>
 </head>
-<body data-ng-app="app" data-ng-controller="tempController">
+<body data-ng-app="app" data-ng-controller="tempController" id="body">
 
 
 <style>
@@ -89,13 +117,11 @@
 </style>
 
 <div class="printable-container">
-    <div class="page"></div>
-
-    <div ng-repeat="t in hi.templates">
+    <div ng-repeat="c in template.categories">
         <div class="page">
             <div class="page-top">
                 <div class="category-name">
-                    {{t.title}}
+                    {{c.title}}
                 </div>
                 <div class="disclaimer">
                     This is a Report of conditions observed at the time of
@@ -314,208 +340,212 @@
     function tempController($scope, $timeout, $http) {
         $scope.dtown = "hello world";
 
-        $scope.hi = {
-            "templates": [
-                {
-                    "templateId": 1,
-                    "title": "DTown's Template",
-                    "date": "4/14/2014",
-                    "time": "4:14 pm",
-                    "firstDetailName": "Inspections",
-                    "firstDetailCount": "33",
-                    "secondDetailName": "Categories",
-                    "secondDetailCount": "55",
-                    "chk": {
-                        "isDisabled": false,
-                        "id": "chk1",
-                        "label": "Template",
-                        "hideLabel": true,
-                        "useCircles": true,
-                        "isChecked": false
-                    },
-                    "categories": [
-                        {
-                            "categoryId": 1,
-                            "title": "DTown's category",
-                            "date": "5/14/2014",
-                            "time": "5:14 pm",
-                            "firstDetailName": "Items",
-                            "firstDetailCount": "11",
-                            "secondDetailName": "Categories",
-                            "secondDetailCount": "21",
-                            "chk": {
-                                "isDisabled": false,
-                                "id": "chkCategories1",
-                                "hideLabel": true,
-                                "useCircles": true,
-                                "isChecked": false
-                            },
-                            "categoryItems": [
-                                {
-                                    "categoryItemId": 1,
-                                    "title": "DTown's category item",
-                                    "date": "5/14/2014",
-                                    "time": "5:14 pm",
-                                    "firstDetailName": "Options",
-                                    "firstDetailCount": "11",
-                                    "secondDetailName": "Categories",
-                                    "secondDetailCount": "21",
-                                    "chk": {
-                                        "isDisabled": false,
-                                        "id": "chkCategoryItem1",
-                                        "hideLabel": true,
-                                        "useCircles": true,
-                                        "isChecked": false
-                                    },
-                                    "categoryItemOptions": [
-                                        {
-                                            "categoryItemOptionId": 1,
-                                            "title": "DTown's category item Options",
-                                            "date": "5/14/2014",
-                                            "time": "5:14 pm",
-                                            "firstDetailName": "Options",
-                                            "firstDetailCount": "11",
-                                            "secondDetailName": "Categories",
-                                            "secondDetailCount": "21",
-                                            "chk": {
-                                                "isDisabled": false,
-                                                "id": "chkCategoryItemOption1",
-                                                "hideLabel": true,
-                                                "useCircles": true,
-                                                "isChecked": false
-                                            }
-                                        },
-                                        {
-                                            "categoryItemOptionId": 2,
-                                            "title": "Category Griffen item Options",
-                                            "date": "6/5/2008",
-                                            "time": "6:05 pm",
-                                            "firstDetailName": "Options",
-                                            "firstDetailCount": "11",
-                                            "secondDetailName": "Categories",
-                                            "secondDetailCount": "21",
-                                            "chk": {
-                                                "isDisabled": false,
-                                                "id": "chkCategoryItemOption2",
-                                                "hideLabel": true,
-                                                "useCircles": true,
-                                                "isChecked": false
-                                            }
-                                        }
-                                    ],
-                                },
-                                {
-                                    "categoryItemId": 2,
-                                    "title": "Category Griffen item",
-                                    "date": "6/5/2008",
-                                    "time": "6:05 pm",
-                                    "firstDetailName": "Options",
-                                    "firstDetailCount": "11",
-                                    "secondDetailName": "Categories",
-                                    "secondDetailCount": "21",
-                                    "chk": {
-                                        "isDisabled": false,
-                                        "id": "chkCategoryItem2",
-                                        "hideLabel": true,
-                                        "useCircles": true,
-                                        "isChecked": false
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "categoryId": 2,
-                            "title": "Category Griffen",
-                            "date": "6/5/2008",
-                            "time": "6:05 pm",
-                            "firstDetailName": "Items",
-                            "firstDetailCount": "23",
-                            "secondDetailName": "Categories",
-                            "secondDetailCount": "32",
-                            "chk": {
-                                "isDisabled": false,
-                                "id": "chkCategories2",
-                                "hideLabel": true,
-                                "useCircles": true,
-                                "isChecked": false
-                            }
-                        },
-                        {
-                            "categoryId": 3,
-                            "title": "category category for the fun",
-                            "date": "7/15/2011",
-                            "time": "7:35 am",
-                            "firstDetailName": "Items",
-                            "firstDetailCount": "2133",
-                            "secondDetailName": "Categories",
-                            "secondDetailCount": "545",
-                            "chk": {
-                                "isDisabled": false,
-                                "id": "chkCategories3",
-                                "hideLabel": true,
-                                "useCircles": true,
-                                "isChecked": false
-                            }
-                        },
-                        {
-                            "categoryId": 4,
-                            "title": "4 category category for the fun",
-                            "date": "7/15/2011",
-                            "time": "7:35 am",
-                            "firstDetailName": "Items",
-                            "firstDetailCount": "2",
-                            "secondDetailName": "Categories",
-                            "secondDetailCount": "545",
-                            "chk": {
-                                "isDisabled": false,
-                                "id": "chkCategories4",
-                                "hideLabel": true,
-                                "useCircles": true,
-                                "isChecked": false
-                            }
-                        }
-                    ]
-                },
-                {
-                    "templateId": 2,
-                    "title": "Griffen's Template",
-                    "date": "5/5/2008",
-                    "time": "5:05 pm",
-                    "firstDetailName": "Inspections",
-                    "firstDetailCount": "33",
-                    "secondDetailName": "Categories",
-                    "secondDetailCount": "55",
-                    "chk": {
-                        "isDisabled": false,
-                        "id": "chk2",
-                        "label": "Template",
-                        "hideLabel": true,
-                        "useCircles": true,
-                        "isChecked": false
-                    }
-                },
-                {
-                    "templateId": 3,
-                    "title": "Template for the fun of it",
-                    "date": "5/15/2011",
-                    "time": "5:35 am",
-                    "firstDetailName": "Inspections",
-                    "firstDetailCount": "2133",
-                    "secondDetailName": "Categories",
-                    "secondDetailCount": "545",
-                    "chk": {
-                        "isDisabled": false,
-                        "id": "chk3",
-                        "label": "Template",
-                        "hideLabel": true,
-                        "useCircles": true,
-                        "isChecked": false
-                    }
-                }
-            ],
-            "inspections": [
-            ]
+        $scope.template = {
+            categories:[]
         };
+
+        //$scope.hi = {
+        //    "templates": [
+        //        {
+        //            "templateId": 1,
+        //            "title": "DTown's Template",
+        //            "date": "4/14/2014",
+        //            "time": "4:14 pm",
+        //            "firstDetailName": "Inspections",
+        //            "firstDetailCount": "33",
+        //            "secondDetailName": "Categories",
+        //            "secondDetailCount": "55",
+        //            "chk": {
+        //                "isDisabled": false,
+        //                "id": "chk1",
+        //                "label": "Template",
+        //                "hideLabel": true,
+        //                "useCircles": true,
+        //                "isChecked": false
+        //            },
+        //            "categories": [
+        //                {
+        //                    "categoryId": 1,
+        //                    "title": "DTown's category",
+        //                    "date": "5/14/2014",
+        //                    "time": "5:14 pm",
+        //                    "firstDetailName": "Items",
+        //                    "firstDetailCount": "11",
+        //                    "secondDetailName": "Categories",
+        //                    "secondDetailCount": "21",
+        //                    "chk": {
+        //                        "isDisabled": false,
+        //                        "id": "chkCategories1",
+        //                        "hideLabel": true,
+        //                        "useCircles": true,
+        //                        "isChecked": false
+        //                    },
+        //                    "categoryItems": [
+        //                        {
+        //                            "categoryItemId": 1,
+        //                            "title": "DTown's category item",
+        //                            "date": "5/14/2014",
+        //                            "time": "5:14 pm",
+        //                            "firstDetailName": "Options",
+        //                            "firstDetailCount": "11",
+        //                            "secondDetailName": "Categories",
+        //                            "secondDetailCount": "21",
+        //                            "chk": {
+        //                                "isDisabled": false,
+        //                                "id": "chkCategoryItem1",
+        //                                "hideLabel": true,
+        //                                "useCircles": true,
+        //                                "isChecked": false
+        //                            },
+        //                            "categoryItemOptions": [
+        //                                {
+        //                                    "categoryItemOptionId": 1,
+        //                                    "title": "DTown's category item Options",
+        //                                    "date": "5/14/2014",
+        //                                    "time": "5:14 pm",
+        //                                    "firstDetailName": "Options",
+        //                                    "firstDetailCount": "11",
+        //                                    "secondDetailName": "Categories",
+        //                                    "secondDetailCount": "21",
+        //                                    "chk": {
+        //                                        "isDisabled": false,
+        //                                        "id": "chkCategoryItemOption1",
+        //                                        "hideLabel": true,
+        //                                        "useCircles": true,
+        //                                        "isChecked": false
+        //                                    }
+        //                                },
+        //                                {
+        //                                    "categoryItemOptionId": 2,
+        //                                    "title": "Category Griffen item Options",
+        //                                    "date": "6/5/2008",
+        //                                    "time": "6:05 pm",
+        //                                    "firstDetailName": "Options",
+        //                                    "firstDetailCount": "11",
+        //                                    "secondDetailName": "Categories",
+        //                                    "secondDetailCount": "21",
+        //                                    "chk": {
+        //                                        "isDisabled": false,
+        //                                        "id": "chkCategoryItemOption2",
+        //                                        "hideLabel": true,
+        //                                        "useCircles": true,
+        //                                        "isChecked": false
+        //                                    }
+        //                                }
+        //                            ],
+        //                        },
+        //                        {
+        //                            "categoryItemId": 2,
+        //                            "title": "Category Griffen item",
+        //                            "date": "6/5/2008",
+        //                            "time": "6:05 pm",
+        //                            "firstDetailName": "Options",
+        //                            "firstDetailCount": "11",
+        //                            "secondDetailName": "Categories",
+        //                            "secondDetailCount": "21",
+        //                            "chk": {
+        //                                "isDisabled": false,
+        //                                "id": "chkCategoryItem2",
+        //                                "hideLabel": true,
+        //                                "useCircles": true,
+        //                                "isChecked": false
+        //                            }
+        //                        }
+        //                    ]
+        //                },
+        //                {
+        //                    "categoryId": 2,
+        //                    "title": "Category Griffen",
+        //                    "date": "6/5/2008",
+        //                    "time": "6:05 pm",
+        //                    "firstDetailName": "Items",
+        //                    "firstDetailCount": "23",
+        //                    "secondDetailName": "Categories",
+        //                    "secondDetailCount": "32",
+        //                    "chk": {
+        //                        "isDisabled": false,
+        //                        "id": "chkCategories2",
+        //                        "hideLabel": true,
+        //                        "useCircles": true,
+        //                        "isChecked": false
+        //                    }
+        //                },
+        //                {
+        //                    "categoryId": 3,
+        //                    "title": "category category for the fun",
+        //                    "date": "7/15/2011",
+        //                    "time": "7:35 am",
+        //                    "firstDetailName": "Items",
+        //                    "firstDetailCount": "2133",
+        //                    "secondDetailName": "Categories",
+        //                    "secondDetailCount": "545",
+        //                    "chk": {
+        //                        "isDisabled": false,
+        //                        "id": "chkCategories3",
+        //                        "hideLabel": true,
+        //                        "useCircles": true,
+        //                        "isChecked": false
+        //                    }
+        //                },
+        //                {
+        //                    "categoryId": 4,
+        //                    "title": "4 category category for the fun",
+        //                    "date": "7/15/2011",
+        //                    "time": "7:35 am",
+        //                    "firstDetailName": "Items",
+        //                    "firstDetailCount": "2",
+        //                    "secondDetailName": "Categories",
+        //                    "secondDetailCount": "545",
+        //                    "chk": {
+        //                        "isDisabled": false,
+        //                        "id": "chkCategories4",
+        //                        "hideLabel": true,
+        //                        "useCircles": true,
+        //                        "isChecked": false
+        //                    }
+        //                }
+        //            ]
+        //        },
+        //        {
+        //            "templateId": 2,
+        //            "title": "Griffen's Template",
+        //            "date": "5/5/2008",
+        //            "time": "5:05 pm",
+        //            "firstDetailName": "Inspections",
+        //            "firstDetailCount": "33",
+        //            "secondDetailName": "Categories",
+        //            "secondDetailCount": "55",
+        //            "chk": {
+        //                "isDisabled": false,
+        //                "id": "chk2",
+        //                "label": "Template",
+        //                "hideLabel": true,
+        //                "useCircles": true,
+        //                "isChecked": false
+        //            }
+        //        },
+        //        {
+        //            "templateId": 3,
+        //            "title": "Template for the fun of it",
+        //            "date": "5/15/2011",
+        //            "time": "5:35 am",
+        //            "firstDetailName": "Inspections",
+        //            "firstDetailCount": "2133",
+        //            "secondDetailName": "Categories",
+        //            "secondDetailCount": "545",
+        //            "chk": {
+        //                "isDisabled": false,
+        //                "id": "chk3",
+        //                "label": "Template",
+        //                "hideLabel": true,
+        //                "useCircles": true,
+        //                "isChecked": false
+        //            }
+        //        }
+        //    ],
+        //    "inspections": [
+        //    ]
+        //};
 
 
 
