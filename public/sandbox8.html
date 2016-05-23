@@ -6,9 +6,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
     <link rel="stylesheet" href="https://homeinspection.harristeq.com/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
-    <link href="/Content/css" rel="stylesheet"/>
+    <link href="/Content/css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-    
+
 
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 
@@ -37,7 +37,7 @@
                 setTimeout(function() {
                     printPdf(event.data);
                 }, 500);
-                
+
             } else {
                 // The data hasn't been sent from your site!
                 // Be careful! Do not use it.
@@ -47,26 +47,29 @@
 
 
         window.onload = function () {
-            var canvas = document.getElementById('myCanvas0');
+            var canvas = document.getElementById('myCanvas');
             var ctx = canvas.getContext('2d');
-            ctx.font = 'bold 12px Arial';
+            ctx.font = '30pt Arial';
+            ctx.fillText('Regular Text', 100, 50);
 
-            ctx.translate(5, 90);
+            ctx.translate(100, 300);
             ctx.rotate(-0.90);
-
 
             var rText = 'Acceptable';
             ctx.fillText(rText, 0, 0);
 
             var rText2 = 'Marginal*';
-            ctx.fillText(rText2, 10, 12);
+            ctx.fillText(rText2, 50, 50);
 
             var rText3 = 'Unacceptable**';
-            ctx.fillText(rText3, 18, 24);
+            ctx.fillText(rText3, 100, 100);
 
-            var rText4 = 'Sub Marginal***';
-            ctx.fillText(rText4, 30, 36);
         };
+        
+        //<div class="column-header rotate" style="margin-left: 30px;">Acceptable</div>
+        //<div class="column-header rotate">Marginal</div>
+        //<div class="column-header rotate">Unacceptable</div>
+
 
         var printPdf = function (item) {
             var pdf = new jsPDF('p', 'pt', 'letter');
@@ -90,135 +93,7 @@
     </script>
 </head>
 <body data-ng-app="app" data-ng-controller="tempController" id="body">
-    
-<div class="printable-container">
-    <style>
-        .grid-main {
-            background-color: green;
-            width: 400px;
-            height: 100px;
-        }
-        .grid-container {
-            width: 100%;
-            text-align: left;
-        }
-        #myCanvas {
-            
-        }
-        .component-check {
-            width: 10px;
-            border-right: 1px solid #000;
-        }
-        .component-name {
-            width: 200px;
-            border-right: 1px solid #000; 
-        }
-        .component-table {
-            width: 100%;
-        }
-        .component-table td{
-            border: 1px solid black;
-            border-bottom: none;
-            border-top: none;
-        }
-        .second-row {
-            border-top: 1px solid black;
-        }
-        td.first-row {
-            border-left: none;
-            border-right: none;
-            border-top: none;
-            border-bottom: 1px solid black;
-        }
-        td.last-row {
-            border-bottom: 1px solid black;
-        }
-    </style>
-    <div ng-repeat="c in template.categories">
-        <div class="page">
-            <div class="page-top">
-                <div class="category-name">
-                    {{c.title}}
-                </div>
-                <div class="disclaimer">
-                    This is a Report of conditions observed at the time of
-                    <br/>
-                    Inspection only. This is NOT a Guarantee or Warranty.
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="page-content">
-                <div class="grid-container">
-                    <table class="component-table">
-                        <tr>
-                            <td class="first-row">&nbsp;</td>
-                            <td colspan="5" class="first-row">
-                                <canvas id="myCanvas{{$index}}" width="170" height="90"></canvas>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                adf asdfasdf Windows
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                Windows asdff
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                Windows asdfasdfs
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name last-row">
-                                Windows asdfasdfs
-                            </td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="last-row"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div ng-repeat="item in c.categoryItems">
-                    <div class="category-item">
-                        <div class="category-item-name">
-                            {{item.title}}
-                        </div>
-                        <div class="category-options-container">
-                            <div ng-repeat="option in item.categoryItemOptions">
-                                <div class="category-option">
-                                    <input type="checkbox"/>
-                                    {{option.title}}
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
     <style>
         .page-divider {
@@ -287,7 +162,72 @@
         }
     </style>
 
-<script>
+    <div class="printable-container">
+        <style>
+            .column-header {
+                background-color: antiquewhite;
+                color: black;
+                width: 100px;
+                text-align: left;
+                float: left;
+                margin-bottom: 40px;
+                margin-right: -70px;
+            }
+
+            .grid-main {
+                background-color: green;
+                width: 400px;
+                height: 100px;
+            }
+        </style>
+        <div>
+            <div class="column-header rotate" style="margin-left: 30px;">Acceptable</div>
+            <div class="column-header rotate">Marginal</div>
+            <div class="column-header rotate">Unacceptable</div>
+            <div class="clearfix"></div>
+            <div class="grid-main">
+                Main rows
+            </div>
+        </div>
+        <div ng-repeat="c in template.categories">
+            <div class="page">
+                <div class="page-top">
+                    <div class="category-name">
+                        {{c.title}}
+                    </div>
+                    <div class="disclaimer">
+                        This is a Report of conditions observed at the time of
+                        <br />
+                        Inspection only. This is NOT a Guarantee or Warranty.
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="page-content">
+                    <div ng-repeat="item in c.categoryItems">
+                        <div class="category-item">
+                            <div class="category-item-name">
+                                {{item.title}}
+                            </div>
+                            <div class="category-options-container">
+                                <div ng-repeat="option in item.categoryItemOptions">
+                                    <div class="category-option">
+                                        <input type="checkbox" />
+                                        {{option.title}}
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="myCanvas" width="300" height="300"></canvas>
+    </div>
+
+
+    <script>
     Date.prototype.addMinutes = function(m) {
         this.setMinutes(this.getMinutes() + m);
         return this;
@@ -2380,6 +2320,6 @@
 
         init();
     }
-</script>
+    </script>
 </body>
 </html>
