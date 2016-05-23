@@ -45,8 +45,24 @@
             }
         });
 
+
+        var isMobileBrowser = function () {
+            if (navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         var drawCanvas = function() {
-            var canvas = document.getElementById('myCanvas0');
+            var canvas = document.getElementById('myCanvas6');
             var ctx = canvas.getContext('2d');
             ctx.font = 'bold 12px Arial';
 
@@ -84,9 +100,12 @@
 
             html2pdf(html, pdf, function (pdf) {
                 //dataurl
-                pdf.save("d.pdf");
                 //alert("asdf");
-                //pdf.output('dataurlnewwindow');
+                if (isMobileBrowser()) {
+                    pdf.output('dataurlnewwindow');
+                } else {
+                    pdf.save("d.pdf");
+                }
             });
             console.log("item", item);
         };
@@ -152,71 +171,73 @@
             </div>
             <div class="clearfix"></div>
             <div class="page-content">
-                <div class="grid-container">
-                    <table class="component-table">
-                        <tr>
-                            <td class="first-row">&nbsp;</td>
-                            <td colspan="5" class="first-row">
-                                <canvas id="myCanvas{{$index}}" width="170" height="90"></canvas>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                adf asdfasdf Windows
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                Windows asdff
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name">
-                                Windows asdfasdfs
-                            </td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td class="component-check"><input type="checkbox" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="component-name last-row">
-                                Windows asdfasdfs
-                            </td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="component-check last-row"><input type="checkbox" /></td>
-                            <td class="last-row"></td>
-                        </tr>
-                    </table>
-                </div>
                 <div ng-repeat="item in c.categoryItems">
-                    <div class="category-item">
+                    <div class="category-item" ng-if="!item.isComponentList">
                         <div class="category-item-name">
                             {{item.title}}
                         </div>
                         <div class="category-options-container">
                             <div ng-repeat="option in item.categoryItemOptions">
                                 <div class="category-option">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" />
                                     {{option.title}}
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="clearfix"></div>
+                    </div>
+                    <div ng-if="item.isComponentList">
+                        <div class="grid-container">
+                            <table class="component-table">
+                                <tr>
+                                    <td class="first-row">&nbsp;</td>
+                                    <td colspan="5" class="first-row">
+                                        <canvas id="myCanvas{{$index}}" width="170" height="90"></canvas>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="component-name">
+                                        adf asdfasdf Windows
+                                    </td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="component-name">
+                                        Windows asdff
+                                    </td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="component-name">
+                                        Windows asdfasdfs
+                                    </td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td class="component-check"><input type="checkbox" /></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="component-name last-row">
+                                        Windows asdfasdfs
+                                    </td>
+                                    <td class="component-check last-row"><input type="checkbox" /></td>
+                                    <td class="component-check last-row"><input type="checkbox" /></td>
+                                    <td class="component-check last-row"><input type="checkbox" /></td>
+                                    <td class="component-check last-row"><input type="checkbox" /></td>
+                                    <td class="last-row"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
