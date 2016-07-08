@@ -345,9 +345,9 @@
                 </div>
                 <div class="add-mode">
                     <ht-floating-text-field floating-field="vm.ff2" floating-field-id="{{vm.ff2.floatingFieldId}}" floating-field-model="vm.ff2.value" ht-resize-width="45"
-                                            size="{{vm.ff2.size}}" data-label="{{vm.ff2.label}}" enter-submits="true" hotkey-press="addItem()" css-class="field field--optional pull-left"></ht-floating-text-field>
+                                            size="{{vm.ff2.size}}" data-label="{{vm.ff2.label}}" enter-submits="true" hotkey-press="vm.addItem()" css-class="field field--optional pull-left"></ht-floating-text-field>
 
-                    <a href="#" class="bottom-btn" ng-click="addItem()">
+                    <a href="#" class="bottom-btn" ng-click="vm.addItem()">
                         <i class="fa fa-plus-square-o"></i>
                     </a>
                 </div>
