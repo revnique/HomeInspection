@@ -641,6 +641,58 @@
             }
         ]);
 
+
+
+        ////<ht-checkbox data-ng-disabled="question.IsDisabled" data-use-check-mark="true" data-ng-model="question.QuestionIsChecked" data-checkbox-id="{{ idfield }}" data-label="{{ labelfield}}"/>
+        //app.directive('htCheckbox', [
+        //function () {
+        //    return {
+        //        restrict: 'E',
+        //        replace: true,
+        //        scope: {
+        //            ngModel: '=',
+        //            checkboxId: '@',
+        //            label: '@',
+        //            enterToggles: '@',
+        //            useCheckMark: '@'
+        //        },
+        //        template: '<a id="{{ checkboxId }}" href="javascript:void(0)" ng-click="checkUncheckMe()" ng-class="setMyClass()"><label for="{{ checkboxId }}">{{ label }}</label><i class="fa fa-fw" ng-class="setMyIconClass()"></i></a>',
+        //        link: function (scope, el, attrs) {
+        //            el.bind('keydown', function ($event) {
+        //                if (($event.keyCode === 32) || (scope.enterToggles && $event.keyCode === 13)) {
+        //                    $event.preventDefault();
+        //                    $event.currentTarget.click();
+        //                    return false;
+        //                } else
+        //                    return true;
+        //            });
+        //            scope.checkUncheckMe = function () {
+        //                if (attrs.disabled) {
+        //                    return;
+        //                }
+        //                scope.ngModel = !scope.ngModel;
+        //            };
+        //            scope.setMyIconClass = function () {
+        //                var rtn;
+        //                if (scope.useCheckMark === "true") {
+        //                    rtn = scope.ngModel === true ? "fa-check-square" : "fa-square";
+        //                } else {
+        //                    rtn = scope.ngModel === true ? "fa-square" : "fa-square-o";
+        //                }
+        //                return rtn;
+        //            }
+        //            scope.setMyClass = function () {
+        //                var rtn = "htcheckbox";
+        //                if (attrs.disabled) {
+        //                    rtn += " disabled";
+        //                }
+        //                return rtn;
+        //            }
+        //        }
+        //    };
+        //}
+        //]);
+
         //<ht-checkbox use-circles="{{obj.useCircles}}" hide-label="{{obj.hideLabel}}" data-ng-disabled="obj.isDisabled" data-ng-model="obj" data-checkbox-id="{{obj.id}}" data-label="{{ obj.label }}"/>
         app.directive('htCheckbox', [
             function () {
