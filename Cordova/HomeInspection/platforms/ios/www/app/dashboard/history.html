@@ -1,0 +1,39 @@
+<ion-view title="Timeline">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon dark icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header" scroll="false">
+
+        <ion-scroll direction="x" style="width:auto">
+            <div class="row no-padding bb-grey text-center" style="width:500px">
+                <div class="col font-thin" ng-click="goTo('tabs.reminders')">Reminders</div>
+                <div class="col font-thin" ng-click="goTo('tabs.dashboard')">Charts</div>
+                <div class="col font-thin" ng-click="goTo('tabs.contacts')">Contacts</div>
+                <div class="col font-thin text-large balanced bb" ng-click="goTo('tabs.history')">Timeline</div>
+            </div>
+        </ion-scroll>
+
+        <ion-scroll class="bg-lightgrey padding" direction="y" style="height:100%">
+            <div style="height:700px">
+                <div class="list history" ng-repeat="history in news.items  | filter: searchFilter | orderBy:'publishedDate':true track by $index">
+
+                    <div class="item item-avatar">
+                        <img ng-src="{{history.sourceLogo}}">
+                        <div class="inner-content">
+                            <h2 class="lead text-small" am-time-ago="history.publishedDate"></h2>
+                            <p class="text-smaller">{{history.author}}</p>
+                            <p class="text-smaller">{{history.title}}</p>
+                            <p class="text-medium text-right">
+                                <i class="icon ion-ios-bookmarks-outline padding"></i>
+                                <i class="icon ion-ios-star-outline padding bl-grey"></i>
+                                <i class="icon ion-ios-trash-outline padding bl-grey"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

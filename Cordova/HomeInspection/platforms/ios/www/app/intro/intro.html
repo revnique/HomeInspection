@@ -1,0 +1,25 @@
+<ion-view hide-nav-bar="true" class="intro" style="background:url('img/bg-green.png') center; background-size: cover;background-color: #28b99a;background-blend-mode: luminosity;">
+
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" active-slide="activeIndex"
+        ng-init="activeIndex = 0" class="slide-intro">
+        <ion-slide class="container">
+            <div class="text-center"><img src="img/ionic-logo.png" class="text-center" /></div>
+            <h2 class="light">Ionic</h2>
+            <h2 class="light">Full Starter Theme</h2>
+        </ion-slide>
+        <ion-slide class="container">
+            <h2 class="light">Comprehensive ionic theme</h2>
+        </ion-slide>
+        <ion-slide class="container">
+            <h2 class="light">Feed, eShop, dashboard, authentication, profile</h2>
+        </ion-slide>
+        <ion-slide class="container">
+            <h2 class="light">features and components</h2>
+        </ion-slide>
+    </ion-slide-box>
+
+    <div class="intro_button">
+        <button class="btn waves-effect waves-teal button button-light button-outline button-block" ui-sref="authentication">Continue</button>
+    </div>
+
+</ion-view>

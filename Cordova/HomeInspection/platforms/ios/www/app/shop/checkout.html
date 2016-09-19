@@ -1,0 +1,84 @@
+<ion-view title="Checkout" cache-view="false">
+
+    <ion-content class="has-header bt-grey padding-vertical">
+
+        <p class="bb text-smaller padding-horizontal uppercase">info</p>
+        <div class="edit padding-horizontal">
+
+            <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Address</span>
+                <textarea rows="2"></textarea>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">City</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Post Code</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Phone Number</span>
+                <input type="text">
+            </label>
+        </div>
+
+        <p class="bb text-smaller padding-horizontal uppercase">delivery<span class="pull-right text-large" ng-if="delivery"> ${{delivery}}</span></p>
+        <div class="checkbox-section padding-horizontal">
+
+            <ion-checkbox ng-click="delivery = 3">Standard Delivery <strong>(5 working days)</strong></ion-checkbox>
+            <ion-checkbox ng-click="delivery = 10">Express Delivery <strong>(3 working days)</strong></ion-checkbox>
+            <ion-checkbox ng-click="delivery = 15">Next Day <strong>(1 working day)</strong></ion-checkbox>
+
+        </div>
+
+        <p class="bb text-smaller padding-horizontal uppercase">payment details<span class="pull-right text-large" ng-if="delivery"> ${{delivery}}</span></p>
+        <div class="checkbox-section edit padding-horizontal">
+
+            <!--<ion-checkbox ng-click="shipping = !shipping">not same shipping address?</ion-checkbox>-->
+
+            <label class="item item-input" ng-if="shipping">
+                    <span class="input-label">Address</span>
+                    <textarea rows="2"></textarea>
+                </label>
+            <label class="item item-input" ng-if="shipping">
+                    <span class="input-label">City</span>
+                    <input type="text">
+                </label>
+            <label class="item item-input" ng-if="shipping">
+                    <span class="input-label">Post Code</span>
+                    <input type="text">
+                </label>
+            <label class="item item-input" ng-if="shipping">
+                    <span class="input-label">Phone Number</span>
+                    <input type="text">
+                </label>
+
+            <label class="item item-input">
+                    <span class="input-label">card no</span>
+                    <input type="text">
+                </label>
+            <label class="item item-input">
+                    <span class="input-label">expiry date</span>
+                    <input type="date">
+                </label>
+            <label class="item item-input">
+                    <span class="input-label">csv</span>
+                    <input type="text">
+                </label>
+        </div>
+
+        <p class="bb text-large padding uppercase">grand total<span class="pull-right text-large" ng-if="delivery"> ${{delivery + 1000 | number:2}}</span></p>
+
+        <button class="button button-balanced button-full" ng-click="makePayment();">Make Payment</button>
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="true" class="bg-lightgrey" cache-view="false">
+
+    <ion-header-bar class="no-bg">
+        <h1 class="title"></h1>
+         <button class="button button-icon button-clear button-light icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+        <button class="button button-icon button-clear button-light ion-android-close" ng-click="goBack('tabs.post-detail')"></button>
+    </ion-header-bar>
+
+    <ion-content class="has-header">
+
+        <div class="row text-center">
+            <div class="col font-thin text-large balanced">Likes</div>
+            <div class="col font-thin bl-grey" ng-click="gotoComments();">Comments</div>
+        </div>
+
+        <div class="list">
+            <div class="item item-avatar" ng-repeat="liker in post.likes | filter: searchFilter ">
+                <img ng-src="{{liker.photo}}">
+                <h2 class="lead">{{liker.name}}</h2>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <a class="btn-floating btn-large waves-effect waves-light" ng-class="{'red':liked, 'stable': !liked}" style="position:fixed; bottom:5%;right:5%;" ng-click="like(post);"><i class="icons ion-ios-heart"></i></a>
+
+</ion-view>

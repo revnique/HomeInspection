@@ -1,0 +1,49 @@
+<ion-view title="Dashboard" cache-view="false">
+
+    <ion-content class="has-header" scroll="false">
+
+        <ion-scroll direction="x" style="width:auto">
+            <div class="row no-padding bb-grey text-center" style="width:500px">
+                <div class="col font-thin" ng-click="goTo('tabs.reminders')">Reminders</div>
+                <div class="col font-thin text-large balanced bb">Charts</div>
+                <div class="col font-thin" ng-click="goTo('tabs.contacts')">Contacts</div>
+                <div class="col font-thin" ng-click="goTo('tabs.history')">Timeline</div>
+            </div>
+        </ion-scroll>
+
+        <ion-scroll class="bg-lightgrey padding" direction="y" style="height:100%">
+            <div style="height:700px">
+            <div class="card margin">
+                <canvas id="line" class="chart chart-line" chart-data="line_data" chart-labels="line_labels">
+                </canvas>
+            </div>
+            <div class="row bb-grey">
+                <div class="col">
+                    <canvas id="doughnut" class="chart chart-doughnut" chart-data="doughnut_data" chart-labels="doughnut_labels" width="100"
+                        height="100">
+                    </canvas>
+                </div>
+                <div class="col">
+                    <canvas id="pie" class="chart chart-pie" chart-data="doughnut_data" chart-labels="doughnut_labels" width="100" height="100">
+                    </canvas>
+                </div>
+
+            </div>
+            <div class="row bb-grey">
+                <div class="col col-70">
+                    <canvas id="bar" class="chart chart-bar" chart-data="line_data" chart-labels="line_labels" width="150"
+                        height="100">
+                    </canvas>
+                </div>
+                <div class="col">
+                    <canvas id="polar-area" class="chart chart-polar-area" chart-data="doughnut_data" chart-labels="doughnut_labels" width="40"
+                        height="50">
+                    </canvas>
+                </div>
+            </div>
+            </div>
+        </ion-scroll>
+
+    </ion-content>
+
+</ion-view>

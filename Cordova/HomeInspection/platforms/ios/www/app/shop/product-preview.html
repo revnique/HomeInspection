@@ -1,0 +1,32 @@
+<ion-modal-view>
+
+    <ion-nav-button side="left">
+        <button class="button button-icon icon ion-android-close" ng-click="closeProductPreview();"></button>
+    </ion-nav-button>
+
+    <ion-content class="has-header">
+        <div class="card tile no-box">
+            <div class="item item-image">
+                <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" active-slide="activeIndex"
+                    ng-init="activeIndex = 0" class="slide-intro">
+                    <ion-slide ng-repeat="image in product.image track by $index">
+                        <img ng-src="{{image}}" alt="{{product.name}}">
+                    </ion-slide>
+            </div>
+            <div class="item item-text-wrap no-b">
+
+                <h2 class="text-large lead text-left">{{product.name}}</h2>
+<span class="tags pull-right" ng-if="product.stock < 900">Low Stock</span>
+                <p class="text-medium">${{product.price | number:2}}</p> 
+                <p class="text-medium" ng-if="product.size">Size: {{product.size}}</p>
+                <p class="text-medium" ng-if="product.amount">Amount: {{product.amount}}</p>
+                <p class=" text-larger mt">
+                            <i class="icon mr" ng-class="{'calm ion-ios-heart': favourite, 'ion-ios-heart-outline': !favourite}" ng-click="favourite = !favourite"></i>
+                            <i class="icon ion-ios-redo-outline mr"></i>
+                            <i class="icon ion-ios-cart-outline" ng-click="selectProductDetails(product)"></i>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-modal-view>

@@ -1,0 +1,29 @@
+﻿<ion-view title="Conversations">
+    
+    <ion-nav-buttons side="right">
+        <button class="button button-icon dark icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+    </ion-nav-buttons>
+    
+    <ion-content class="has-header">
+        
+        <div class="note note-info padding" style="margin:10px;" ng-if="messages.length === 0">
+            <h2 class="positive">No Messages</h4>
+            <p class="dark">Click on the chat button to start a conversation with a teacher</p>
+        </div>
+        
+        <div class="list">
+            <div class="item item-avatar item-text-wrap"  ng-repeat="item in conversations  | filter: searchFilter " ui-sref="tabs.chat({chat: item})">
+
+                <img ng-src="{{item.recepientphoto}}">
+                <h2 class="lead">{{item.recepientname}}</h2>
+                <p class="text-small" ng-if="item.messages.length">Last Message: {{item.messages[item.messages.length -1].text}}</p>
+                <i class="icon ion-ios-chatboxes-outline calm"><span class="text-smaller"> {{ item.messages.length}} Unread Messages</span></i>
+                <span class="date calm">Sent <span am-time-ago="item.messages[item.messages.length -1].sentAt"></span></span>
+        </div>
+        </div>
+        
+    </ion-content>
+    
+    <a class="btn-floating btn-large waves-effect waves-light red" style="position:absolute; bottom:5%;right:5%;" ng-click="contactPopover.show($event);"><i class="icons ion-plus"></i></a>
+    
+</ion-view>

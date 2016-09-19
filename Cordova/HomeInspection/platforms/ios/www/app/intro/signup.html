@@ -1,0 +1,38 @@
+<ion-modal-view hide-nav-bar="true" class="auth">
+
+    <ion-content scroll="false">
+
+        <div ng-form="signup_form" class="padding text-center" novalidate>
+            <ion-list>
+                <div class="item item-avatar">
+                    <img ng-src="{{user.photo}}" ng-click="uploadUserPhoto();">
+
+                    <label class="item item-input">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <input type="text" placeholder="Full name" ng-model="user.name" required>
+                </label>
+                    <label class="item item-input">
+                    <i class="icon ion-android-mail placeholder-icon"></i>
+                    <input type="email" placeholder="Email" ng-model="user.email" required>
+            </label>
+                </div>
+
+                <label class="item item-input">
+                    <i class="icon ion-android-lock placeholder-icon"></i>
+                    <input type="password" placeholder="Password" ng-model="user.password" required>
+            </label>
+                <label class="item item-input">
+                    <i class="icon ion-android-lock placeholder-icon"></i>
+                    <input type="password" placeholder="Confirm Password" ng-model="user.rpassword" compare-to="user.password">
+            </label>
+            </ion-list>
+
+            <button class="btn waves-effect waves-light button button-positive button-block waves-effect waves-light" ng-click="gotoHome()">Sign up</button>
+        </div>
+        
+        <p class="padding-horizontal">
+            <span class="balanced pull-left" ng-click="closeRegister();openLogin();">Log in</span>
+            <span class="dark pull-right" ng-click="closeRegister()">Close</span>
+        </p>
+    </ion-content>
+</ion-modal-view>

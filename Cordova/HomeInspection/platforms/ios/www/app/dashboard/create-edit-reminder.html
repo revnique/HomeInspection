@@ -1,0 +1,77 @@
+<ion-view cache-view="false" hide-nav-bar="true">
+<ion-header-bar>
+    <div class="row text-center">
+        <div class="col font-thin text-large dark" ng-click="goTo('tabs.reminders')">Cancel</div>
+        <div class="col font-thin text-large balanced bl-grey" ng-click="saveReminder()">Save</div>
+    </div>
+    </ion-header-bar>
+
+    <form name="reminderForm" novalidate>
+        <ion-content class="has-header">
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">{{reminder.type}}</span>
+                <input type="text" placeholder="{{reminder.type}} Title" ng-model="reminder.title" required/>
+            </label>
+
+            <label class="item item-input item-floating-label" ng-if="reminder.type == 'Add Call'">
+                <span class="input-label">Phone number</span>
+                <input type="tel" placeholder="Phone number" ng-model="reminder.phone" ng-required="reminder.type=== 'Add Call'"/>
+            </label>
+
+            <label class="item item-input" ng-if="showLocation">
+                <span class="input-label">Location</span>
+                <ion-google-place ng-model="reminder.location"  current-location="true" />
+            </label>
+
+            <label class="item item-input item-floating-label" ng-if="showNotes">
+                <span class="input-label">Notes</span>
+                <textarea rows="3" style="resize:none;" placeholder="Notes" ng-model="reminder.notes"></textarea>
+            </label>
+
+            <div class="item item-toggle" ng-if="showDate || reminder.type=== 'Add Event'">
+                All Day?
+                <label class="toggle toggle-balanced">
+                <input type="checkbox" ng-model="reminder.allDay"><div class="track"><div class="handle"></div></div>
+                </label>
+            </div>
+            <div class="row date-time" ng-if="showDate || reminder.type=== 'Add Event'">
+                <div class="col card" ion-datetime-picker ng-model="reminder.startsAt" ng-required=" reminder.type=== 'Add Event'">
+                    <div class="item"><span class="balanced">Start Date</span>
+                        <p class="small">{{reminder.startsAt| date: "dd-MMM-yyyy"}}</p><span class="text-large">{{reminder.startsAt| date: "H:mm a"}}</span></div>
+                </div>
+                <div class="col-10 no-padding caret" ng-if="!reminder.allDay"><i class="icon ion-ios-arrow-right"></i></div>
+
+                <div class="col card" ion-datetime-picker ng-model="reminder.endsAt" ng-if="!reminder.allDay" ng-required=" reminder.type=== 'Add Event'">
+                    <div class="item"><span class="balanced">End Date</span>
+                        <p class="small">{{reminder.endsAt| date: "dd-MMM-yyyy"}}</p><span class="text-large">{{reminder.endsAt| date: "H:mm a"}}</span></div>
+                </div>
+            </div>
+            <label class="item item-input" ng-if="reminder.remindTime.length > 0">
+                <span class="input-label">Remind Times</span>
+                <div class="item-text-wrap">
+                <span class="tags" ng-repeat="item in reminder.remindTime track by $index" ng-if="item">{{item}}</span>
+                </div>
+            </label>
+
+
+            <div class="row text-center date-time-buttons">
+                <div class="col stable-bg margin" ng-click="showDate = !showDate"><button class="button button-icon icon ion-ios-time-outline"></button>
+                    <p>Date</p>
+                </div>
+                <div class="col stable-bg margin" ng-click="openRemindAt()"><button class="button button-icon icon ion-ios-bell-outline"></button>
+                    <p>Reminder</p>
+                </div>
+                <div class="col stable-bg margin" ng-click="showNotes = !showNotes"><button class="button button-icon icon ion-ios-compose-outline"></button>
+                    <p>Notes</p>
+                </div>
+                <div class="col stable-bg margin" ng-show="reminder.type == 'Add Event'" ng-click="showLocation = !showLocation; reminder.location = undefined">
+                    <button class="button button-icon icon ion-ios-location-outline"></button>
+                    <p>Location</p>
+                </div>
+            </div>
+
+        </ion-content>
+    </form>
+
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-modal-view hide-nav-bar="true"  class="auth">
+    
+    
+    <ion-content scroll="false">
+        <div ng-form="login_form" class="padding text-center" novalidate>
+            <ion-list>
+                <label class="item item-input">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <input type="email" placeholder="Username" ng-model="user.email" required>
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-android-lock placeholder-icon"></i>
+                    <input type="password" placeholder="Password" ng-model="user.password" required>
+                </label>
+            </ion-list>
+            <button class="button button-balanced button-block waves-effect waves-light" ng-click="gotoHome();">Log in</button>
+           
+            <p class="">or login in with</p>
+            
+            <div class="button-bar">
+            <button class="button button-facebook icon ion-social-facebook button-block waves-effect waves-light" ng-click="facebookSignIn()"></button>
+            <button class="button button-google icon ion-social-google button-block waves-effect waves-light" ng-click="googleSignIn()"></button>
+            </div>
+        </div>
+        
+        <p class="padding-horizontal">
+            <span class="balanced pull-left" ng-click="closeLogin();openForgot();">Forgot password</span>
+            <span class="dark pull-right" ng-click="closeLogin()">Close</span>
+        </p>
+    </ion-content>
+</ion-modal-view>
