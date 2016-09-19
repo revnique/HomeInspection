@@ -1,0 +1,28 @@
+<ion-side-menus enable-menu-with-back-views="false">
+
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-light no-b">
+            <ion-nav-back-button></ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear button-dark ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" width="95" id="menu" hide-nav-bar="false">
+        <ion-header-bar class="c0">
+            <h1 class="title light">Menu</h1>
+        </ion-header-bar>
+        <ion-content padding="false" class="side-menu-left">
+            <ion-list>
+                <ion-item class="c1 item-avatar" menu-close><img ng-src="{{user.photo}}" ui-sref="tabs.account"></ion-item>
+                <ion-item class="c2" menu-close><i class="icon ion-ios-star-outline" ui-sref="tabs.dashboard"></i></ion-item>
+                <ion-item class="c3" menu-close><i class="icon ion-ios-paper-outline" ui-sref="tabs.news"></i></ion-item>
+                <ion-item class="c4" menu-close><i class="icon ion-ios-cart-outline" ui-sref="tabs.shop-front"></i></ion-item>
+                <ion-item class="c5" menu-close><i class="icon ion-ios-gear-outline" ui-sref="tabs.more"></i></ion-item>
+                <ion-item class="c6" menu-close><i class="icon ion-ios-unlocked-outline" ng-click="signOut();"></i></ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

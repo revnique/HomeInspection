@@ -1,0 +1,62 @@
+<ion-view title="Account" class="bg-lightgrey">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon dark icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+        <button class="button button-dark button-clear icon ion-ios-compose-outline" ui-sref="tabs.edit-profile"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header bt-grey profile" scroll="false">
+        <div class="header">
+            <img ng-src="{{user.photo}}">
+            <!--<span class="badge badge-balanced">3</span>-->
+            <h2 class="lead text-medium">{{user.name}}</h2>
+            <p>{{user.city}}</p>
+            <button class="button button-small icon " ng-class="{'button-balanced button-outline ion-ios-personadd-outline': !follow, 'button-balanced ion-ios-undo-outline':follow }" ng-click="follow = !follow"> 
+                <span ng-if="!follow"> Follow</span>
+                <span ng-if="follow"> Unfollow</span>
+            </button>
+        </div>
+
+        <div class="row no-padding bb-grey text-center" style="text-transform: capitalize;">
+            <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 1}" ng-click="profile.type = 1">27<br/>Posts</div>
+            <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 2}" ng-click="profile.type = 2">20K<br/>Followers</div>
+            <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 3}" ng-click="profile.type = 3">1500<br/>Following</div>
+        </div>
+
+        <ion-scroll direction="y" style="height: 100%">
+            <div ng-if="profile.type === 1">
+                <div style="height: 700px">
+                    <div class="row post" ng-repeat="post in news.items" ng-if="$index % 3 == 0">
+                        <div class="col"><img ng-src="{{news.items[$index].image}}" /></div>
+                        <div class="col"><img ng-src="{{news.items[$index + 1].image}}" /></div>
+                        <div class="col"><img ng-src="{{news.items[$index + 2].image}}" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="profile.type === 2">
+                <div style="height: 700px">
+                    <div class="item item-avatar item-button-right followers" ng-repeat="contact in contacts  | filter: searchFilter">
+                        <img ng-src="{{contact.photo}}">
+                        <h2 class="font-thin">{{contact.name}}</h2>
+                        <p>{{contact.city}}</p>
+                        <button class="button button-small button-balanced icon ion-ios-checkmark-empty" ng-if="$index % 3 == 1"> Following</button>
+                        <button class="button button-small button-balanced button-outline icon ion-ios-personadd-outline" ng-if="$index % 3 !== 1"> Follow</button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="profile.type === 3">
+                <div style="height: 700px">
+                    <div class="item item-avatar item-button-right followers" ng-repeat="contact in contacts  | filter: searchFilter" ng-if="$index % 3 === 1">
+                        <img ng-src="{{contact.photo}}">
+                        <h2 class="font-thin">{{contact.name}}</h2>
+                        <p>{{contact.city}}</p>
+                        <button class="button button-small button-balanced icon ion-ios-checkmark-empty" ng-if="$index % 3 === 1"> Unfollow</button>
+                    </div>
+                </div>
+
+            </div>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

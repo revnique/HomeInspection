@@ -1,0 +1,78 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+
+$stable:   #f8f8f8 !default;
+$positive: #1479C9;
+$balanced: #009688;
+$energized: #E2B90B;
+$assertive: #C91914;
+$royal: #886aea !default;
+$calm:  #FF4653 !default;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "custom.sass";
+// Multi-range css
+ui-multi-range {
+    @include flex(1);
+    position: relative;
+    height: 50px;
+    input[type=range] {
+        position: absolute;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0 2px;
+        overflow: hidden;
+        border: 0;
+        border-radius: 1px;
+        outline: none;
+        pointer-events: none;
+        
+        &:active,
+        &:focus {
+            outline: none;
+        }
+        
+        &::-webkit-slider-thumb {
+            position: relative;
+            cursor: pointer;
+            pointer-events: all;
+            &::before {
+                content: ' ';
+                display: block;
+                position: absolute;
+                top: 13px;
+                left: 100%;
+                width: 2000px;
+                height: 2px;
+            }
+        }
+
+        &:nth-child(2) {
+            background: none;
+
+            &::-webkit-slider-thumb::before {
+                background-color: $range-default-track-bg;
+            }
+        }
+    }
+}

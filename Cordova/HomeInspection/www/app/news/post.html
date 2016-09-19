@@ -1,0 +1,44 @@
+<ion-view title="Post" class="bg-lightgrey">
+
+    <ion-content class="has-header" scroll-event-interval="5" padding="false">
+
+        <div class="card post-detail">
+            <div class="item item-avatar">
+                <img ng-src="{{post.sourceLogo}}">
+                <h2 class="lead">{{post.author}}</h2>
+                <p class="text-smaller">{{post.title}}</p>
+
+            </div>
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{post.image}}">
+                <p class="text-smaller date" am-time-ago="{{post.publishedDate}}"></p>
+                <p>{{post.summary}}</p>
+                <div class="item comments">
+                    <p>
+                        <span ng-click="like(post);"><img ng-src="{{liker.photo}}" class="likers" ng-repeat="liker in post.likes | limitTo:-3"><span class="pull-left interact"> +{{post.likes.length}} Like</span>
+                        <span ui-sref="tabs.comments({post: post, type:'comments'})" class="pull-right">{{post.comments.length}} Comments</a>
+                </p>
+                </div>
+                <div class="item comments no-b">
+                    <div class="item item-avatar" ng-if="post.comments"ng-repeat="comment in post.comments" >
+                        <img ng-src="{{comment.photo}}"/>
+                        <h2 class="text-small">{{comment.name}}</h2>
+                    <p class="text-smaller">{{comment.text}}</p>
+                    
+                    </div>
+                    <p ng-if="!post.comments">No comments. be the first to leave a comment</p>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-footer-bar class="no-bg bt-grey">
+                <div class="row">
+                        <div class="col text-left no-padding" ui-sref="tabs.likes({post: post })"><i class="icon text-small" ng-class="liked == true ? 'ion-ios-heart': 'ion-ios-heart-outline'"> Like</i></div>
+                        <div class="col text-center no-padding" ui-sref="tabs.comments({post: post })"><i class="icon ion-ios-chatboxes-outline text-small"> {{post.comments.length}} Comment</i></div>
+                        <div class="col text-right no-padding" ng-click="share(post);"><i class="icon ion-android-share-alt text-small"> Share</i></div>
+                </div>
+    </ion-footer-bar>
+
+</ion-view>

@@ -1,0 +1,27 @@
+<ion-view title="Basket" cache-view="false">
+
+<ion-nav-buttons side="right">
+        <button class="button button-icon dark icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+    </ion-nav-buttons>
+    
+    <ion-content class="has-header padding bg-lightgrey">
+
+        <div class="note note-info padding" style="margin:10px;" ng-if="cart.length === 0">
+            <h2 class="positive">No Items</h4>
+            <p class="dark">Your basket is empty, you can view and add items to basket in the shopping page</p>
+        </div>
+        <div ng-repeat="item in cart | filter: searchFilter track by $index" ng-if="item.amount !== 0 || cart.length">
+            <a class="item item-thumbnail-left">
+                <img ng-src="{{item.image[0]}}">
+                <h2 class="lead">{{item.name}}</h2>
+                <p>Price per item: ${{item.price | number: 2}}</p>
+                <p>Size: {{item.size}}</p>
+
+                <span>Total: ${{item.price * item.amount | number: 2}}</span><span class="pull-right assertive">Remove</span>
+            </a>
+        </div>
+
+
+        <button ng-if="cart.length" class="button button-balanced button-block" ui-sref="tabs.checkout">Proceed to Checkout</button>
+    </ion-content>
+</ion-view>

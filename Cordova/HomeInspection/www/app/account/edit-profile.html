@@ -1,0 +1,61 @@
+<ion-view hide-nav-bar="true" class="bg-lightgrey">
+
+    <ion-header-bar>
+        <div class="row text-center">
+            <div class="col font-thin text-large dark" ng-click="goTo('tabs.account')">Cancel</div>
+            <div class="col font-thin text-large balanced bl-grey" ng-click="save()">Save</div>
+        </div>
+    </ion-header-bar>
+
+    <ion-content class="profile has-header bt-grey">
+
+        <div class="header edit">
+            <img ng-src="{{user.photo}}">
+        </div>
+
+        <p class="bb text-smaller padding-horizontal uppercase">info</p>
+        <div class="edit padding-horizontal">
+            <label class="item item-input">
+                <span class="input-label">First name</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Last name</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email">
+            </label>
+        </div>
+
+        <p class="bb text-smaller padding-horizontal uppercase">password</p>
+        <div class="edit padding-horizontal">
+            <label class="item item-input">
+                <span class="input-label">password</span>
+                <input type="password" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">new password</span>
+                <input type="password">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">retype</span>
+                <input type="password">
+            </label>
+        </div>
+
+        <p class="bb text-smaller padding-horizontal uppercase">More</p>
+        <div class="edit padding-horizontal">
+            <label class="item item-input">
+                    <span class="input-label">Phone number</span>
+                    <input type="tel">
+                </label>
+            <label class="item item-input">
+                    <span class="input-label">Address</span>
+                    <textarea rows="3" style="resize:none"></textarea>
+                </label>
+        </div>
+
+    </ion-content>
+</ion-view>

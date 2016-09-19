@@ -1,0 +1,71 @@
+<ion-view title="Feed">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon dark icon ion-ios-search" ng-click="searchPopover.show($event)"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header" scroll="false">
+        <div class="row text-center">
+            <div class="col font-thin" ng-class="news.type === 'image' ? 'text-large balanced' : ''" ng-click="news.type = 'image'">Image</div>
+            <div class="col font-thin" ng-class="news.type === 'classic' ? 'text-large balanced' : ''" ng-click="news.type = 'classic'">Classic</div>
+            <div class="col font-thin" ng-class="news.type === 'hybrid' ? 'text-large balanced' : ''" ng-click="news.type = 'hybrid'">Hybrid</div>
+        </div>
+
+        <div style="height:95%; overflow:scroll" class="bg-lightgrey">
+            <div ng-if="news.type === 'classic'">
+                <div class="list card" ng-repeat="post in news.items | filter: searchFilter | orderBy: 'publishedDate':true " ui-sref="tabs.post-detail({post:post})">
+                    <div class="item item-avatar">
+                        <img ng-src="{{post.sourceLogo}}">
+                        <h2 class="balanced">{{post.author}}</h2>
+                        <p class="text-small" am-time-ago="{{post.publishedDate}}"></p>
+                    </div>
+                    <div class="item item-body">
+                        <img class="full-image" ng-src="{{post.image}}">
+                        <p>{{post.title}}</p>
+                        <p>
+                            <a href="#" class="subdued"><i class="icon calm" ng-class="{'ion-ios-heart': liked, 'ion-ios-heart-outline': !liked }" ng-click="liked = !liked"> {{post.likes.length}} Likes</i></a>
+                            <a href="#" class="subdued"><i class="icon ion-ios-chatbubble-outline calm"> {{post.comments.length}} Comments</i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="news.type === 'image'">
+                <div class="card image" ng-repeat="post in news.items | filter: searchFilter  | orderBy: 'publishedDate':true " ui-sref="tabs.post-detail({post:post})">
+                    <div class="item item-image">
+                        <img ng-src="{{post.image}}">
+                        <span class="interact">
+                        <i class="icon ion-ios-heart" ng-class="{'calm light-bg': liked, 'light': !liked }" ng-click="liked = !liked"> {{post.likes.length}}</i>
+                        <i class="icon ion-ios-chatbubble light"> {{post.comments.length}}</i>
+                    </span>
+                        <div class="item item-avatar">
+                            <img ng-src="{{post.sourceLogo}}">
+                            <h2>{{post.author}}</h2>
+                            <p>{{post.title}}</p>
+                            <p class="text-smaller" am-time-ago="{{post.publishedDate}}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="news.type === 'hybrid'">
+                <div class="card hybrid" ng-repeat="post in news.items | filter: searchFilter  | orderBy: 'publishedDate':true " ui-sref="tabs.post-detail({post:post})">
+
+                    <div class="item item-thumbnail-left item-text-wrap">
+                        <img ng-src="{{post.image}}">
+                        <img ng-src="{{post.sourceLogo}}" class="profile">
+                        <h2 class="balanced">{{post.author}}</h2>
+                        <p>{{post.title}}</p>
+                        <span class="interact">
+                            <i class="icon calm" ng-class="{'ion-ios-heart': liked, 'ion-ios-heart-outline': !liked }" ng-click="liked = !liked"> {{post.likes.length}}</i>
+                            <i class="icon ion-ios-chatbubble-outline calm"> {{post.comments.length}}</i>
+                        </span>
+                        <span class="text-small font-thin pull-right" am-time-ago="{{post.publishedDate}}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+    <a class="btn-floating btn-large waves-effect waves-light red lighten-1" style="position:fixed; bottom:3%;right:5%;z-index:999" ng-click="newsPopover.show($event);"><i class="icons ion-plus"></i></a>
+</ion-view>

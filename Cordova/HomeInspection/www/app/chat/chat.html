@@ -1,0 +1,40 @@
+﻿<ion-view id="chat" title="<i class='icon ion-ios-chatboxes-outline'></i> {{chat.recepientname}}">
+
+
+    <ion-content class="has-header has-footer bg-lightgrey" delegate-handle="chatScroll">
+        
+        <div class="list">
+            <div ng-repeat="item in chat.messages track by $index">
+
+                <div class="out item item-avatar-right item-text-wrap" ng-if="item.senderid === user.id" on-hold="onMessageHold($event, $index, chat)">
+                    <img ng-src="{{user.photo}}" ui-sref="profile">
+                    <div class="card">
+                        <p class="name" ui-sref="tabs.profile({id: user.id})">{{user.name}}</p>
+                        <p class="text" ng-bind-html="item.text | nl2br" autolinker></p>
+                        <p class="date" am-time-ago="item.sentAt"></p>
+                    </div>
+                </div>
+
+                <div class="in item item-avatar item-text-wrap" ng-if="item.senderid !== user.id" on-hold="onMessageHold($event, $index, chat)">
+                    <img ng-src="{{chat.recepientphoto}}" ui-sref="profile">
+                    <div class="card">
+                        <p class="name" ui-sref="tabs.profile({id: chat.id})">{{chat.recepientname}}</p>
+                        <p class="text" ng-bind-html="item.text | nl2br" autolinker></p>
+                        <p class="date" am-time-ago="item.sentAt"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+
+    <ion-footer-bar class="bar-light item-input-inset" style="border-top:1px solid #138D75;" ng-form="chatForm" novalidate>
+        <button class="button button-clear button-icon ion-camera" ng-click="sendPhoto()">
+    </button>
+        <label class="item-input-wrapper no-bg">
+        <textarea id="textChat" ng-model="input" placeholder="Chat with {{chat.recepientname}}" required minlength="1" maxlength="1500" style="width:100%;resize: none;" msd-elastic></textarea>
+    </label>
+        <button class="button button-clear button-icon ion-android-send button-calm" ng-class="chatForm.$invalid == false ? 'button-calm' : 'button-outline'" ng-click="sendChat(input)" ng-disabled="chatForm.$invalid">
+    </button>
+    </ion-footer-bar>
+</ion-view>

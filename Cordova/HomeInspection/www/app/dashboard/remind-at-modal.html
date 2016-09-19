@@ -1,0 +1,17 @@
+<ion-modal-view class="ion-modal">
+<div class="row">
+        <div class="col"></div>
+        <div class="col-75 text-center">
+            <h1 class=" balanced font-thin text-larger">Reminder At</h1></div>
+        <div class="col text-right ">
+            <span class="icon ion-android-close" ng-click="closeRemindAt()"></span>
+        </div>
+    </div>
+        
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-checkbox ng-repeat="item in notifyTimes" ng-checked="reminder.remindTime[$index] === item" ng-click="notifyCheck($index, item)"><span style="text-transform: capitalise;">{{item}}</span></ion-checkbox>
+        </ion-list>
+    </ion-content>
+    
+</ion-modal-view>

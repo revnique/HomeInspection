@@ -1,0 +1,68 @@
+<ion-view title="Calendar" id="calendar">
+
+
+    <ion-content class="has-header bt-grey" ng-class="{'month':calendarView == 'month', 'week': calendarView == 'week'}" scroll="false">
+        <div style="height:20px;"></div>
+        <div class="header">
+            <div class="item item-avatar no-bg no-b">
+                <img ng-src="{{user.photo}}">
+                <div style="height:20px;"></div>
+                <h2 class="lead">{{viewDate | date:'dd MMMM'}} {{viewDate | date:'yyyy'}}</h2>
+                <span class="text-medium" ng-class="{'underline': calendarView == 'month'}" ng-click="calendarView = 'month'">Month</span>
+                <span class="text-medium" ng-class="{'underline': calendarView == 'week'}" ng-click="calendarView = 'week'">Week</span>
+                <span class="text-medium" ng-class="{'underline': calendarView == 'day'}" ng-click="getDayEvents(); calendarView = 'day'">Day</span>
+            </div>
+        </div>
+
+        <div class="item item-divider dark-bg" ng-show="calendarView === 'week'">
+            <div class="row">
+                <div class="col"><i class="icon light ion-ios-arrow-back" mwl-date-modifier date="viewDate" decrement="'week'" style="padding: 0 20px 0 0;"></i></div>
+                <div class="col light text-center">{{viewDate | date:'MMMM'}} {{viewDate | date:'ww'}} week of year</div>
+                <div class="col light text-right"><i class="icon ion-ios-arrow-forward" mwl-date-modifier date="viewDate" increment="'week'" style="padding: 0 0 0 20px;"></i></div>
+            </div>
+        </div>
+        <div class="item item-divider dark-bg" ng-show="calendarView === 'month'">
+            <div class="row">
+                <div class="col"><i class="icon light ion-ios-arrow-back" mwl-date-modifier date="viewDate" decrement="'month'" style="padding: 0 20px 0 0;"></i></div>
+                <div class="col light text-center">{{viewDate | date:'MMMM'}}</div>
+                <div class="col light text-right"><i class="icon ion-ios-arrow-forward" mwl-date-modifier date="viewDate" increment="'month'" style="padding: 0 0 0 20px;"></i></div>
+            </div>
+        </div>
+
+        <ion-scroll direction="y" style="height:100%">
+            <div style="height:700px">
+                <mwl-calendar events="events" view="calendarView" view-title="calendarTitle" view-date="viewDate" on-event-click="eventClicked(calendarEvent)" on-view-change-click="viewChangeClicked(calendarNextView, calendarDate)" on-event-times-changed="eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                    edit-event-html="'<i class=\'icon ion-android-checkbox-outline positive\'></i>'" delete-event-html="'<i class=\'icon ion-close assertive\'></i>'" on-edit-event-click="eventEdited(calendarEvent)" on-delete-event-click="eventDeleted(calendarEvent)"
+                    slide-box-disabled="false">
+                </mwl-calendar>
+                <div ng-if="calendarView === 'week'">
+                    <div class="item item-divider dark-bg font-thin">Events on {{viewDate | date:'dd MMMM'}} {{viewDate | date:'yyyy'}}</div>
+
+                    <div class="list" ng-if="seletedDateEvents.length > 0">
+                        <div class="item item-icon-left item-text-wrap" ng-repeat="event in seletedDateEvents | orderBy: startsAt : true track by $index" ng-class="{'bl-teal':event.type == 'Add Event',
+                    'bl-indigo':event.type == 'Add Task',
+                    'bl-blue':event.type == 'Add Call',
+                    'bl-light-blue':event.type == 'Add Email'}">
+
+                            <i class="icon" ng-class="{'ion-ios-calendar-outline':event.type == 'Add Event',
+                    'ion-ios-checkmark-outline':event.type == 'Add Task',
+                    'ion-ios-telephone-outline':event.type == 'Add Call',
+                    'ion-ios-at-outline':event.type == 'Add Email'}"></i>
+                            <p class="text-left">{{event.title}}</p>
+                            <span class="location" ng-if="event.location"><i class="icon ion-ios-location assertive"></i> {{event.location}}</span>
+                            <p class="text-small">{{event.startsAt | amDateFormat:' h a'}} - {{event.endsAt | amDateFormat:'h a'}}</p>
+                        </div>
+                    </div>
+
+                    <div class="list" ng-if="seletedDateEvents.length == 0">
+                        <div class="item">
+                            <h2 class="text-wrap">No Event Set for specified Date</h2>
+                            <button class="button button-icon ion-plus calm" ui-sref="reminder({fromView: 'tabs.calendar'})"> Add an Event</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-scroll>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,141 @@
+<ion-view title="Cards">
+
+    <ion-content class="has-header bt-grey bg-lightgrey padding-vertical">
+
+        <ion-list>
+
+            <!--Card Image-->
+            <p class="bb text-large padding uppercase" ng-click="_cardImage = !_cardImage">Card Image<span ng-if="_cardImage" class="pull-right icon ion-ios-arrow-down"></span><span ng-if="!_cardImage"
+                    class="pull-right icon ion-ios-arrow-up"></span></p>
+            <div class="item padding-horizontal no-b" ng-if="_cardImage">
+                <div class="card image">
+                    <div class="item item-image">
+                        <img ng-src="{{post.image}}">
+                        <span class="interact">
+                        <i class="icon ion-ios-heart" ng-class="{'calm light-bg': liked, 'light': !liked }" ng-click="liked = !liked"> {{post.likes.length}}</i>
+                        <i class="icon ion-ios-chatbubble light"> {{post.comments.length}}</i>
+                    </span>
+                        <div class="item item-avatar">
+                            <img ng-src="{{post.sourceLogo}}">
+                            <h2>{{post.author}}</h2>
+                            <p>{{post.title}}</p>
+                            <p class="text-smaller" am-time-ago="{{post.publishedDate}}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Card Hybrid-->
+            <p class="bb text-large padding uppercase" ng-click="_cardHybrid = !_cardHybrid">Card Hybrid<span ng-if="_cardHybrid" class="pull-right icon ion-ios-arrow-down"></span><span ng-if="!_cardHybrid"
+                    class="pull-right icon ion-ios-arrow-up"></span></p>
+            <div class="item padding-horizontal no-b" ng-if="_cardHybrid">
+
+                <div class="card hybrid">
+                    <div class="item item-thumbnail-left item-text-wrap">
+                        <img ng-src="{{post.image}}">
+                        <img ng-src="{{post.sourceLogo}}" class="profile">
+                        <h2 class="balanced">{{post.author}}</h2>
+                        <p>{{post.title}}</p>
+                        <span class="interact">
+                            <i class="icon calm" ng-class="{'ion-ios-heart': liked, 'ion-ios-heart-outline': !liked }" ng-click="liked = !liked"> {{post.likes.length}}</i>
+                            <i class="icon ion-ios-chatbubble-outline calm"> {{post.comments.length}}</i>
+                        </span>
+                        <span class="text-small font-thin pull-right" am-time-ago="{{post.publishedDate}}"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Card Post Detail-->
+            <p class="bb text-large padding uppercase" ng-click="_cardPost = !_cardPost">Card Post<span ng-if="_cardPost" class="pull-right icon ion-ios-arrow-down"></span><span ng-if="!_cardPost" class="pull-right icon ion-ios-arrow-up"></span></p>
+            <div class="item padding-horizontal no-b" ng-if="_cardPost">
+
+                <div class="card post-detail">
+                    <div class="item item-avatar">
+                        <img ng-src="{{post.sourceLogo}}">
+                        <h2 class="lead">{{post.author}}</h2>
+                        <p class="text-smaller">{{post.title}}</p>
+
+                    </div>
+                    <div class="item item-body">
+                        <img class="full-image" ng-src="{{post.image}}">
+                        <p class="text-smaller date" am-time-ago="{{post.publishedDate}}"></p>
+                        <p>{{post.summary}}</p>
+                        <div class="item comments">
+                            <p><span ng-click="like(post);"><img ng-src="{{liker.photo}}" class="likers" ng-repeat="liker in post.likes | limitTo:-3"><span class="pull-left interact" ng-if="post.likes.length > 0"> +{{post.likes.length}} Like</span>
+                                <span ui-sref="tabs.comments({post: post, type:'comments'})" class="pull-right">{{post.comments.length}} Comments</a></p>
+                        </div>
+                        <div class="item comments">
+                            <div class="item item-avatar" ng-if="post.comments" ng-repeat="comment in post.comments" >
+                                <img ng-src="{{comment.photo}}"/>
+                                <h2 class="text-small">{{comment.name}}</h2>
+                            <p class="text-smaller">{{comment.text}}</p>
+                            
+                            </div>
+                            <p ng-if="!post.comments">No comments. be the first to leave a comment</p>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+            <!--Card Image-->
+            <p class="bb text-large padding uppercase" ng-click="_cardTile = !_cardTile">Card Tile<span ng-if="_cardTile" class="pull-right icon ion-ios-arrow-down"></span>
+                                <span ng-if="!_cardTile" class="pull-right icon ion-ios-arrow-up"></span>
+                            </p>
+                            <div class="item padding-horizontal no-b" ng-if="_cardTile">
+                                <div class="card tile tile-large text-center" ui-sref="tabs.components">
+                                    <div class="item item-text-wrap balanced-bg light">
+                                        <i class="icon ion-ios-settings"></i>
+                                        <span class="text-large">Cards</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Card Image-->
+                            <p class="bb text-large padding uppercase" ng-click="_cardTileShop = !_cardTileShop">Card Tile Shop<span ng-if="_cardTileShop" class="pull-right icon ion-ios-arrow-down"></span>
+                                <span ng-if="!_cardTileShop" class="pull-right icon ion-ios-arrow-up"></span>
+                            </p>
+                            <div class="item padding-horizontal no-b" ng-if="_cardTileShop">
+                                <div class="card tile">
+                                    <div class="item item-image">
+                                        <img ng-src="{{product.image[0]}}" alt="{{product.name}}">
+                                    </div>
+                                    <div class="item item-text-wrap padding">
+
+                                        <h2 class="text-small lead">{{product.name}}</h2>
+
+                                        <span class="pull-left text-small">${{product.price | number: 2}}</span>
+                                        <span class="pull-right text-medium">
+                            <i class="icon mr" ng-class="{'calm ion-ios-heart': favourite, 'ion-ios-heart-outline': !favourite}" ng-click="favourite = !favourite"></i>
+                            <i class="icon ion-ios-cart-outline"></i>
+                       </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Card Image-->
+                            <p class="bb text-large padding uppercase" ng-click="_cardHybridShop = !_cardHybridShop">Card Hybrid Shop<span ng-if="_cardHybridShop" class="pull-right icon ion-ios-arrow-down"></span>
+                                <span ng-if="!_cardHybridShop" class="pull-right icon ion-ios-arrow-up"></span>
+                            </p>
+                            <div class="item padding-horizontal" ng-if="_cardHybridShop">
+                                <div class="card hybrid shop">
+
+                                    <div class="item item-thumbnail-left item-text-wrap shop">
+                                        <img ng-src="{{product.image[0]}}">
+                                        <h2 class="text-small lead no-padding no-margin">{{product.name}}</h2>
+                                        <p class="text-small">${{product.price | number: 2}}</p>
+                                        <span class="text-small tags pull-right" ng-if="product.stock < 1000">Low Stock</span>
+                                        <p class="text-small" ng-if="product.size">Size: {{product.size}}</p>
+                                        <p class="text-small" ng-if="product.amount">Amount: {{product.amount}}</p>
+
+                                        <span class="interact text-larger">
+                            <i class="icon mr" ng-class="{'calm ion-ios-heart': favourite, 'ion-ios-heart-outline': !favourite}" ng-click="favourite = !favourite"></i>
+                            <i class="icon ion-ios-cart-outline"></i>
+                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+    </ion-content>
+</ion-view>
