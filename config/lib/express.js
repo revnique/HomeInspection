@@ -164,6 +164,7 @@ module.exports.initModulesClientRoutes = function (app) {
 
     //app.use(express.static('pages'));
   app.use('/Cordova/HomeInspection/platforms/browser', express.static(path.resolve('./Cordova/HomeInspection/platforms/browser')));
+  app.use('/Cordova/HomeInspection/platforms/ios/www', express.static(path.resolve('./Cordova/HomeInspection/platforms/ios/www')));
   app.use('/Cordova/HelloCordova/platforms/browser', express.static(path.resolve('./Cordova/HelloCordova/platforms/browser')));
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {
