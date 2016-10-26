@@ -462,6 +462,35 @@
 
         tempController.$inject = ['$scope', '$timeout', '$http', 'Socket', 'toaster'];
 
+        app.utils = {};
+        app.utils.createCookie = function (name, value, time, days) {
+            var expires, date;
+
+            if (time) {
+                date = new Date(time);
+                expires = "; expires=" + date.toGMTString();
+            } else if (days) {
+                date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            } else {
+                expires = "";
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        };
+
+        app.utils.expireCookie = function (name) {
+            return utils.createCookie(name, "", "2000-01-01T11:59:59.045665-05:00");
+        };
+
+        app.utils.getCookie = function (k) {
+            var v = document.cookie.match('(^|;) ?' + k + '=([^;]*)(;|$)');
+            return v ? v[2] : null;
+        };
+
+
+
+
 
         //<div ht-resize-width="45"></div>
         app.directive('htResizeWidth', [
@@ -757,6 +786,10 @@
                 });
             }
         ]);
+
+
+
+
 
         function tempController($scope, $timeout, $http, Socket, toaster) {
             var vm = this;
