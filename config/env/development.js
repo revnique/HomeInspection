@@ -4,8 +4,9 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
     db: {
-        uri: 'mongodb://admin:password@ec2-54-164-70-216.compute-1.amazonaws.com:27017/homeinspection',
+        uri: 'mongodb://admin:password@ds161008.mlab.com:61008/homeinspection',
         //mongodb://<dbuser>:<dbpassword>@ds053148.mongolab.com:53148/<database name>
+        //mongodb://<dbuser>:<dbpassword>@ds161008.mlab.com:61008/homeinspection
         options: {
             user: 'admin',
             pass: 'password'

@@ -10,7 +10,7 @@ module.exports = {
   // Binding to 127.0.0.1 is safer in production.
   host: process.env.HOST || '0.0.0.0',
   db: {
-      uri: 'mongodb://admin:password@ec2-54-164-70-216.compute-1.amazonaws.com:27017/homeinspection',
+      uri: 'mongodb://admin:password@ds161008.mlab.com:61008/homeinspection',
       //mongodb://<dbuser>:<dbpassword>@ds053148.mongolab.com:53148/<database name>
       options: {
           user: 'admin',
