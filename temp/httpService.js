@@ -3,7 +3,7 @@ app.factory("httpService", [
     "$http", "$window", "$q",
     function($http, $window, $q) {
         var svc = {};
-        svc.root = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/' : 'https://approvals.h1teq.com/';
+        svc.root = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/' : 'https://demo.com/';
 
         svc.makeRequest = function(method, url, model, errorMsg, config) {
             if (config == undefined) {
