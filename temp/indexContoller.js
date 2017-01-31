@@ -39,9 +39,9 @@
         $http) {
         var vm = this;
         vm.token = 'xoxp-53073755459-53114600822-88563026849-2ff4db3175a5194af8129d7b5c4f6b0c';
-        vm.root = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/' : 'https://approvals.h1teq.com/';
-        vm.apiRoot = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/api/proof/' : 'https://approvals.h1teq.com/api/proof/';
-        vm.apiRootUser = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/api/user/' : 'https://approvals.h1teq.com/api/user/';
+        vm.root = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/' : 'https://demo.com/';
+        vm.apiRoot = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/api/proof/' : 'https://demo.com/api/proof/';
+        vm.apiRootUser = location.href.indexOf('localhost:') > -1 ? 'http://localhost:51985/api/user/' : 'https://demo.com/api/user/';
 
 
         $rootScope.$broadcast('isInTagMode', { isInTagMode: vm.isInTagMode, overlayHeight: vm.overlayHeight });
